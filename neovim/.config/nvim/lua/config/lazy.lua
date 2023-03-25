@@ -1,29 +1,24 @@
+--- Install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  spec = {
-    -- import LazyVim plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import/override with your plugins
-    { import = "plugins" },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.json" },
-  },
-  defaults = {
-    lazy = true, -- every plugin is lazy-loaded by default
-    version = "*", -- try installing the latest stable version for plugins that support semver
-  },
-  install = { colorscheme = { "catppuccin" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+-- Configure lazy.nvim
+require("lazy").setup("plugins", {
+  defaults = { lazy = true, version = nil },
+  install = { missing = true, colorscheme = { "tokyonight", "gruvbox" } },
+  checker = { enabled = true },
   performance = {
     rtp = {
-      -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
         "matchit",
@@ -37,3 +32,5 @@ require("lazy").setup({
     },
   },
 })
+
+vim.keymap.set("n", "<leader>ql", "<cmd>:Lazy<cr>", { desc = "Lazy" })

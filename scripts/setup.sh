@@ -9,6 +9,7 @@ sudo apt install bat &&  # cat replacement
 	sudo ln -s /usr/bin/batcat /usr/local/bin/bat
 sudo apt install neofetch
 sudo apt-get install python3-pip
+sudo apt install delta
 
 # install rust and cargo
 curl https://sh.rustup.rs -sSf | sh
