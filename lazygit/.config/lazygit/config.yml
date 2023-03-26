@@ -42,9 +42,10 @@
 #  commandLogSize: 8
 #  splitDiff: 'auto' # one of 'auto' | 'always'
 #  skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
-#git:
-#  paging:
-#    colorArg: always
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
 #    useConfig: false
 #  commit:
 #    signOff: false
@@ -73,9 +74,9 @@
 #  disableForcePushing: false
 #  parseEmoji: false
 #  diffContextSize: 3 # how many lines of context are shown around a change in diffs
-#os:
-#  editCommand: '' # see 'Configuring File Editing' section
-#  editCommandTemplate: ''
+os:
+  editCommand: 'nvim --server $NVIM_SERVER'
+  editCommandTemplate: "{{editor}} --remote-send '<C-\\><C-n>:5ToggleTerm<CR>:lua require('util').Edit({{filename}}, {{line}})<CR>'"
 #  openCommand: ''
 #refresher:
 #  refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled via option 'git.autoRefresh'.
