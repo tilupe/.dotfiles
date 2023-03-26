@@ -67,3 +67,6 @@ map("n", "<leader>wa", "<cmd>wa<CR>", { desc = "Save all" })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete" })
 map("n", "<leader>ws", "<C-W>s", { desc = "Split below" })
 map("n", "<leader>wv", "<C-W>v", { desc = "Split right" })
+
+-- Git
+map("n", "<leader>gg", "<cmd>lua require('util').Lazygit_toggle()<cr>", { desc = "Lazygit" })

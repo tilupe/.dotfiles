@@ -4,7 +4,7 @@ opt.formatoptions = "jcroqlnt" -- tcqj
 opt.shortmess:append({ W = true, I = true, c = true })
 opt.breakindent = true
 opt.clipboard = "unnamedplus" -- Access system clipboard
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.completeopt = "menuone,noselect"
 opt.conceallevel = 3
 opt.confirm = true
@@ -47,8 +47,8 @@ opt.updatetime = 200
 opt.wildmode = "longest:full,full"
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-	opt.splitkeep = "screen"
-	opt.shortmess:append({ C = true })
+  opt.splitkeep = "screen"
+  opt.shortmess:append({ C = true })
 end
 
 vim.g.mapleader = " "
