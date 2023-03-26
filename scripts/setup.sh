@@ -1,15 +1,15 @@
 #!/bin/bash
 
-sudo apt install stow
-sudo apt install ripgrep
-sudo apt install fzf
-sudo apt install fd-find # find replacement
-sudo apt install duf     # df replacement
-sudo apt install bat &&  # cat replacement
+sudo apt install stow -y
+sudo apt install ripgrep -y
+sudo apt install fzf -y
+sudo apt install fd-find -y # find replacement
+sudo apt install duf -y     # df replacement
+sudo apt install bat -y &&  # cat replacement
 	sudo ln -s /usr/bin/batcat /usr/local/bin/bat
-sudo apt install neofetch
-sudo apt-get install python3-pip
-sudo apt install delta
+sudo apt install neofetch -y
+sudo apt install python3-pip -y
+sudo apt install python3-virtualenv -y
 
 # install rust and cargo
 curl https://sh.rustup.rs -sSf | sh
