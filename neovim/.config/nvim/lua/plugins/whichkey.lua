@@ -14,6 +14,11 @@ return {
       q = { name = "+Quick" },
       f = { name = "+File" },
       g = { name = "+Git" },
+      o = { name = "+Overseer" },
+      t = { name = "+Test" },
+      d = { name = "+Debug" },
+      s = { name = "+Search" },
+      b = { name = "+Buffer" },
       l = {
         name = "+Code",
         x = {
