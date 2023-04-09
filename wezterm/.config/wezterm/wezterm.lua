@@ -17,4 +17,6 @@ return {
 	hide_tab_bar_if_only_one_tab = true,
 	window_decorations = "NONE",
 	audible_bell = "Disabled",
-}
+	window_close_confirmation = 'NeverPrompt'
+
+	}
