@@ -1,25 +1,16 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
-keybinds {
+keybinds clear-defaults=true {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-        unbind "Ctrl h"
         bind "Alt m" { SwitchToMode "move"; }
-        unbind "Ctrl g"
         bind "Alt d" { SwitchToMode "Locked"; }
-        unbind "Ctrl p"
         bind "Alt p" { SwitchToMode "pane"; }
-        unbind "Ctrl t"
         bind "Alt t" { SwitchToMode "tab"; }
-        unbind "Ctrl n"
         bind "Alt r" { SwitchToMode "resize"; }
-        unbind "Ctrl l"
         bind "Alt f" { SwitchToMode "search"; }
-        unbind "Ctrl o"
         bind "Alt s" { SwitchToMode "session"; }
-        unbind "Ctrl e"
         bind "Alt o" { SwitchToMode "scroll"; }
-        unbind "Ctrl q"
         bind "Alt q" { Quit; }
     }
     locked {
@@ -98,8 +89,6 @@ keybinds {
         // bind "Alt c" { Copy; }
     }
     search {
-        unbind "Ctrl s"
-        unbind "Ctrl e"
         bind "Alt f" { SwitchToMode "Normal"; }
         bind "Alt c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
@@ -127,7 +116,6 @@ keybinds {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
     }
     session {
-        unbind "Ctrl o"
         bind "Alt s" { SwitchToMode "Normal"; }
         bind "Alt o" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
@@ -214,7 +202,7 @@ plugins {
 //    - true
 //    - false (Default)
 //
-// simplified_ui true
+simplified_ui true
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
