@@ -12,7 +12,7 @@ function M.format()
   local ft = vim.bo[buf].filetype
   local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
-  vim.lsp.buf.format {
+  vim.lsp.buf.format({
     bufnr = buf,
     filter = function(client)
       if have_nls then
@@ -20,11 +20,11 @@ function M.format()
       end
       return client.name ~= "null-ls"
     end,
-  }
+  })
 end
 
 function M.on_attach(client, buf)
-  if client.supports_method "textDocument/formatting" then
+  if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
       buffer = buf,
@@ -34,6 +34,16 @@ function M.on_attach(client, buf)
         end
       end,
     })
+  end
+  if client.name == "omnisharp" then
+    local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+    for i, v in ipairs(tokenModifiers) do
+      tokenModifiers[i] = v:gsub(" ", "_")
+    end
+    local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+    for i, v in ipairs(tokenTypes) do
+      tokenTypes[i] = v:gsub(" ", "_")
+    end
   end
 end
 
