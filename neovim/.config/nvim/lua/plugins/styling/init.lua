@@ -3,6 +3,9 @@ return {
     "eddyekofo94/gruvbox-flat.nvim",
     lazy = false,
     priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme gruvbox-flat]])
+    end,
   },
   {
     "catppuccin/nvim",
@@ -12,9 +15,6 @@ return {
       transparent_background = true,
       flavour = "latte",
     },
-    config = function()
-      vim.cmd([[colorscheme catppuccin]])
-    end,
   },
   {
     "xiyaowong/nvim-transparent",
