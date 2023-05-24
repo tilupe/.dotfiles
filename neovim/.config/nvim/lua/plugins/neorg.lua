@@ -6,8 +6,8 @@ return {
     opts = {
       load = {
         ["core.defaults"] = {},
-        ["core.norg.concealer"] = {},
-        ["core.norg.dirman"] = {
+        ["core.concealer"] = {},
+        ["core.dirman"] = {
           config = {
             workspaces = {
               notes = "~/notes",
@@ -16,7 +16,14 @@ return {
           },
         },
         ["core.integrations.telescope"] = {},
-        ["core.export.markdown"] = {},
+        ["core.export.markdown"] = {
+          extensions = "md",
+        },
+        ["core.completion"] = {
+          engine = "nvim-cmp",
+        },
+        ["core.manoeuvre"] = {},
+        -- ["core.ui.calendar"] = {},
       },
     },
     dependencies = {

@@ -5,7 +5,7 @@ opt.shortmess:append({ W = true, I = true, c = true })
 opt.breakindent = true
 opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.cmdheight = 0
-opt.completeopt = "menuone,noselect"
+opt.completeopt = "menuone,noselect,longest"
 opt.conceallevel = 3
 opt.confirm = true
 opt.cursorline = true
@@ -47,6 +47,7 @@ opt.updatetime = 200
 opt.wildmode = "longest:full,full"
 opt.spelllang = en_us, de_ch
 opt.spell = true
+opt.diffopt = "linematch:50"
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   opt.splitkeep = "screen"

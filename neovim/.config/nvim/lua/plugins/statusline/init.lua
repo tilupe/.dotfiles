@@ -4,9 +4,9 @@ return {
     event = "VeryLazy",
 
     config = function()
-      local components = require "plugins.statusline.components"
+      local components = require("plugins.statusline.components")
 
-      require("lualine").setup {
+      require("lualine").setup({
         options = {
           icons_enabled = true,
           theme = "auto",
@@ -29,8 +29,8 @@ return {
           lualine_c = {
             components.diff,
             components.diagnostics,
-            components.noice_command,
-            components.noice_mode,
+            --components.noice_command,
+            --components.noice_mode,
             components.separator,
             components.lsp_client,
           },
@@ -47,7 +47,7 @@ return {
           lualine_z = {},
         },
         extensions = { "nvim-tree", "toggleterm", "quickfix" },
-      }
+      })
     end,
   },
 }

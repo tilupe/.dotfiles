@@ -8,6 +8,32 @@ return {
     end,
   },
   {
+    "sainnhe/gruvbox-material",
+    lazy = false,
+    opts = {
+      background = "dark",
+      gruvbox_material_background = "hard",
+    },
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    config = function()
+      require("kanagawa").setup({
+        typeStyle = {},
+        transparent = true, -- do not set background color
+        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        theme = "wave", -- Load "wave" theme when 'background' option is not set
+      })
+      --vim.cmd([[colorscheme kanagawa]])
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
@@ -15,6 +41,12 @@ return {
       transparent_background = true,
       flavour = "latte",
     },
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
   {
     "xiyaowong/nvim-transparent",

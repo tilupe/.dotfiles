@@ -21,10 +21,10 @@ return {
         return n, p
       end)()
 
-      require("nvim-treesitter.configs").setup {
+      require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
-	  "c_sharp",
+          "c_sharp",
           "help",
           "html",
           "javascript",
@@ -32,6 +32,7 @@ return {
           "lua",
           "markdown",
           "markdown_inline",
+          "norg",
           "python",
           "query",
           "regex",
@@ -92,7 +93,7 @@ return {
             swap_previous = swap_prev,
           },
         },
-      }
+      })
     end,
   },
 }

@@ -1,4 +1,12 @@
 return {
+
+  {
+    "Hoffs/omnisharp-extended-lsp.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    keys = {
+      { "<leader>xxx", "<cmd>lua require('omnisharp_extended').telescope_lsp_definitions()<cr>", desc = "Mason" },
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
@@ -36,6 +44,7 @@ return {
         },
         dockerls = {},
         omnisharp = {},
+        html_lsp = {},
       },
       setup = {
         lua_ls = function(_, _)
