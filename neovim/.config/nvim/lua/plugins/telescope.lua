@@ -3,9 +3,11 @@ return {
   dependencies = {
     {
       "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       config = function()
         require("telescope").load_extension("file_browser")
+        require("telescope").load_extension("fzf")
       end,
     },
     { "nvim-lua/plenary.nvim" },
