@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -74,6 +81,22 @@ ZSH_THEME="agnoster"
 plugins=(git)
 
 # User configuration
+source ~/.zplug/init.zsh
+
+zplug "woefe/wbase.zsh"
+zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "junegunn/fzf", use:"shell/*.zsh"
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
+zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64-unknown-linux-gnu.tar.gz"
+zplug "junegunn/fzf"
+zplug romkatv/powerlevel10k, as:theme, depth:1
+zplug "jeffreytse/zsh-vi-mode"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+# Then, source plugins and add commands to $PATH
+zplug load
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -86,6 +109,12 @@ plugins=(git)
 # else
 #   export EDITOR='mvim'
 # fi
+#
+
+## ENVIRONEMENT VARIALES
+export MonolithRoot=/home/$USER/Development/devinite/
+export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
+export EDITOR=nvim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -98,9 +127,24 @@ plugins=(git)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias l='exa -l --icons --git -a'
+alias l='exa -l --icons --git --no-user'
+alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
+alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
+alias ktest="kubectl config use-context test"
+alias kprod="kubectl config use-context prod"
+alias k9="k9s -n dg-sales"
+alias v="nvim"
+alias z="zellij"
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Created by `pipx` on 2023-04-18 06:15:55
+export PATH="$PATH:/home/$USER/.local/bin"
+export PATH="$PATH:/opt/mssql-tools18/bin"
