@@ -1,18 +1,14 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 14.0,
+	font_size = 15.0,
 	line_height = 0.95,
+	cell_width = 0.90,
 	font = wezterm.font_with_fallback({
-		-- {
-		-- 	family = "LeagueMono",
-		-- 	weight = 300,
-		--
-		-- 	harfbuzz_features = { "zero" },
-		-- },
-		"JetBrains Mono NF",
+		{ family = "JetBrains Mono NF", weight = "Light" },
 		"MesloLGS NF",
 	}),
+
 	automatically_reload_config = true,
 	adjust_window_size_when_changing_font_size = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -28,7 +24,7 @@ return {
 	warn_about_missing_glyphs = false,
 
 	window_decorations = "NONE",
-	window_background_opacity = 0.8,
+	window_background_opacity = 0.85,
 	window_padding = {
 		left = 0,
 		right = 0,
