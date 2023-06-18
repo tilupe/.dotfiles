@@ -36,8 +36,11 @@ return {
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
+      { "<leader>gs", "<cmd>Git<cr>", desc = "Status" },
       { "<leader>gl", "<cmd>Gvdiffsplit<cr>", desc = "Git diff right" },
+      { "<leader>gb", "<cmd>Git blame<cr>", desc = "Blame" },
+      { "<leader>gP", "<cmd>Git push<cr>", desc = "Push" },
+      { "<leader>gp", "<cmd>Git pull<cr>", desc = "Pull" },
     },
   },
   {
@@ -73,6 +76,12 @@ return {
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
+    },
+  },
+  {
+    "sindrets/diffview.nvim",
+    keys = {
+      { "<leader>go", "<cmd>DiffviewOpen<cr>", desc = "DiffOpen" },
     },
   },
   {

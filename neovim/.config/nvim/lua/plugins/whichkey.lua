@@ -16,6 +16,7 @@ return {
       g = { name = "+Git" },
       o = { name = "+Overseer" },
       t = { name = "+Test" },
+      u = { name = "+Ui" },
       d = { name = "+Debug" },
       s = { name = "+Search" },
       b = { name = "+Buffer" },
@@ -34,6 +35,7 @@ return {
           c = "Class",
         },
       },
+      ["<tab>"] = { name = "+Tab" },
     }, { prefix = "<leader>" })
   end,
 }

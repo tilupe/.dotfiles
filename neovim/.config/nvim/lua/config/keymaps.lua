@@ -64,9 +64,12 @@ end
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader>ww", "<cmd>update!<CR>", { desc = "Save" })
 map("n", "<leader>wa", "<cmd>wa<CR>", { desc = "Save all" })
+map("n", "<leader>wk", "<cmd>wq<CR>", { desc = "Save & Kuit" })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete" })
 map("n", "<leader>ws", "<C-W>s", { desc = "Split below" })
 map("n", "<leader>wv", "<C-W>v", { desc = "Split right" })
+
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close" })
 
 -- Git
 map("n", "<leader>gg", "<cmd>lua require('util').Lazygit_toggle()<cr>", { desc = "Lazygit" })
