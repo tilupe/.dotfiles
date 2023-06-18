@@ -37,7 +37,9 @@ return {
         "BufferLineSeparator",
         "BufferLineIndicatorSelected",
       },
-      exclude = {}, -- table: groups you don't want to clear
+    },
+    keys = {
+      { "<leader>ut", "<cmd>TransparentToggle<cr>", desc = "TransparentToggle" },
     },
     config = function(_, opts)
       require("transparent").setup(opts)

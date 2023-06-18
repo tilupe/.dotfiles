@@ -25,7 +25,6 @@ return {
         ensure_installed = {
           "bash",
           "c_sharp",
-          "help",
           "html",
           "javascript",
           "json",

@@ -70,3 +70,5 @@ map("n", "<leader>wv", "<C-W>v", { desc = "Split right" })
 
 -- Git
 map("n", "<leader>gg", "<cmd>lua require('util').Lazygit_toggle()<cr>", { desc = "Lazygit" })
+
+map("n", "<F5>", "<cmd>e<cr>", { desc = "Reload file" })

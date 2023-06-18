@@ -25,18 +25,19 @@ return {
     "rcarriga/nvim-notify",
     event = "VeryLazy",
     enabled = true,
-    config = { default = true }, -- same as config = true
+    config = function()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
+    end,
   },
 
   --- Git
   {
-    "TimUntersberger/neogit",
-    cmd = "Neogit",
-    config = {
-      integrations = { diffview = true },
-    },
+    "tpope/vim-fugitive",
     keys = {
-      { "<leader>gs", "<cmd>Neogit kind=floating<cr>", desc = "Status" },
+      { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
+      { "<leader>gl", "<cmd>Gvdiffsplit<cr>", desc = "Git diff right" },
     },
   },
   {
