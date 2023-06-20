@@ -2,19 +2,9 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      {
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        config = function()
-          require("telescope").load_extension("file_browser")
-        end,
-      },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        build = "make",
-      },
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
     },
     cmd = "Telescope",
     keys = {
@@ -51,6 +41,9 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
+
+        preview_cutoff = 12,
+
         mappings = {
           i = {
             ["<c-t>"] = function(...)
@@ -86,5 +79,20 @@ return {
         },
       },
     },
+  },
+
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    config = function()
+      require("telescope").load_extension("file_browser")
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
   },
 }
