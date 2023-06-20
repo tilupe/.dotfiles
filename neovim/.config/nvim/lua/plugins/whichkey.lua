@@ -13,7 +13,11 @@ return {
       w = { name = "+Window" },
       q = { name = "+Quick" },
       f = { name = "+File" },
-      g = { name = "+Git" },
+      g = {
+        name = "+Git",
+        d = { name = "+Diff" },
+        s = { name = "+Stage" },
+      },
       o = { name = "+Overseer" },
       t = { name = "+Test" },
       u = { name = "+Ui" },
