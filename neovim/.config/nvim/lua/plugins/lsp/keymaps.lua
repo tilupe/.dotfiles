@@ -3,10 +3,10 @@ local M = {}
 function M.on_attach(client, buffer)
   local self = M.new(client, buffer)
 
-  self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
-  self:map("gr", "Telescope lsp_references", { desc = "References" })
+  self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" }, "zz")
+  self:map("gr", "Telescope lsp_references", { desc = "References", "zz" })
   self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
-  self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
+  self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" }, "zz")
   self:map("gb", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
   self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
   self:map("gK", vim.lsp.buf.signature_help, { desc = "Signature Help", has = "signatureHelp" })
@@ -35,15 +35,16 @@ function M:has(cap)
   return self.client.server_capabilities[cap .. "Provider"]
 end
 
-function M:map(lhs, rhs, opts)
+function M:map(lhs, rhs, opts, add)
   opts = opts or {}
   if opts.has and not self:has(opts.has) then
     return
   end
+  local ex = add or ""
   vim.keymap.set(
     opts.mode or "n",
     lhs,
-    type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
+    type(rhs) == "string" and ("<cmd>%s<cr>" .. ex):format(rhs) or rhs,
     ---@diagnostic disable-next-line: no-unknown
     { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
   )
