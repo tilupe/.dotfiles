@@ -1,11 +1,32 @@
 return {
+  --{
+  --  "eddyekofo94/gruvbox-flat.nvim",
+  --  lazy = false,
+  --  priority = 1000,
+  --  config = function()
+  --    vim.cmd([[colorscheme gruvbox-flat]])
+  --  end,
+  --},
   {
-    "eddyekofo94/gruvbox-flat.nvim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 900,
     config = function()
-      vim.cmd([[colorscheme gruvbox-flat]])
+      require("gruvbox").setup({
+        contrast = "soft",
+        palette_overrides = {
+          bright_red = "#f2594b",
+        },
+      })
+      vim.cmd([[colorscheme gruvbox]])
     end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = true,
+    keys = {
+      { "<leader>uc", "<cmd>ColorizerToggle<cr>", desc = "ColorizerToggle" },
+    },
   },
   {
     "catppuccin/nvim",
