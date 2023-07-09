@@ -15,8 +15,6 @@ return {
 	max_fps = 144,
 	animation_fps = 1,
 
-	enable_tab_bar = false,
-
 	allow_square_glyphs_to_overflow_width = "Never",
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
@@ -78,6 +76,21 @@ return {
 	--		"#e3e5e8",
 	--	},
 	--},
+	--
+	keys = {
+		{ key = "o", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+		{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
+		{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
+		{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
+		{ key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
+		{ key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
+		{ key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
+		{ key = "6", mods = "ALT", action = wezterm.action.ActivateTab(5) },
+		{ key = "7", mods = "ALT", action = wezterm.action.ActivateTab(6) },
+		{ key = "8", mods = "ALT", action = wezterm.action.ActivateTab(7) },
+		{ key = "9", mods = "ALT", action = wezterm.action.ActivateTab(8) },
+		{ key = "0", mods = "ALT", action = wezterm.action.ActivateTab(9) },
+	},
 
 	color_scheme = "GruvboxDark",
 }
