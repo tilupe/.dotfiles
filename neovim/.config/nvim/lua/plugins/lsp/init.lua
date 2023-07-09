@@ -46,6 +46,7 @@ return {
         omnisharp = {},
         html_lsp = {},
         pyright = {},
+        powershell_es = {},
       },
       setup = {
         lua_ls = function(_, _)
