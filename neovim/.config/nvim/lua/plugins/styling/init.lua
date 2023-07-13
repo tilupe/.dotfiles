@@ -17,6 +17,9 @@ return {
         palette_overrides = {
           bright_red = "#f2594b",
         },
+        overrides = {
+          Keyword = { fg = "#d2890b" },
+        },
       })
       vim.cmd([[colorscheme gruvbox]])
     end,
@@ -65,5 +68,16 @@ return {
     config = function(_, opts)
       require("transparent").setup(opts)
     end,
+  },
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        width = 160,
+      },
+    },
+    keys = {
+      { "<leader>mf", "<cmd>ZenMode<cr>", desc = "ZenMode" },
+    },
   },
 }

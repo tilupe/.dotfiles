@@ -34,6 +34,22 @@ return {
 
   --- Git
   {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
+    opts = {
+      integrations = {
+        diffview = true,
+      },
+    },
+    config = true,
+    keys = {
+      { "<leader>gnn", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
+  },
+  {
     "tpope/vim-fugitive",
     keys = {
       { "<leader>gg", "<cmd>Git<cr>", desc = "Status" },
@@ -150,6 +166,10 @@ return {
       -- use gz mappings instead of s to prevent conflict with leap
       require("mini.surround").setup(opts)
     end,
+    keys = {
+      { "<leader>ff", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Mini Files" },
+      { "<leader>fF", "<cmd>lua MiniFiles.open()<cr>", desc = "Mini Files" },
+    },
   },
 
   -- buffer remove
