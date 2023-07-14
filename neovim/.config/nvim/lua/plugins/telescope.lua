@@ -15,6 +15,11 @@ return {
         "<cmd>lua require('telescope.builtin').find_files()<cr>",
         desc = "Find Files",
       },
+      {
+        "<leader>F",
+        "<cmd>lua require('telescope.builtin').find_files({ hidden = true})<cr>",
+        desc = "Find All Files",
+      },
       { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
       { "<leader>sG", "<cmd>Telescope git_files<cr>", desc = "Git Files" },
@@ -41,7 +46,7 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-
+        file_ignore_patterns = { "^.git/" },
         preview_cutoff = 12,
 
         mappings = {
