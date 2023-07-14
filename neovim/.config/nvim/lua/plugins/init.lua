@@ -41,6 +41,7 @@ return {
     },
     opts = {
       kind = "auto",
+      disable_commit_confirmation = true,
       integrations = {
         diffview = true,
       },
