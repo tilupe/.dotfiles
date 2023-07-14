@@ -40,19 +40,19 @@ return {
       "sindrets/diffview.nvim",
     },
     opts = {
+      kind = "auto",
       integrations = {
         diffview = true,
       },
     },
     config = true,
     keys = {
-      { "<leader>gnn", "<cmd>Neogit<cr>", desc = "Neogit" },
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
   },
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>gg", "<cmd>Git<cr>", desc = "Status" },
       { "<leader>gb", "<cmd>Git blame<cr>", desc = "Blame" },
       { "<leader>gP", "<cmd>Git -c push.default=current push<cr>", desc = "Push" },
       { "<leader>gp", "<cmd>Git pull<cr>", desc = "Pull" },
