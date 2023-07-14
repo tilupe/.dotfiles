@@ -148,6 +148,8 @@ alias v="nvim"
 alias z="zellij"
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias oscpvpn="sudo -b openvpn --config ~/projects/offsec/universal.ovpn "
+alias sales="cd $HOME/Development/Dg.Sales/ && z attach sales || z -s sales"
+alias config="cd $HOME/.dotfiles/neovim/.config/nvim/ && z attach config || z -s config"
 
 
 export NVM_DIR="$HOME/.nvm"
