@@ -152,12 +152,9 @@ alias sales="cd $HOME/Development/Dg.Sales/ && zj attach sales || zj -s sales"
 alias config="cd $HOME/.dotfiles/neovim/.config/nvim/ && zj attach config || zj -s config"
 
 
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Created by `pipx` on 2023-04-18 06:15:55
 export PATH="$PATH:/home/$USER/.local/bin"
