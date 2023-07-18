@@ -47,6 +47,7 @@ return {
         html_lsp = {},
         pyright = {},
         powershell_es = {},
+        terraformls = {},
       },
       setup = {
         lua_ls = function(_, _)
