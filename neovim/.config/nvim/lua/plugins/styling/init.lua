@@ -80,4 +80,9 @@ return {
       { "<leader>mf", "<cmd>ZenMode<cr>", desc = "ZenMode" },
     },
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    lazy = false,
+    config = true,
+  },
 }
