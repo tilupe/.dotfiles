@@ -78,7 +78,7 @@ return {
 	--},
 	--
 	keys = {
-		{ key = "o", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+		{ key = "w", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
 		{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
 		{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
