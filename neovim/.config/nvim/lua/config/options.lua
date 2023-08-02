@@ -47,7 +47,8 @@ opt.updatetime = 200
 opt.wildmode = "longest:full,full"
 opt.spelllang = en_us, de_ch
 opt.spell = true
-opt.diffopt = "linematch:50"
+opt.diffopt = "linematch:60,context:5,closeoff,algorithm:histogram"
+opt.fillchars = "diff:╱"
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   opt.splitkeep = "screen"
