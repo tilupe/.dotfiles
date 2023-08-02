@@ -7,6 +7,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
+export GOBIN="$GOPATH"/bin
 export ZPLUG_HOME="$XDG_DATA_HOME"/zplug
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
@@ -16,6 +17,9 @@ export NVM_DIR="$XDG_DATA_HOME"/nvm
 export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export ZAUTOJUMP="$XDG_DATA_HOME/autojump/autojump.txt "
+export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/.terraformrc"
+export POETRY_HOME="$XDG_DATA_HOME/poetry"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -94,7 +98,10 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git)
+plugins=(
+  git
+  poetry
+)
 
 # User configuration
 source "$ZPLUG_HOME"/init.zsh
@@ -150,6 +157,10 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias oscpvpn="sudo -b openvpn --config ~/projects/offsec/universal.ovpn "
 alias sales="cd $HOME/Development/Dg.Sales/ && zj attach sales || zj -s sales"
 alias config="cd $HOME/.dotfiles/neovim/.config/nvim/ && zj attach config || zj -s config"
+alias cd..="cd .."
+alias cd2="cd ../.."
+alias cd3="cd ../../.."
+alias cd4="cd ../../../.."
 
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -160,5 +171,6 @@ alias config="cd $HOME/.dotfiles/neovim/.config/nvim/ && zj attach config || zj 
 export PATH="$PATH:/home/$USER/.local/bin"
 export PATH="$PATH:/opt/mssql-tools18/bin"
 
+eval "$(zoxide init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
