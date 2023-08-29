@@ -2,7 +2,7 @@
 	name = Timothy Pescatore
 	email = timothy.pescatore@digitecgalaxus.ch
 [core]
-  autocrlf = input
+	autocrlf = input
   pager = delta
   editor = nvim
 
