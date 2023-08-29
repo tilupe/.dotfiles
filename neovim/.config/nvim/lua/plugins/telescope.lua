@@ -5,6 +5,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
+      "jvgrootveld/telescope-zoxide",
     },
     cmd = "Telescope",
     keys = {
@@ -27,6 +28,7 @@ return {
       { "<leader>sk", "<cmd>Telescope file_browser path=%:p:h<cr>", desc = "File Browser current" },
       { "<leader>sK", "<cmd>Telescope file_browser<cr>", desc = "File Browser root" },
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+      { "<leader>ss", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Lsp Symbols" },
       -- search
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
@@ -98,6 +100,12 @@ return {
     build = "make",
     config = function()
       require("telescope").load_extension("fzf")
+    end,
+  },
+  {
+    "jvgrootveld/telescope-zoxide",
+    config = function()
+      require("telescope").load_extension("zoxide")
     end,
   },
 }

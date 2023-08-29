@@ -1,6 +1,5 @@
 return {
   {
-
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
     opts = {
@@ -15,14 +14,8 @@ return {
             default_workspace = "notes",
           },
         },
-        ["core.export.markdown"] = {
-          extensions = "md",
-        },
-        ["core.completion"] = {
-          engine = "nvim-cmp",
-        },
+        ["core.export"] = {},
         ["core.manoeuvre"] = {},
-        -- ["core.ui.calendar"] = {},
         ["core.integrations.telescope"] = {},
         ["core.integrations.nvim-cmp"] = {},
       },

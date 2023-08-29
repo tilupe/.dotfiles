@@ -10,6 +10,7 @@ sudo apt install bat -y &&  # cat replacement
 sudo apt install neofetch -y
 sudo apt install python3-pip -y
 sudo apt install python3-virtualenv -y
+sudo apt install zoxide
 
 # install rust and cargo
 curl https://sh.rustup.rs -sSf | sh
