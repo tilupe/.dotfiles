@@ -48,6 +48,7 @@ return {
         pyright = {},
         powershell_es = {},
         terraformls = {},
+        marksman = {},
       },
       setup = {
         lua_ls = function(_, _)
