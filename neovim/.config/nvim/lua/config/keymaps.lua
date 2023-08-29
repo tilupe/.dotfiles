@@ -45,10 +45,10 @@ keymap("n", "<S-Left>", "<cmd>vertical resize -2<CR>")
 keymap("n", "<S-Right>", "<cmd>vertical resize +2<CR>")
 
 -- Better Window navigation
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-j>", "<C-w>j")
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-l>", "<C-w>l")
+--keymap("n", "<C-h>", "<C-w>h")
+--keymap("n", "<C-j>", "<C-w>j")
+--keymap("n", "<C-k>", "<C-w>k")
+--keymap("n", "<C-l>", "<C-w>l")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
