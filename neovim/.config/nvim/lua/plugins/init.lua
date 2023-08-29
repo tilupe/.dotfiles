@@ -261,12 +261,22 @@ return {
     ---@type Flash.Config
     opts = {},
   -- stylua: ignore
-  keys = {
-    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
+  {
+    "christoomey/vim-tmux-navigator",
+    event = "VeryLazy",
+    keys = {
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Window Left" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Window Down" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Window Up" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Window Right" },
+    },
   },
 }
