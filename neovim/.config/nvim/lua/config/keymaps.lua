@@ -75,3 +75,9 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close" })
 map("n", "<leader>gl", "<cmd>lua require('util').Lazygit_toggle()<cr>", { desc = "Lazygit" })
 
 map("n", "<F5>", "<cmd>e<cr>", { desc = "Reload file" })
+map(
+  "n",
+  "<F10>",
+  "<cmd>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal<CR>cd $VIM_DIR<cr>",
+  { desc = "Current DIR Terminal" }
+)
