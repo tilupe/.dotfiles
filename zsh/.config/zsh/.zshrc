@@ -35,7 +35,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$H
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -112,7 +111,8 @@ zplug "junegunn/fzf", use:"shell/*.zsh"
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
 zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64-unknown-linux-gnu.tar.gz"
 zplug "junegunn/fzf"
-zplug romkatv/powerlevel10k, as:theme, depth:1
+#zplug "caiomcg/gruvbox-zsh-theme", as:theme #from:github, as:theme
+zplug romkatv/powerlevel10k, as:theme, depth:1 
 zplug "jeffreytse/zsh-vi-mode"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"

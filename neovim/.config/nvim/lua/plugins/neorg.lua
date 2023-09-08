@@ -5,6 +5,11 @@ return {
     opts = {
       load = {
         ["core.defaults"] = {},
+        ["core.esupports.metagen"] = {
+          config = {
+            type = "auto",
+          },
+        },
         ["core.concealer"] = {},
         ["core.dirman"] = {
           config = {
