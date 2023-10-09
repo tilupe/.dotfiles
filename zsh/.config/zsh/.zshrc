@@ -161,6 +161,8 @@ alias cd..="cd .."
 alias cd2="cd ../.."
 alias cd3="cd ../../.."
 alias cd4="cd ../../../.."
+alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
+alias cat='bat --style=plain'
 
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

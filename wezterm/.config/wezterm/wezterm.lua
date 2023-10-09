@@ -1,8 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 15.0,
-	line_height = 0.95,
+	font_size = 14.5,
 	cell_width = 0.90,
 	font = wezterm.font_with_fallback({
 		{ family = "JetBrains Mono NF", weight = "Light" },
@@ -77,6 +76,35 @@ return {
 	--	},
 	--},
 	--
+	colors = {
+		foreground = "#ECE1D7",
+		background = "#292522",
+		cursor_bg = "#ECE1D7",
+		cursor_border = "#ECE1D7",
+		cursor_fg = "#292522",
+		selection_bg = "#403A36",
+		selection_fg = "#ECE1D7",
+		ansi = {
+			"#34302C",
+			"#BD8183",
+			"#78997A",
+			"#E49B5D",
+			"#7F91B2",
+			"#B380B0",
+			"#7B9695",
+			"#C1A78E",
+		},
+		brights = {
+			"#867462",
+			"#D47766",
+			"#85B695",
+			"#EBC06D",
+			"#A3A9CE",
+			"#CF9BC2",
+			"#89B3B6",
+			"#ECE1D7",
+		},
+	},
 	keys = {
 		{ key = "w", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
@@ -93,7 +121,7 @@ return {
 		{ key = "Enter", mods = "ALT", action = wezterm.action.ActivateTab(9) },
 	},
 
-	color_scheme = "GruvboxDark",
+	--	color_scheme = "GruvboxDark",
 
 	wezterm.on("user-var-changed", function(window, pane, name, value)
 		local overrides = window:get_config_overrides() or {}

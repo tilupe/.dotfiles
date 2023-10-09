@@ -1,0 +1,27 @@
+session_name: DgSales
+
+windows:
+  - window_name: code
+    shell_command_before:
+      - cd ~/Development/Dg.Sales/ # run as a first command in all panes
+      - nvim  # run as a first command in all panes
+  - window_name: build
+    layout: tiled
+    shell_command_before:
+      - cd ~/Development/Dg.Sales/ # run as a first command in all panes
+    panes:
+      - dotnet build Dg.Sales.Host.sln # pane no. 2
+      - echo second pane # pane no. 2
+  - window_name: Web-Host
+    layout: tiled
+    shell_command_before:
+      - cd ~/Development/Dg.Sales/ # run as a first command in all panes
+  - window_name: Messagehandler
+    layout: tiled
+    shell_command_before:
+      - cd ~/Development/Dg.Sales/ # run as a first command in all panes
+  - window_name: Ui
+    layout: tiled
+    shell_command_before:
+      - cd ~/Development/Dg.Sales/ # run as a first command in all panes
+
