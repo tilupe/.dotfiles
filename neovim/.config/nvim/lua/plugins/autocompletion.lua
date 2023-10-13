@@ -32,7 +32,7 @@ return {
           ['<C-k>'] = cmp.mapping.select_prev_item(),
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-y>'] = cmp.mapping.complete {},
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
@@ -88,6 +88,25 @@ return {
           end,
         },
       }
+    end,
+  },
+  {
+    'Exafunction/codeium.vim',
+    event = 'VeryLazy',
+    config = function()
+      -- Change '<C-g>' here to any keycode you like.
+      vim.keymap.set('i', '<C-Space>', function()
+        return vim.fn['codeium#Accept']()
+      end, { expr = true })
+      vim.keymap.set('i', '<c-l>', function()
+        return vim.fn['codeium#CycleCompletions'](1)
+      end, { expr = true })
+      vim.keymap.set('i', '<c-z>', function()
+        return vim.fn['codeium#CycleCompletions'](-1)
+      end, { expr = true })
+      vim.keymap.set('i', '<c-x>', function()
+        return vim.fn['codeium#Clear']()
+      end, { expr = true })
     end,
   },
 }

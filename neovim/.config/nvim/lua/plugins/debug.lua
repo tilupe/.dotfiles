@@ -27,12 +27,7 @@ return {
     local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
       automatic_setup = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
       handlers = {},
 
       -- You'll need to check that you have the required things installed
@@ -44,6 +39,7 @@ return {
       },
     }
 
+    local icons = require 'utils.icons'
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -53,15 +49,15 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
+          pause = icons.debug.Pause,
+          play = icons.debug.Play,
+          step_into = icons.debug.StepInto,
+          step_over = icons.debug.StepOver,
+          step_out = icons.debug.StepOut,
+          step_back = icons.debug.StepBack,
+          run_last = icons.debug.RunLast,
+          terminate = icons.debug.Terminate,
+          disconnect = icons.debug.Disconnect,
         },
       },
     }

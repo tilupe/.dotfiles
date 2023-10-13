@@ -1,5 +1,13 @@
 return {
   {
+    'ThePrimeagen/harpoon',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    keys = require('config.keymaps').harpoon,
+  },
+  {
     'echasnovski/mini.files',
     event = 'VeryLazy',
     config = function(_, opts)
@@ -59,6 +67,15 @@ return {
           miniclue.gen_clues.registers(),
           miniclue.gen_clues.windows(),
           miniclue.gen_clues.z(),
+
+          { mode = 'n', keys = '<leader>g', desc = '[G]it' },
+          { mode = 'n', keys = '<leader>c', desc = '[C]ode' },
+          { mode = 'n', keys = '<leader>s', desc = '[S]earch' },
+          { mode = 'n', keys = '<leader>n', desc = '[N]otes' },
+          { mode = 'n', keys = '<leader>d', desc = '[D]ebu' },
+          { mode = 'n', keys = '<leader>t', desc = '[T]est' },
+          { mode = 'n', keys = '<leader>r', desc = '[R]efactor' },
+          { mode = 'n', keys = '<leader>w', desc = '[W]indow | [W]orkspace' },
         },
       }
     end,

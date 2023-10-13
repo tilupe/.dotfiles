@@ -59,8 +59,8 @@ M.lsp = function()
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>rn', vim.lsp.buf.rename, '[N]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -86,11 +86,16 @@ M.blame = {
 }
 
 M.telescope = {
-  { '<leader>sr', '<CMD>Telescope oldfiles<CR>', desc = 'Recent' },
-  { '<leader>sb', '<CMD>Telescope buffers<CR>', desc = 'Buffers' },
-  { '<leader>sk', '<CMD>Telescope git_files<CR>', desc = 'Git' },
-  { '<leader>sg', '<CMD>Telescope live_grep<CR>', desc = 'Grep' },
+  { '<leader>sr', '<CMD>Telescope oldfiles<CR>', desc = '[R]ecent' },
+  { '<leader>sb', '<CMD>Telescope buffers<CR>', desc = '[B]uffers' },
+  { '<leader>sg', '<CMD>Telescope live_grep<CR>', desc = '[G]rep' },
   { '<leader>ss', '<CMD>Telescope<CR>', desc = 'Telescope' },
+  { '<leader>gf', '<CMD>Telescope git_files<CR>', desc = 'search [F]iles' },
+  { '<leader><space>', '<CMD>Telescope find_files<CR>', desc = '[F]iles' },
+  { '<leader>gh', '<CMD>Telescope help_tags<CR>', desc = '[H]elp' },
+  { '<leader>sw', '<CMD>Telescope grep_string<CR>', desc = 'current [W]ord' },
+  { '<leader>sd', '<CMD>Telescope diagnostics<CR>', desc = '[D]iagnostics' },
+  { '<leader>sr', '<CMD>Telescope resume<CR>', desc = '[S]earch [R]esume' },
 }
 
 M.mason = {
@@ -139,8 +144,12 @@ M.vim_test = {
 }
 
 M.mini_files = {
-  { '<leader>ff', '<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>', desc = 'Mini Files' },
-  { '<leader>fF', '<CMD>lua MiniFiles.open()<CR>', desc = 'Mini Files' },
+  { '<leader>sf', '<CMD>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>', desc = 'Mini Files' },
+  { '<leader>sF', '<CMD>lua MiniFiles.open()<CR>', desc = 'Mini Files' },
+}
+
+M.trouble = {
+  { '<leader>ct', '<CMD>TroubleToggle<CR>', desc = '[T]rouble' },
 }
 
 M.dap = {
@@ -285,6 +294,18 @@ M.dap = {
     end,
     desc = 'Step Out',
   },
+}
+
+M.harpoon = {
+  { '<leader>h', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Harpoon' },
+}
+
+M.colorizer = {
+  { '<leader>uc', '<cmd>ColorizerToggle<cr>', desc = 'ColorizerToggle' },
+}
+
+M.transparent = {
+  { '<leader>ut', '<cmd>TransparentToggle<cr>', desc = 'TransparentToggle' },
 }
 
 return M

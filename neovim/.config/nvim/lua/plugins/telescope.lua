@@ -20,6 +20,12 @@ return {
     },
     opts = {
       defaults = {
+        layout_strategy = 'vertical',
+        layout_config = {
+          height = 0.95,
+          prompt_position = 'top',
+        },
+        sorting_order = 'descending',
         file_ignore_patterns = { '^.git/' },
         mappings = {
           i = {

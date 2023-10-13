@@ -1,3 +1,5 @@
+local icons = require 'utils.icons'
+
 return {
   {
     'FabijanZulj/blame.nvim',
@@ -6,12 +8,13 @@ return {
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'BufRead',
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
+        add = { text = icons.git.LineAdded },
+        change = { text = icons.git.LineModified },
+        delete = { text = icons.git.LineRemoved },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
