@@ -66,7 +66,6 @@ M.lsp = function()
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
@@ -89,13 +88,19 @@ M.telescope = {
   { '<leader>sr', '<CMD>Telescope oldfiles<CR>', desc = '[R]ecent' },
   { '<leader>sb', '<CMD>Telescope buffers<CR>', desc = '[B]uffers' },
   { '<leader>sg', '<CMD>Telescope live_grep<CR>', desc = '[G]rep' },
-  { '<leader>ss', '<CMD>Telescope<CR>', desc = 'Telescope' },
+  { '<leader>st', '<CMD>Telescope<CR>', desc = 'Telescope' },
   { '<leader>gf', '<CMD>Telescope git_files<CR>', desc = 'search [F]iles' },
+  {
+    '<leader>F',
+    "<cmd>lua require('telescope.builtin').find_files({ hidden = true})<cr>",
+    desc = 'Find All Files',
+  },
   { '<leader><space>', '<CMD>Telescope find_files<CR>', desc = '[F]iles' },
   { '<leader>gh', '<CMD>Telescope help_tags<CR>', desc = '[H]elp' },
   { '<leader>sw', '<CMD>Telescope grep_string<CR>', desc = 'current [W]ord' },
   { '<leader>sd', '<CMD>Telescope diagnostics<CR>', desc = '[D]iagnostics' },
   { '<leader>sr', '<CMD>Telescope resume<CR>', desc = '[S]earch [R]esume' },
+  { '<leader>ss', '<CMD>lua require("telescope.builtin").lsp_document_symbols()<CR>', desc = '[S]ymbols' },
 }
 
 M.mason = {
