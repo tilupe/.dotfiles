@@ -23,6 +23,7 @@ export POETRY_HOME="$XDG_DATA_HOME/poetry"
 export JIRA_API_TOKEN=$(cat ~/.config/secrets/jira_token)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export DOTNET_ROOT=/opt/dotnet
+export BROWSER="/usr/bin/firefox"
 
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$HOME/.local/share/cargo/bin/:$XDG_DATA_HOME/zplug/bin/:
