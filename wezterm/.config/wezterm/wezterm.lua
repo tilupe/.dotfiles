@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 14.5,
+	font_size = 13.5,
 	cell_width = 0.90,
 	font = wezterm.font_with_fallback({
 		{ family = "JetBrains Mono NF", weight = "Light" },

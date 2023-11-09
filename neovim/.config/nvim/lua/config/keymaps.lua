@@ -39,14 +39,18 @@ keymap('n', '<leader>wa', '<CMD>wa<CR>', { desc = '[W]rite [A]ll' })
 keymap('n', '<leader>wd', '<C-W>c', { desc = 'Delete' })
 
 -- Quickfix navigation
-keymap('n', '<C-Down>', '<CMD>cbelow<CR>', { desc = 'Quickfix below' })
-keymap('n', '<C-Up>', '<CMD>cabove<CR>', { desc = 'Quickfix above' })
+keymap('n', '<C-Down>', '<CMD>cnext<CR>', { desc = 'Quickfix next' })
+keymap('n', '<C-Up>', '<CMD>cprev<CR>', { desc = 'Quickfix prev' })
 
 -- Tabs
 keymap('n', '<leader><tab>d', '<CMD>tabclose<CR>', { desc = 'Close' })
 
 keymap('n', '<F5>', '<CMD>e<CR>', { desc = 'Reload file' })
 keymap('n', '<F10>', "<CMD>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal<CR>cd $VIM_DIR<cr>", { desc = 'Current DIR Terminal' })
+
+-- Diagnostics
+keymap('n', '<leader>cj', '<CMD>lua vim.diagnostic.goto_next()<CR>', { desc = 'Next Diagnostic' })
+keymap('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
 
 local M = {}
 
@@ -77,7 +81,8 @@ M.lsp = function()
 end
 
 M.neogit = {
-  { '<leader>gg', '<CMD>Neogit<CR>', silent = true, desc = 'Neogit' },
+  { '<leader>gs', '<CMD>lua require("utils.custom.git").status()<CR>', silent = true, desc = '[S]tatus' },
+  { '<leader>gc', '<CMD>lua require("utils.custom.git").commit()<CR>', silent = true, desc = '[C]ommit' },
 }
 
 M.blame = {
@@ -107,12 +112,30 @@ M.mason = {
   { '<leader>m', '<CMD>Mason<CR>', desc = 'Mason' },
 }
 
+M.conform = {
+  { '<leader>cf', '<CMD>lua require("conform").format({ async = true, lsp_fallback = true })<CR>', desc = 'Format' },
+  { '<leader>cf', '<CMD>lua require("conform").format({ async = true, lsp_fallback = true })<CR>', desc = 'Format' },
+  { '<leader>cF', '<CMD>ConformInfo<CR>', desc = 'FormatInfo' },
+}
+
 M.neorg = {
   { '<leader>nl', '<CMD>Telescope neorg insert_file_link<CR>', desc = 'Insert file link' },
   { '<leader>nw', '<CMD>Neorg workspace<CR>', desc = 'workspace' },
   { '<leader>nn', '<CMD>Neorg keybind<CR>', desc = 'New Note' },
   { '<leader>nr', '<CMD>Neorg return<CR>', desc = 'Close & return' },
   { '<leader>nt', '<CMD>Telescope neorg<CR>', desc = 'Telescope' },
+}
+
+M.lspsaga = {
+  { '<leader>ld', '<CMD>Lspsaga peek_definition<CR>', desc = 'Peek [D]efinition' },
+  { '<leader>la', '<CMD>Lspsaga code_action<CR>', desc = 'Code [A]ction' },
+  { '<leader>lr', '<CMD>Lspsaga incoming_calls<CR>', desc = 'incoming [R]eferences' },
+  { '<leader>lR', '<CMD>Lspsaga outgoing_calls<CR>', desc = 'outgoing [R]eferences' },
+  { '<leader>ln', '<CMD>Lspsaga outgoing_calls<CR>', desc = 're[N]ame' },
+  { '<leader>ld', '<CMD>Lspsaga show_cursor_diagnostics<CR>', desc = '[D]iagnostics' },
+  { '<leader>lj', '<CMD>Lspsaga diagnostic_jump_next<CR>', desc = 'Diagnostics Next' },
+  { '<leader>lk', '<CMD>Lspsaga diagnostic_jump_pre<CR>', desc = 'Diagnostics Prev' },
+  { '<leader>lf', '<CMD>Lspsaga finder<CR>', desc = '[F]inder' },
 }
 
 M.tmux = {
@@ -154,7 +177,8 @@ M.mini_files = {
 }
 
 M.trouble = {
-  { '<leader>ct', '<CMD>TroubleToggle<CR>', desc = '[T]rouble' },
+  { '<leader>ct', '<CMD>TroubleToggle<CR>', desc = '[T]rouble Document' },
+  { '<leader>cT', '<CMD>TroubleToggle<CR>', desc = '[T]rouble Workspace' },
 }
 
 M.dap = {
