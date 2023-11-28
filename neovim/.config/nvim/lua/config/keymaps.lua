@@ -85,6 +85,13 @@ M.neogit = {
   { '<leader>gc', '<CMD>lua require("utils.custom.git").commit()<CR>', silent = true, desc = '[C]ommit' },
 }
 
+M.diffview = {
+  { '<leader>gd', '<CMD>DiffviewOpen<CR>', silent = true, desc = '[D]iffview' },
+  { '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', silent = true, desc = 'File [H]istory' },
+  { '<leader>gH', '<CMD>DiffviewFileHistory<CR>', silent = true, desc = 'All File [H]istory' },
+  { '<leader>gr', '<CMD>DiffviewRefresh<CR>', silent = true, desc = 'All File [H]istory' },
+}
+
 M.blame = {
   { '<leader>gb', '<CMD>ToggleBlame<CR>', silent = true, desc = 'Blame' },
 }

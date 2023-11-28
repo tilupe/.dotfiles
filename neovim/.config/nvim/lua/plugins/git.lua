@@ -60,4 +60,8 @@ return {
     config = true,
     keys = require('config.keymaps').neogit,
   },
+}, 
+{
+  'sindrets/diffview.nvim',
+  cmd = 'DiffviewOpen',
 }
