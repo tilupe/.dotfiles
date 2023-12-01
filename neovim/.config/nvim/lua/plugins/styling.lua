@@ -52,6 +52,16 @@ return {
     end,
   },
   {
+    'Shatur/neovim-ayu',
+    lazy = false,
+    config = function()
+      require('ayu').setup {
+        mirage = true,
+        overrides = {},
+      }
+    end,
+  },
+  {
     'ellisonleao/gruvbox.nvim',
     lazy = false,
     priority = 900,

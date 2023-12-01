@@ -8,6 +8,13 @@ return {
     keys = require('config.keymaps').harpoon,
   },
   {
+    'echasnovski/mini.pick',
+    event = 'VeryLazy',
+    config = function(_, opts)
+      require('mini.pick').setup(opts)
+    end,
+  },
+  {
     'echasnovski/mini.files',
     event = 'VeryLazy',
     config = function(_, opts)
@@ -20,10 +27,12 @@ return {
     event = 'VeryLazy',
     keys = require('config.keymaps').tmux,
   },
+  ---- Mini
+  { 'echasnovski/mini.nvim', version = '*' },
   {
     'echasnovski/mini.clue',
     event = 'VeryLazy',
-    version = false,
+    version = '*',
     config = function()
       local miniclue = require 'mini.clue'
       miniclue.setup {

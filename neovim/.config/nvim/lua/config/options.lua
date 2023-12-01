@@ -63,6 +63,9 @@ opt.diffopt = 'linematch:60,context:5,closeoff,algorithm:histogram'
 opt.fillchars = 'diff:╱'
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
+--opt.netrw_keepdir = 0
+--opt.netrw_winsize = 30
+--opt.netrw_localcopydircmd = 'cp -r'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','

@@ -83,6 +83,9 @@ end
 M.neogit = {
   { '<leader>gs', '<CMD>lua require("utils.custom.git").status()<CR>', silent = true, desc = '[S]tatus' },
   { '<leader>gc', '<CMD>lua require("utils.custom.git").commit()<CR>', silent = true, desc = '[C]ommit' },
+  { '<leader>gp', '<CMD>lua require("utils.custom.git").pull()<CR>', silent = true, desc = '[p]ull' },
+  { '<leader>gP', '<CMD>lua require("utils.custom.git").push()<CR>', silent = true, desc = '[P]ush' },
+  { '<leader>gl', '<CMD>lua require("utils.custom.git").log()<CR>', silent = true, desc = '[L]og' },
 }
 
 M.diffview = {
