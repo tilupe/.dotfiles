@@ -58,7 +58,7 @@ return {
       },
     },
     config = true,
-    keys = require('config.keymaps').neogit,
+    keys = require('config.keymaps').diffview,
   },
 }, {
   'sindrets/diffview.nvim',

@@ -89,7 +89,8 @@ M.neogit = {
 }
 
 M.diffview = {
-  { '<leader>gd', '<CMD>DiffviewOpen<CR>', silent = true, desc = '[D]iffview' },
+  { '<leader>gd', '<CMD>DiffviewOpen<CR>', silent = true, desc = '[d]iffview Open' },
+  { '<leader>gD', '<CMD>DiffviewOpen<CR>', silent = true, desc = '[D]iffview Close' },
   { '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', silent = true, desc = 'File [H]istory' },
   { '<leader>gH', '<CMD>DiffviewFileHistory<CR>', silent = true, desc = 'All File [H]istory' },
   { '<leader>gr', '<CMD>DiffviewRefresh<CR>', silent = true, desc = 'All File [H]istory' },
