@@ -1,12 +1,88 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 13.5,
-	cell_width = 0.90,
+	font_size = 12.0,
+	cell_width = 0.85,
 	font = wezterm.font_with_fallback({
+		{
+			family = "Monaspace Neon Var",
+			-- family='Monaspace Argon Var',
+			-- family='Monaspace Xenon Var',
+			-- family='Monaspace Radon Var',
+			-- family='Monaspace Krypton Var',
+			weight = "DemiBold",
+			harfbuzz_features = {
+				"calt",
+				"liga",
+				"dlig",
+				"ss01",
+				"ss02",
+				"ss03",
+				"ss04",
+				"ss05",
+				"ss06",
+				"ss07",
+				"ss08",
+			},
+		},
 		{ family = "JetBrains Mono NF", weight = "Light" },
 		"MesloLGS NF",
 	}),
+	font_rules = {
+		--
+		-- Italic (comments)
+		--
+		{
+			intensity = "Normal",
+			italic = true,
+			font = wezterm.font({
+				family = "Monaspace Argon Var",
+				weight = "Regular",
+				stretch = "Normal",
+				style = "Normal",
+				harfbuzz_features = {
+					"calt",
+					"liga",
+					"dlig",
+					"ss01",
+					"ss02",
+					"ss03",
+					"ss04",
+					"ss05",
+					"ss06",
+					"ss07",
+					"ss08",
+				},
+			}),
+		},
+
+		--
+		-- -- Bold (highlighting)
+		-- --
+		-- {
+		-- 	intensity = "Bold",
+		-- 	italic = false,
+		-- 	font = wezterm.font({
+		-- 		family = "Monaspace Krypton Var",
+		-- 		weight = "Black",
+		-- 		stretch = "Normal",
+		-- 		style = "Normal",
+		-- 		harfbuzz_features = {
+		-- 			"calt",
+		-- 			"liga",
+		-- 			"dlig",
+		-- 			"ss01",
+		-- 			"ss02",
+		-- 			"ss03",
+		-- 			"ss04",
+		-- 			"ss05",
+		-- 			"ss06",
+		-- 			"ss07",
+		-- 			"ss08",
+		-- 		},
+		-- 	}),
+		-- },
+	},
 
 	automatically_reload_config = true,
 	adjust_window_size_when_changing_font_size = false,
