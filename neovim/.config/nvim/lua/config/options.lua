@@ -33,7 +33,6 @@ opt.ignorecase = true
 opt.inccommand = 'nosplit'
 opt.joinspaces = false
 opt.laststatus = 0
-opt.list = true
 opt.mouse = 'a'
 opt.number = true
 opt.pumblend = 10
@@ -63,9 +62,10 @@ opt.diffopt = 'linematch:60,context:5,closeoff,algorithm:histogram'
 opt.fillchars = 'diff:╱'
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
---opt.netrw_keepdir = 0
---opt.netrw_winsize = 30
---opt.netrw_localcopydircmd = 'cp -r'
+opt.wrap = false
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
+
+opt.list = true
+opt.listchars = { leadmultispace = '│   ', multispace = '│ ', tab = '│ ' }
