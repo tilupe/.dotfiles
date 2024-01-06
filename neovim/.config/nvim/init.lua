@@ -62,3 +62,5 @@ else
   -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
   vim.defer_fn(function() end, 0)
 end
+
+require 'config.autocommands'

@@ -1,84 +1,55 @@
-local keymap = vim.keymap.set
-
--- Remap for dealing with word wrap
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- Better viewing
-keymap('n', 'n', 'nzzzv')
-keymap('n', 'N', 'Nzzzv')
-keymap('n', 'g,', 'g,zvzz')
-keymap('n', 'g;', 'g;zvzz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', 'g,', 'g,zvzz')
+vim.keymap.set('n', 'g;', 'g;zvzz')
 
 -- Better escape using jk in insert and terminal mode
-keymap('i', 'jk', '<ESC>')
-keymap('t', 'jk', '<C-\\><C-n>')
-keymap('t', '<C-h>', '<C-\\><C-n><C-w>h')
-keymap('t', '<C-j>', '<C-\\><C-n><C-w>j')
-keymap('t', '<C-k>', '<C-\\><C-n><C-w>k')
-keymap('t', '<C-l>', '<C-\\><C-n><C-w>l')
+vim.keymap.set('i', 'jk', '<ESC>')
+vim.keymap.set('t', 'jk', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
+vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j')
+vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
+vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l')
 
 -- Better indent
-keymap('v', '<', '<gv')
-keymap('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
 
 -- Paste over currently selected text without yanking it
-keymap('v', 'p', '"_dP')
+vim.keymap.set('v', 'p', '"_dP')
 
 -- Resize window using <shift> arrow keys
-keymap('n', '<S-Up>', '<CMD>resize +2<CR>')
-keymap('n', '<S-Down>', '<CMD>resize -2<CR>')
-keymap('n', '<S-Left>', '<CMD>vertical resize -2<CR>')
-keymap('n', '<S-Right>', '<CMD>vertical resize +2<CR>')
+vim.keymap.set('n', '<S-Up>', '<CMD>resize +2<CR>')
+vim.keymap.set('n', '<S-Down>', '<CMD>resize -2<CR>')
+vim.keymap.set('n', '<S-Left>', '<CMD>vertical resize -2<CR>')
+vim.keymap.set('n', '<S-Right>', '<CMD>vertical resize +2<CR>')
 
-keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-keymap('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'Quit all' })
-keymap('n', '<leader>ww', '<CMD>update!<CR>', { desc = 'Save' })
-keymap('n', '<leader>wa', '<CMD>wa<CR>', { desc = '[W]rite [A]ll' })
-keymap('n', '<leader>wd', '<C-W>c', { desc = 'Delete' })
+vim.keymap.set('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'Quit all' })
+vim.keymap.set('n', '<leader>bw', '<CMD>update!<CR>', { desc = 'Save' })
+vim.keymap.set('n', '<leader>bW', '<CMD>wa<CR>', { desc = '[W]rite [A]ll' })
+vim.keymap.set('n', '<leader>bd', '<C-W>c', { desc = 'Delete' })
 
 -- Quickfix navigation
-keymap('n', '<C-Down>', '<CMD>cnext<CR>', { desc = 'Quickfix next' })
-keymap('n', '<C-Up>', '<CMD>cprev<CR>', { desc = 'Quickfix prev' })
+vim.keymap.set('n', '<C-Down>', '<CMD>cnext<CR>', { desc = 'Quickfix next' })
+vim.keymap.set('n', '<C-Up>', '<CMD>cprev<CR>', { desc = 'Quickfix prev' })
 
 -- Tabs
-keymap('n', '<leader><tab>d', '<CMD>tabclose<CR>', { desc = 'Close' })
+vim.keymap.set('n', '<leader><tab>d', '<CMD>tabclose<CR>', { desc = 'Close' })
 
-keymap('n', '<F5>', '<CMD>e<CR>', { desc = 'Reload file' })
-keymap('n', '<F10>', "<CMD>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal<CR>cd $VIM_DIR<cr>", { desc = 'Current DIR Terminal' })
+vim.keymap.set('n', '<F5>', '<CMD>e<CR>', { desc = 'Reload file' })
+vim.keymap.set('n', '<F10>', "<CMD>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal<CR>cd $VIM_DIR<cr>", { desc = 'Current DIR Terminal' })
 
 -- Diagnostics
-keymap('n', '<leader>cj', '<CMD>lua vim.diagnostic.goto_next()<CR>', { desc = 'Next Diagnostic' })
-keymap('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
+vim.keymap.set('n', '<leader>cj', '<CMD>lua vim.diagnostic.goto_next()<CR>', { desc = 'Next Diagnostic' })
+vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
 
 local M = {}
-
-M.lsp = function()
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<leader>rn', vim.lsp.buf.rename, '[N]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[A]ction')
-
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<leader>sh', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-end
 
 M.neogit = {
   { '<leader>gs', '<CMD>lua require("utils.custom.git").status()<CR>', silent = true, desc = '[S]tatus' },
@@ -106,12 +77,15 @@ M.telescope = {
   { '<leader>sg', '<CMD>Telescope live_grep<CR>', desc = '[G]rep' },
   { '<leader>st', '<CMD>Telescope<CR>', desc = 'Telescope' },
   { '<leader>gf', '<CMD>Telescope git_files<CR>', desc = 'search [F]iles' },
+  { '<leader><space>', '<CMD>FzfLua files<CR>', desc = '[F]iles' },
+  { 'gr', '<CMD>FzfLua lsp_references<CR>', '[G]oto [R]eferences' },
+  { 'gI', '<CMD>FzfLua lsp_implementations<CR>', '[G]oto [I]mplementation' },
   {
+
     '<leader>F',
     "<cmd>lua require('telescope.builtin').find_files({ hidden = true})<cr>",
     desc = 'Find All Files',
   },
-  { '<leader><space>', '<CMD>Telescope find_files<CR>', desc = '[F]iles' },
   { '<leader>gh', '<CMD>Telescope help_tags<CR>', desc = '[H]elp' },
   { '<leader>sw', '<CMD>Telescope grep_string<CR>', desc = 'current [W]ord' },
   { '<leader>sd', '<CMD>Telescope diagnostics<CR>', desc = '[D]iagnostics' },
@@ -129,25 +103,7 @@ M.conform = {
   { '<leader>cF', '<CMD>ConformInfo<CR>', desc = 'FormatInfo' },
 }
 
-M.neorg = {
-  { '<leader>nl', '<CMD>Telescope neorg insert_file_link<CR>', desc = 'Insert file link' },
-  { '<leader>nw', '<CMD>Neorg workspace<CR>', desc = 'workspace' },
-  { '<leader>nn', '<CMD>Neorg keybind<CR>', desc = 'New Note' },
-  { '<leader>nr', '<CMD>Neorg return<CR>', desc = 'Close & return' },
-  { '<leader>nt', '<CMD>Telescope neorg<CR>', desc = 'Telescope' },
-}
-
-M.lspsaga = {
-  { '<leader>ld', '<CMD>Lspsaga peek_definition<CR>', desc = 'Peek [D]efinition' },
-  { '<leader>la', '<CMD>Lspsaga code_action<CR>', desc = 'Code [A]ction' },
-  { '<leader>lr', '<CMD>Lspsaga incoming_calls<CR>', desc = 'incoming [R]eferences' },
-  { '<leader>lR', '<CMD>Lspsaga outgoing_calls<CR>', desc = 'outgoing [R]eferences' },
-  { '<leader>ln', '<CMD>Lspsaga outgoing_calls<CR>', desc = 're[N]ame' },
-  { '<leader>ld', '<CMD>Lspsaga show_cursor_diagnostics<CR>', desc = '[D]iagnostics' },
-  { '<leader>lj', '<CMD>Lspsaga diagnostic_jump_next<CR>', desc = 'Diagnostics Next' },
-  { '<leader>lk', '<CMD>Lspsaga diagnostic_jump_pre<CR>', desc = 'Diagnostics Prev' },
-  { '<leader>lf', '<CMD>Lspsaga finder<CR>', desc = '[F]inder' },
-}
+M.neorg = {}
 
 M.tmux = {
   { '<C-h>', '<CMD>TmuxNavigateLeft<CR>', desc = 'Window Left' },
@@ -190,6 +146,11 @@ M.mini_files = {
 M.trouble = {
   { '<leader>ct', '<CMD>TroubleToggle<CR>', desc = '[T]rouble Document' },
   { '<leader>cT', '<CMD>TroubleToggle<CR>', desc = '[T]rouble Workspace' },
+}
+
+M.fzf = {
+
+  { '<leader>ca', '<CMD>FzfLua lsp_code_actions<CR>', desc = '[A]ctions' },
 }
 
 M.dap = {
@@ -337,15 +298,31 @@ M.dap = {
 }
 
 M.harpoon = {
-  { '<leader>h', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Harpoon' },
+  { '<leader>hu', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Menu' },
+  { '<leader>hh', '<cmd>lua require("harpoon.mark").add_file()<cr>', desc = 'Add' },
+  { '<leader>ha', '<cmd>lua require("harpoon.ui").nav_file(1)<cr>', desc = 'GoTo 1' },
+  { '<leader>hs', '<cmd>lua require("harpoon.ui").nav_file(2)<cr>', desc = 'GoTo 2' },
+  { '<leader>hd', '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', desc = 'GoTo 3' },
+  { '<leader>hf', '<cmd>lua require("harpoon.ui").nav_file(4)<cr>', desc = 'GoTo 4' },
+  { '<leader>hg', '<cmd>lua require("harpoon.ui").nav_file(5)<cr>', desc = 'GoTo 5' },
+  { '<leader>hj', '<cmd>lua require("harpoon.ui").nav_next()<cr>', desc = 'Next' },
+  { '<leader>hk', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', desc = 'Prev' },
+  { '<leader>ht', '<cmd>lua require("harpoon.tmux").gotoTerminal(1)<cr>', desc = 'Term 1' },
 }
-
 M.colorizer = {
   { '<leader>uc', '<cmd>ColorizerToggle<cr>', desc = 'ColorizerToggle' },
 }
 
 M.transparent = {
   { '<leader>ut', '<cmd>TransparentToggle<cr>', desc = 'TransparentToggle' },
+}
+
+M.nerdy = {
+  { '<leader>in', '<cmd>Nerdy<cr>', desc = 'Nerdy' },
+}
+
+M.ccc = {
+  { '<leader>ic', '<cmd>CccPick<cr>', desc = 'Colour Picker' },
 }
 
 return M

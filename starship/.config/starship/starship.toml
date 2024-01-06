@@ -3,7 +3,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Inserts a blank line between shell prompts
-add_newline = true
+add_newline = false
+
+# Use custom format
+format = """
+$directory$character
+"""
+right_format = """$all"""
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
@@ -35,3 +41,11 @@ pyenv_version_name = true
 [dotnet]
 symbol = ' '
 heuristic = false
+
+[kubernetes]
+symbol = '☸ '
+disabled = false
+detect_files = ['Dockerfile']
+format = '[$context(\[$namespace\])]($style) '
+
+[directory.substitutions]

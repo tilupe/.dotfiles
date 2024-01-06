@@ -52,16 +52,17 @@ return {
     },
     opts = {
       kind = 'auto',
-      disable_commit_confirmation = true,
+      disable_commit_confirmation = false,
       integrations = {
         diffview = true,
       },
     },
     config = true,
+    keys = require('config.keymaps').neogit,
+  },
+  {
+    'sindrets/diffview.nvim',
+    cmd = 'DiffviewOpen',
     keys = require('config.keymaps').diffview,
   },
-}, {
-  'sindrets/diffview.nvim',
-  cmd = 'DiffviewOpen',
-  keys = require('config.keymaps').diffview,
 }

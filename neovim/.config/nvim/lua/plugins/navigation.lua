@@ -8,11 +8,15 @@ return {
     keys = require('config.keymaps').harpoon,
   },
   {
-    'echasnovski/mini.pick',
-    event = 'VeryLazy',
-    config = function(_, opts)
-      require('mini.pick').setup(opts)
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = 'FzfLua',
+    config = function()
+      -- calling `setup` is optional for customization
+      require('fzf-lua').setup {}
     end,
+    keys = require('config.keymaps').fzf,
   },
   {
     'echasnovski/mini.files',
@@ -84,7 +88,8 @@ return {
           { mode = 'n', keys = '<leader>d', desc = '[D]ebu' },
           { mode = 'n', keys = '<leader>t', desc = '[T]est' },
           { mode = 'n', keys = '<leader>r', desc = '[R]efactor' },
-          { mode = 'n', keys = '<leader>w', desc = '[W]indow | [W]orkspace' },
+          { mode = 'n', keys = '<leader>w', desc = '[W]orkspace' },
+          { mode = 'n', keys = '<leader>b', desc = '[B]uffer' },
         },
       }
     end,
@@ -105,10 +110,11 @@ return {
         '                                                     ',
       }
       dashboard.section.buttons.val = {
-        dashboard.button('f', ' ' .. ' Find file', ':Telescope find_files <CR>'),
+        dashboard.button('o', ' ' .. ' Find file', ':Telescope find_files <CR>'),
         dashboard.button('n', ' ' .. ' New file', ':ene <BAR> startinsert <CR>'),
         dashboard.button('r', ' ' .. ' Recent files', ':Telescope oldfiles <CR>'),
-        dashboard.button('g', ' ' .. ' Find text', ':Telescope live_grep <CR>'),
+        dashboard.button('g', ' ' .. ' Git', '<CMD>lua require("utils.custom.git").status()<CR>'),
+        dashboard.button('f', ' ' .. ' Grep', '<CMD>Telescope live_grep <CR>'),
         dashboard.button('c', ' ' .. ' Config', ':e $MYVIMRC <CR>'),
         dashboard.button('l', '鈴' .. ' Lazy', ':Lazy<CR>'),
         dashboard.button('q', ' ' .. ' Quit', ':qa<CR>'),

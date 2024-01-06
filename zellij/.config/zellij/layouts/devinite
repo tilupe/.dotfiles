@@ -1,0 +1,26 @@
+layout {
+  tab name="code"{
+    pane {
+      cwd "~/Development/devinite"
+      plugin location="zellij:strider"
+    }
+  }
+
+  tab name="build/test" split_direction="vertical"{
+    pane name="build"{
+      cwd "~/Development/devinite"
+    }
+    pane name="test" {
+      cwd "~/Development/devinite"
+    }
+  }
+
+  tab name="servers" split_direction="vertical"{
+    pane name="api"{
+      cwd "~/Development/devinite"
+    }
+    pane name="ui" {
+      cwd "~/Development/devinite"
+    }
+  }
+} 

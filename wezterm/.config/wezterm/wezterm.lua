@@ -1,8 +1,8 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 12.0,
-	cell_width = 0.85,
+	font_size = 14.5,
+	cell_width = 0.90,
 	font = wezterm.font_with_fallback({
 		{
 			family = "Monaspace Neon Var",
@@ -97,7 +97,7 @@ return {
 	warn_about_missing_glyphs = false,
 
 	window_decorations = "NONE",
-	window_background_opacity = 0.85,
+	window_background_opacity = 0.93,
 	window_padding = {
 		left = 0,
 		right = 0,

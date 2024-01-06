@@ -25,8 +25,8 @@ opt.expandtab = true
 opt.tabstop = 2
 opt.foldcolumn = '1' -- '0' is not bad
 opt.foldenable = true
-opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-opt.foldlevelstart = 99
+opt.foldlevel = 2
+opt.foldlevelstart = 2
 opt.hidden = true
 opt.hlsearch = false
 opt.ignorecase = true
@@ -69,3 +69,14 @@ vim.g.maplocalleader = ','
 
 opt.list = true
 opt.listchars = { leadmultispace = '│   ', multispace = '│ ', tab = '│ ' }
+
+vim.diagnostic.config {
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.HINT] = '⚑',
+      [vim.diagnostic.severity.INFO] = '»',
+    },
+  },
+}

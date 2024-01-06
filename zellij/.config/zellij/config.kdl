@@ -286,9 +286,12 @@ theme "melange"
 
 // The name of the default layout to load on startup
 // Default: "default"
+// default_layout "dg-sales"
 //
-// default_layout "compact"
 
+// The folder in which Zellij will look for layouts
+//
+layout_dir "/home/dev-notomoro/.config/zellij/layouts"
 // Choose the mode that zellij uses when starting up.
 // Default: normal
 //
@@ -317,7 +320,7 @@ theme "melange"
 // that will be used by default if this option is not set.
 // Examples:
 //
-// copy_command "xclip -selection clipboard" // x11
+copy_command "xclip -selection clipboard" // x11
 // copy_command "wl-copy"                    // wayland
 // copy_command "pbcopy"                     // osx
 
@@ -347,9 +350,6 @@ theme "melange"
 //
 // mirror_session true
 
-// The folder in which Zellij will look for layouts
-//
-// layout_dir "/path/to/my/layout_dir"
 
 // The folder in which Zellij will look for themes
 //

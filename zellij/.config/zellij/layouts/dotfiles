@@ -1,0 +1,25 @@
+layout {
+  tab name="code"{
+    pane {
+      cwd "~/Development/Dg.Sales"
+    }
+  }
+
+  tab name="build/test" split_direction="vertical"{
+    pane name="build"{
+      cwd "~/Development/Dg.Sales"
+    }
+    pane name="test" {
+      cwd "~/Development/Dg.Sales"
+    }
+  }
+
+  tab name="servers" split_direction="vertical"{
+    pane name="api"{
+      cwd "~/Development/Dg.Sales"
+    }
+    pane name="ui" {
+      cwd "~/Development/Dg.Sales"
+    }
+  }
+}

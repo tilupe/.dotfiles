@@ -24,10 +24,13 @@ export JIRA_API_TOKEN=$(cat ~/.config/secrets/jira_token)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export DOTNET_ROOT=/opt/dotnet
 export BROWSER="/usr/bin/firefox"
+export GPGKEY=
 
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$HOME/.local/share/cargo/bin/:$XDG_DATA_HOME/zplug/bin/:
 
+# fuzzy finder
+export FZF_DEFAULT_OPTS='-i --height=50%'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -86,6 +89,7 @@ alias cd3="cd ../../.."
 alias cd4="cd ../../../.."
 alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
 alias cat='bat --style=plain'
+alias fd='fdfind'
 
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
