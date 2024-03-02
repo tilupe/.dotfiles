@@ -74,9 +74,9 @@ alias l='exa -l --icons --git --no-user'
 alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
 alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
-alias ktest="kubectl config use-context test"
-alias kprod="kubectl config use-context prod"
-alias k9="k9s -n dg-sales"
+alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep k8s-tes)'
+alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep k8s-pro)'
+alias k9='k9s -n dg-sales'
 alias v="nvim"
 alias ze="zellij"
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
@@ -90,6 +90,7 @@ alias cd4="cd ../../../.."
 alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
 alias cat='bat --style=plain'
 alias fd='fdfind'
+bindkey -s '^f' "zellij-sessionizer /home/$USER \n"
 
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -102,3 +103,7 @@ export PATH="$PATH:/opt/mssql-tools18/bin"
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

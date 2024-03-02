@@ -2,24 +2,16 @@ return {
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = 'VeryLazy',
+    event = 'BufEnter',
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
     config = function()
       local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
       local icons = require 'utils.icons'
-      require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup {}
+      local luasnip = require 'luasnip'
 
       cmp.setup {
         snippet = {
@@ -68,8 +60,8 @@ return {
             local source_names = {
               nvim_lsp = '(LSP)',
               path = '(Path)',
-              luasnip = '(Snippet)',
-              buffer = '(Buffer)',
+              luasnip = '(Snip)',
+              buffer = '(Buf)',
             }
             local duplicates = {
               buffer = 1,
@@ -91,22 +83,35 @@ return {
     end,
   },
   {
-    'Exafunction/codeium.vim',
-    event = 'VeryLazy',
+    'L3MON4D3/LuaSnip',
     config = function()
+      require('luasnip').setup()
+      require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip').filetype_extend('cs', { 'csharpdoc' })
+      require('luasnip').filetype_extend('python', { 'pydoc' })
+      require('luasnip').filetype_extend('lua', { 'luadoc' })
+      require('luasnip').filetype_extend('sh', { 'shelldoc' })
+      --require 'snippets.cs'
+    end,
+  },
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+    config = function()
+      vim.g.codeium_no_map_tab = 1
       -- Change '<C-g>' here to any keycode you like.
       vim.keymap.set('i', '<C-Space>', function()
         return vim.fn['codeium#Accept']()
-      end, { expr = true })
-      vim.keymap.set('i', '<c-l>', function()
+      end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-g>', function()
         return vim.fn['codeium#CycleCompletions'](1)
-      end, { expr = true })
-      vim.keymap.set('i', '<c-z>', function()
+      end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-t>', function()
         return vim.fn['codeium#CycleCompletions'](-1)
-      end, { expr = true })
+      end, { expr = true, silent = true })
       vim.keymap.set('i', '<c-x>', function()
         return vim.fn['codeium#Clear']()
-      end, { expr = true })
+      end, { expr = true, silent = true })
     end,
   },
 }

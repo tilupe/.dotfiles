@@ -1,11 +1,50 @@
 return {
   {
     'ThePrimeagen/harpoon',
-    event = 'VeryLazy',
+    branch = 'harpoon2',
+    lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    keys = require('config.keymaps').harpoon,
+    config = function()
+      local harpoon = require 'harpoon'
+      harpoon:setup {
+        settings = {
+          save_on_toggle = true,
+          sync_on_ui_close = true,
+        },
+      }
+      vim.keymap.set('n', '<leader>hh', function()
+        harpoon:list():append()
+      end)
+      vim.keymap.set('n', '<leader>hu', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
+
+      vim.keymap.set('n', '<leader>ha', function()
+        harpoon:list():select(1)
+      end)
+      vim.keymap.set('n', '<leader>hs', function()
+        harpoon:list():select(2)
+      end)
+      vim.keymap.set('n', '<leader>hd', function()
+        harpoon:list():select(3)
+      end)
+      vim.keymap.set('n', '<leader>hf', function()
+        harpoon:list():select(4)
+      end)
+      vim.keymap.set('n', '<leader>hg', function()
+        harpoon:list():select(5)
+      end)
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set('n', '<leader>hk', function()
+        harpoon:list():prev()
+      end)
+      vim.keymap.set('n', '<leader>hj', function()
+        harpoon:list():next()
+      end)
+    end,
   },
   {
     'ibhagwan/fzf-lua',

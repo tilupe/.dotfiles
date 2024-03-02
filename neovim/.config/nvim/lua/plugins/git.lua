@@ -43,15 +43,18 @@ return {
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     },
+    keys = require('config.keymaps').gitsigns,
   },
   {
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
+      'nvim-telescope/telescope.nvim',
     },
     opts = {
       kind = 'auto',
+      graph_style = 'unicode',
       disable_commit_confirmation = false,
       integrations = {
         diffview = true,

@@ -1,5 +1,4 @@
 return {
-
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -8,6 +7,7 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'jmederosalvarado/roslyn.nvim',
+      'hrsh7th/cmp-nvim-lsp',
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -20,7 +20,6 @@ return {
       mason.setup()
       local servers = {
         rust_analyzer = {},
-
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -30,7 +29,9 @@ return {
             },
           },
         },
-        -- omnisharp = {},
+        yamlls = {},
+        jdtls = {},
+        kotlin_language_server = {},
       }
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -46,7 +47,6 @@ return {
 
       -- Ensure the servers above are installed
       local mason_lspconfig = require 'mason-lspconfig'
-
       mason_lspconfig.setup {
         ensure_installed = vim.tbl_keys(servers),
       }
@@ -68,8 +68,6 @@ return {
       end
 
       require('roslyn').setup {
-        dotnet_cmd = 'dotnet', -- this is the default
-        roslyn_version = '4.8.0-3.23475.7', -- this is the default
         on_attach = on_attach,
         capabilities = capabilities,
       }
@@ -98,6 +96,7 @@ return {
           lua = { 'stylua' },
           python = { 'isort', 'black' },
           javascript = { { 'prettierd', 'prettier' } },
+          -- cs = { 'csharpier' },
         },
         format_on_save = {
           timeout_ms = 500,

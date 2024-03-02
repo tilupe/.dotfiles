@@ -18,7 +18,7 @@ opt.breakindent = true
 opt.clipboard = 'unnamedplus' -- Access system clipboard
 opt.cmdheight = 0
 opt.completeopt = 'menuone,noselect,longest'
-opt.conceallevel = 3
+opt.conceallevel = 2
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
@@ -62,21 +62,10 @@ opt.diffopt = 'linematch:60,context:5,closeoff,algorithm:histogram'
 opt.fillchars = 'diff:╱'
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
-opt.wrap = false
+opt.wrap = true
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 opt.list = true
 opt.listchars = { leadmultispace = '│   ', multispace = '│ ', tab = '│ ' }
-
-vim.diagnostic.config {
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '✘',
-      [vim.diagnostic.severity.WARN] = '▲',
-      [vim.diagnostic.severity.HINT] = '⚑',
-      [vim.diagnostic.severity.INFO] = '»',
-    },
-  },
-}

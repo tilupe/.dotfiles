@@ -52,6 +52,16 @@ return {
     end,
   },
   {
+    'wittyjudge/gruvbox-material.nvim',
+    lazy = false,
+  },
+  {
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    event = 'VeryLazy',
+    priority = 1000,
+  },
+  {
     'Shatur/neovim-ayu',
     lazy = false,
     config = function()
@@ -104,10 +114,15 @@ return {
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch' },
-          lualine_c = { require('utils.lualine').lsp_client },
-          lualine_x = { 'filename', 'encoding', 'fileformat', 'filetype', 'progress' },
+          lualine_c = { 'filename', 'location', 
+            {
+                "macro-recording",
+                fmt = require('utils.custom').macro_recording,
+            },
+          },
+          lualine_x = { 'encoding', 'fileformat', 'filetype', 'progress' },
           lualine_y = {},
-          lualine_z = { 'location' },
+          lualine_z = {},
         },
         inactive_sections = {
           lualine_c = { 'filename' },

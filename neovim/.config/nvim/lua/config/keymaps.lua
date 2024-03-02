@@ -52,11 +52,21 @@ vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { d
 local M = {}
 
 M.neogit = {
-  { '<leader>gs', '<CMD>lua require("utils.custom.git").status()<CR>', silent = true, desc = '[S]tatus' },
-  { '<leader>gc', '<CMD>lua require("utils.custom.git").commit()<CR>', silent = true, desc = '[C]ommit' },
+  { '<leader>gg', '<CMD>lua require("utils.custom.git").status()<CR>', silent = true, desc = 'neo[g]it' },
+  { '<leader>gc', '<CMD>lua require("utils.custom.git").commit()<CR>', silent = true, desc = '[c]ommit' },
   { '<leader>gp', '<CMD>lua require("utils.custom.git").pull()<CR>', silent = true, desc = '[p]ull' },
   { '<leader>gP', '<CMD>lua require("utils.custom.git").push()<CR>', silent = true, desc = '[P]ush' },
   { '<leader>gl', '<CMD>lua require("utils.custom.git").log()<CR>', silent = true, desc = '[L]og' },
+}
+
+M.gitsigns = {
+  { '<leader>gs', '<CMD>Gitsigns stage_hunk<CR>', silent = true, desc = '[s]tage hunk' },
+  { '<leader>gu', '<CMD>Gitsigns undo_stage_hunk<CR>', silent = true, desc = '[u]ndo-stage hunk' },
+  { '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', silent = true, desc = '[r]eset-hunk' },
+  { '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', silent = true, desc = 'next-hunk' },
+  { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', silent = true, desc = 'prev-hunk' },
+  { '<leader>gb', '<CMD>Gitsigns blame_line<CR>', silent = true, desc = 'prev-hunk' },
+  { '<leader>gq', '<CMD>Gitsigns setqflist<CR>', silent = true, desc = 'prev-hunk' },
 }
 
 M.diffview = {
@@ -64,11 +74,11 @@ M.diffview = {
   { '<leader>gD', '<CMD>DiffviewOpen<CR>', silent = true, desc = '[D]iffview Close' },
   { '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', silent = true, desc = 'File [H]istory' },
   { '<leader>gH', '<CMD>DiffviewFileHistory<CR>', silent = true, desc = 'All File [H]istory' },
-  { '<leader>gr', '<CMD>DiffviewRefresh<CR>', silent = true, desc = 'All File [H]istory' },
+  { '<leader>gR', '<CMD>DiffviewRefresh<CR>', silent = true, desc = 'All File [H]istory' },
 }
 
 M.blame = {
-  { '<leader>gb', '<CMD>ToggleBlame<CR>', silent = true, desc = 'Blame' },
+  { '<leader>gB', '<CMD>ToggleBlame<CR>', silent = true, desc = 'Blame' },
 }
 
 M.telescope = {
@@ -295,19 +305,6 @@ M.dap = {
     end,
     desc = 'Step Out',
   },
-}
-
-M.harpoon = {
-  { '<leader>hu', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Menu' },
-  { '<leader>hh', '<cmd>lua require("harpoon.mark").add_file()<cr>', desc = 'Add' },
-  { '<leader>ha', '<cmd>lua require("harpoon.ui").nav_file(1)<cr>', desc = 'GoTo 1' },
-  { '<leader>hs', '<cmd>lua require("harpoon.ui").nav_file(2)<cr>', desc = 'GoTo 2' },
-  { '<leader>hd', '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', desc = 'GoTo 3' },
-  { '<leader>hf', '<cmd>lua require("harpoon.ui").nav_file(4)<cr>', desc = 'GoTo 4' },
-  { '<leader>hg', '<cmd>lua require("harpoon.ui").nav_file(5)<cr>', desc = 'GoTo 5' },
-  { '<leader>hj', '<cmd>lua require("harpoon.ui").nav_next()<cr>', desc = 'Next' },
-  { '<leader>hk', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', desc = 'Prev' },
-  { '<leader>ht', '<cmd>lua require("harpoon.tmux").gotoTerminal(1)<cr>', desc = 'Term 1' },
 }
 M.colorizer = {
   { '<leader>uc', '<cmd>ColorizerToggle<cr>', desc = 'ColorizerToggle' },
