@@ -10,7 +10,7 @@ return {
 		-- 	-- family='Monaspace Xenon Var',
 		-- 	-- family='Monaspace Radon Var',
 		-- 	-- family='Monaspace Krypton Var',
-		-- 	weight = "Regular",
+		-- 	weight = "Bold",
 		-- 	harfbuzz_features = {
 		-- 		"calt",
 		-- 		"liga",
@@ -26,6 +26,13 @@ return {
 		-- 	},
 		-- },
 		{ family = "JetBrainsMono NF", weight = "Light" },
+		{ family = "RobotoMonoNerdFont", weight = "Regular" },
+		{ family = "DejaVuSansMono", weight = "Medium" },
+		{ family = "UbuntuMonoNerdFont", weight = "Medium" },
+		{ family = "FiraCodeNerdFont", weight = "Light" },
+		{ family = "HackNerdFont", weight = "Medium" },
+		{ family = "MonacoNerdFontMono", weight = "Regular" },
+		{ family = "InconsolataGoNerdFont", weight = "Medium" },
 		"MesloLGS NF",
 	}),
 	font_rules = {
@@ -188,4 +195,13 @@ return {
 		end
 		window:set_config_overrides(overrides)
 	end),
+
+	mouse_bindings = {
+		-- Ctrl-click will open the link under the mouse cursor
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "CTRL",
+			action = wezterm.action.OpenLinkAtMouseCursor,
+		},
+	},
 }

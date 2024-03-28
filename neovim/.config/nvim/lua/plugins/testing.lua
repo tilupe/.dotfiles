@@ -14,8 +14,12 @@ return {
     'nvim-neotest/neotest',
     keys = require('config.keymaps').neotest,
     dependencies = {
-      'vim-test/vim-test',
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
       'stevearc/overseer.nvim',
+      --- language test adapters
       'nvim-neotest/neotest-python',
       'nvim-neotest/neotest-plenary',
       'nvim-neotest/neotest-vim-test',

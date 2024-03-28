@@ -48,7 +48,7 @@ return {
     event = 'VeryLazy',
     priority = 900,
     config = function()
-      vim.cmd [[colorscheme melange]]
+      -- vim.cmd [[colorscheme melange]]
     end,
   },
   {
@@ -77,7 +77,8 @@ return {
     priority = 900,
     config = function()
       require('gruvbox').setup {
-        contrast = 'soft',
+        contrast = '',
+        bold = false,
         palette_overrides = {
           bright_red = '#f2594b',
         },
@@ -85,6 +86,8 @@ return {
           Keyword = { fg = '#d2890b' },
         },
       }
+
+      vim.cmd [[colorscheme gruvbox]]
     end,
   },
   {
@@ -114,10 +117,12 @@ return {
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch' },
-          lualine_c = { 'filename', 'location', 
+          lualine_c = {
+            'filename',
+            'location',
             {
-                "macro-recording",
-                fmt = require('utils.custom').macro_recording,
+              'macro-recording',
+              fmt = require('utils.custom').macro_recording,
             },
           },
           lualine_x = { 'encoding', 'fileformat', 'filetype', 'progress' },

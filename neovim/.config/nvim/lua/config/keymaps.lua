@@ -133,7 +133,7 @@ M.neotest = {
   { '<leader>tf', "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = 'File' },
   { '<leader>tl', "<cmd>lua require('neotest').run.run_last()<cr>", desc = 'Last' },
   { '<leader>tn', "<cmd>lua require('neotest').run.run()<cr>", desc = 'Nearest' },
-  { '<leader>tN', "<cmd>lua require('plugins.dap.functions').run()<cr>", desc = 'Debug Nearest' },
+  { '<leader>tN', "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = 'Debug Nearest' },
   { '<leader>to', "<cmd>lua require('neotest').output.open({ enter = true })<cr>", desc = 'Output' },
   { '<leader>ts', "<cmd>lua require('neotest').run.stop()<cr>", desc = 'Stop' },
   { '<leader>tS', "<cmd>lua require('neotest').summary.toggle()<cr>", desc = 'Summary' },
