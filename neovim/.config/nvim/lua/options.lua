@@ -32,7 +32,6 @@ opt.hlsearch = false
 opt.ignorecase = true
 opt.inccommand = 'nosplit'
 opt.joinspaces = false
-opt.laststatus = 0
 opt.mouse = 'a'
 opt.number = true
 opt.pumblend = 10
@@ -63,6 +62,11 @@ opt.fillchars = 'diff:╱'
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
 opt.wrap = true
+
+
+--- netrw
+vim.g.netrw_keepdir = 0
+
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
