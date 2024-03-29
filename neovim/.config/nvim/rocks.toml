@@ -22,7 +22,6 @@ nvim-dap = "0.7.0"
 nvim-web-devicons = "0.99"
 neogit = "scm"
 "rocks-treesitter.nvim" = "scm"
-"kanagawa.nvim" = "scm"
 
 # --------- TREESITTER PARSERS ---------
 tree-sitter-c = "scm"
@@ -65,9 +64,6 @@ branch = "dev"
 
 [plugins.roslyn]
 git = "jmederosalvarado/roslyn.nvim"
-
-[plugins.transparent]
-git = "xiyaowong/nvim-transparent"
 
 [config]
 auto_setup = true

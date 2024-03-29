@@ -7,4 +7,5 @@ require('gruvbox').setup {
           Keyword = { fg = '#d2890b' },
         },
       }
+
 --vim.cmd([[colorscheme gruvbox]])
