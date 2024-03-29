@@ -34,7 +34,6 @@ mason_lspconfig.setup {
 }
 
 local on_attach = function(_, bufnr)
-  require"lsp-attach"
   local function sign_define(args)
     vim.fn.sign_define(args.name, {
       texthl = args.name,
