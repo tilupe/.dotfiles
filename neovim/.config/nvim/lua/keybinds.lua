@@ -34,6 +34,10 @@ vim.keymap.set('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'Quit all' })
 vim.keymap.set('n', '<leader>bw', '<CMD>update!<CR>', { desc = 'Save' })
 vim.keymap.set('n', '<leader>bW', '<CMD>wa<CR>', { desc = '[W]rite [A]ll' })
 vim.keymap.set('n', '<leader>bd', '<C-W>c', { desc = 'Delete' })
+vim.keymap.set('n', '<C-j>', '<C-W>j', { desc = 'Window Down' })
+vim.keymap.set('n', '<C-k>', '<C-W>k', { desc = 'Window Up' })
+vim.keymap.set('n', '<C-h>', '<C-W>h', { desc = 'Window Left' })
+vim.keymap.set('n', '<C-l>', '<C-W>l', { desc = 'Window Right' })
 
 -- Quickfix navigation
 vim.keymap.set('n', '<C-Down>', '<CMD>cnext<CR>', { desc = 'Quickfix next' })
@@ -53,3 +57,8 @@ vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { d
  vim.keymap.set( 'n','<leader>sf', '<CMD>Ex<CR>', {desc = 'Explore' })
  vim.keymap.set( 'n','<leader>sF', '<CMD>Vex<CR>', {desc = 'Vertical Explore' })
 
+-------------------- Plugins --------------------------
+vim.keymap.set('n', '<leader>ct', '<CMD>Trouble diagnostic toggle filter.buf=0<CR>', { desc = '[T]rouble Document' })
+vim.keymap.set('n', '<leader>cT', '<CMD>Trouble diagnostic toggle <CR>', { desc = '[T]rouble' })
+vim.keymap.set('n', '<leader>xq', '<CMD>Trouble qflist toggle <CR>', { desc = '[T]rouble' })
+vim.keymap.set('n', '<leader>xl', '<CMD>Trouble loclist toggle <CR>', { desc = '[T]rouble' })

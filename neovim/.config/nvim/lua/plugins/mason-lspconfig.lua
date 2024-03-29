@@ -34,6 +34,7 @@ mason_lspconfig.setup {
 }
 
 local on_attach = function(_, bufnr)
+  require"lsp-attach"
   local function sign_define(args)
     vim.fn.sign_define(args.name, {
       texthl = args.name,
@@ -49,10 +50,10 @@ local on_attach = function(_, bufnr)
   sign_define { name = 'DiagnosticSignInfo', text = icon.BoldInformation }
 end
 
---require('roslyn').setup {
---  on_attach = on_attach,
---  capabilities = capabilities,
---}
+require('roslyn').setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
 mason_lspconfig.setup_handlers {
   function(server_name)
