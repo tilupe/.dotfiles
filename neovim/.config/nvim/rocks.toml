@@ -70,10 +70,10 @@ branch = "dev"
 git = "jmederosalvarado/roslyn.nvim"
 
 # Git
-[puglins.diffview]
+[plugins.diffview]
 git = "sindrets/diffview.nvim"
-[puglins.gitblame]
-git = "f-person/git-blame.nvim"
+[plugins.blame]
+git = "FabijanZulj/blame.nvim"
 
 # Testing
 [plugins.nvim-neotest]
