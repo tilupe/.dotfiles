@@ -70,3 +70,20 @@ vim.keymap.set("n", "<leader>ms", "<cmd>Grapple select index=2<cr>")
 vim.keymap.set("n", "<leader>md", "<cmd>Grapple select index=3<cr>")
 vim.keymap.set("n", "<leader>mf", "<cmd>Grapple select index=4<cr>")
 vim.keymap.set("n", "<leader>mg", "<cmd>Grapple select index=5<cr>")
+
+-- Gitsigns
+ vim.keymap.set('n', '<leader>gs', '<CMD>Gitsigns stage_hunk<CR>', { desc = '[s]tage hunk' })
+ vim.keymap.set('n', '<leader>gu', '<CMD>Gitsigns undo_stage_hunk<CR>', { desc = '[u]ndo-stage hunk' })
+ vim.keymap.set('n', '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', { desc = '[r]eset-hunk' })
+ vim.keymap.set('n', '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', { desc = 'next-hunk' })
+ vim.keymap.set('n', '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'prev-hunk' })
+ vim.keymap.set('n', '<leader>gb', '<CMD>Gitsigns blame_line<CR>', { desc = 'prev-hunk' })
+ vim.keymap.set('n', '<leader>gq', '<CMD>Gitsigns setqflist<CR>', { desc = 'prev-hunk' })
+-- Diffview
+ vim.keymap.set('n', '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' })
+ vim.keymap.set('n', '<leader>gD', '<CMD>DiffviewOpen<CR>', { desc = '[D]iffview Close' })
+ vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' })
+ vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' })
+ vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' })
+ -- Blame
+ vim.keymap.set('n', '<leader>gB', '<CMD>ToggleBlame<CR>', { desc = 'Blame' })
