@@ -54,9 +54,11 @@ local on_attach = function(_, bufnr)
       vim.tbl_extend('force', opts, { desc = '[W]orkspace [S]ymbols' })
     )
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover Documentation' }))
+    vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, vim.tbl_extend('force', opts, { desc = '[G]oto [Implementation]' }))
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = '[c]ode [a]ction' }))
     vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = 'Signature Documentation' }))
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = '[G]oto [D]eclaration' }))
-    vim.keymap.set('i', '<C-h', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = '[G]oto [D]eclaration' }))
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = '[g]oto [D]eclaration' }))
+    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = '[G]oto [D]eclaration' }))
 
   local icon = require('icons').diagnostics
   sign_define { name = 'DiagnosticSignError', text = icon.BoldError }
@@ -80,9 +82,3 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
-require("csharp").setup({
-  lsp = {
-    enable = false
-  }
-})

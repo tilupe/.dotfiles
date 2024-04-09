@@ -8,7 +8,6 @@ local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>gf', '<CMD>Telescope git_files<CR>', { desc = 'search [F]iles' })
     vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = '[F]iles' })
     vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = '[G]oto [R]eferences' })
-    vim.keymap.set('n', 'gI', builtin.lsp_implementations, { desc = '[G]oto [I]mplementation' })
     vim.keymap.set('n', '<leader>F', function()
       builtin.find_files { hidden = true }
     end, { desc = 'Find All Files' })

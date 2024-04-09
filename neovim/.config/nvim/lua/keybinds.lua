@@ -54,15 +54,20 @@ vim.keymap.set('n', '<F10>', "<CMD>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal
 vim.keymap.set('n', '<leader>cj', '<CMD>lua vim.diagnostic.goto_next()<CR>', { desc = 'Next Diagnostic' })
 vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
 
-
- vim.keymap.set( 'n','<leader>sf', '<CMD>Ex<CR>', {desc = 'Explore' })
- vim.keymap.set( 'n','<leader>sF', '<CMD>Vex<CR>', {desc = 'Vertical Explore' })
+ vim.keymap.set( 'n','<leader>sf', '<CMD>Oil<CR>', {desc = 'Explore' })
+ vim.keymap.set( 'n','<leader>sF', function ()
+  local git_root_path = vim.fn.finddir(".git", ".;")
+  vim.cmd("Oil " .. git_root_path)
+ end, {desc = 'Explore' })
 
 -------------------- Plugins --------------------------
 vim.keymap.set('n', '<leader>ct', '<CMD>Trouble diagnostic toggle filter.buf=0<CR>', { desc = '[T]rouble Document' })
 vim.keymap.set('n', '<leader>cT', '<CMD>Trouble diagnostic toggle <CR>', { desc = '[T]rouble' })
 vim.keymap.set('n', '<leader>xq', '<CMD>Trouble qflist toggle <CR>', { desc = '[T]rouble' })
 vim.keymap.set('n', '<leader>xl', '<CMD>Trouble loclist toggle <CR>', { desc = '[T]rouble' })
+
+-- UndoTree
+vim.keymap.set("n", "<leader>ma", "<cmd>Grapple select index=1<cr>")
 
 -- Grapple
 vim.keymap.set("n", "<leader>ma", "<cmd>Grapple select index=1<cr>")

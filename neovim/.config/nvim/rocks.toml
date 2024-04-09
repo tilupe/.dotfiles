@@ -35,7 +35,7 @@ tree-sitter-c_sharp = "scm"
 "conform.nvim" = "5.6.0"
 nvim-lspconfig = { version = "0.1.7", opt = true }
 "mason.nvim" = "1.10.0"
-"mason-lspconfig.nvim" = { version = "1.27.0", opt = true }
+"mason-lspconfig.nvim" = { version = "1.27.0" }
 "obsidian.nvim" = "3.7.5"
 nvim-dap-ui = "4.0.0"
 "structlog.nvim" = "0.1"
@@ -43,15 +43,13 @@ nvim-dap-ui = "4.0.0"
 "grapple.nvim" = "0.27.1"
 "neodev.nvim" = "2.5.2"
 "mason-nvim-dap.nvim" = "2.2.2"
+"oil.nvim" = "2.7.0"
 
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
 rev = "v0.9.1"
 
-[plugins."gitsigns.nvim"]
-git = "lewis6991/gitsigns.nvim"
-rev = "v0.7"
 
 [plugins.nvim-cmp]
 git = "hrsh7th/nvim-cmp"
@@ -74,6 +72,9 @@ git = "jmederosalvarado/roslyn.nvim"
 git = "sindrets/diffview.nvim"
 [plugins.blame]
 git = "FabijanZulj/blame.nvim"
+[plugins."gitsigns.nvim"]
+git = "lewis6991/gitsigns.nvim"
+rev = "v0.7"
 
 # Testing
 [plugins.nvim-neotest]
@@ -92,11 +93,8 @@ git = "Tastyep/structlog.nvim"
 [plugins.lualine]
 git = "nvim-lualine/lualine.nvim"
 
-[plugins.harpoon]
-git = "ThePrimeagen/harpoon"
-
-[plugins.csharp]
-git = "iabdelkareem/csharp.nvim"
+[plugins.undotree]
+git = "mbbill/undotree"
 
 [config]
 auto_setup = true

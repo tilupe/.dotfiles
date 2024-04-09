@@ -25,6 +25,7 @@ require "neotest".setup({
     force_default = true,
   },
   loglevel = 3,
+  discovery_root = "solution",
 })
 
 vim.keymap.set('n', '<leader>tF', "<cmd>lua require('plugins.dap.functions').run(vim.fn.expand('%'))<cr>",
