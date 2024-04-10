@@ -4,7 +4,7 @@ opt.formatoptions = 'jcroqlnt' -- tcqj
 opt.shortmess:append { W = true, I = true, c = true }
 opt.breakindent = true
 opt.clipboard = 'unnamedplus' -- Access system clipboard
-opt.cmdheight = 0
+opt.cmdheight = 1
 opt.completeopt = 'menuone,noselect,longest'
 opt.conceallevel = 2
 opt.confirm = true
@@ -40,6 +40,13 @@ opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
 
 opt.swapfile = false
+
+-- grep
+--
+if vim.fn.executable('rg') == 1 then
+  opt.grepprg = 'rg --vimgrep --hidden --smart-case'
+  opt.grepformat = "%f:%l:%c:%m"
+end
 
 -- fold
 opt.foldcolumn = '1' -- '0' is not bad
