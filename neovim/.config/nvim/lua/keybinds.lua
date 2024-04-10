@@ -28,21 +28,16 @@ vim.keymap.set('n', '<S-Down>', '<CMD>resize -2<CR>')
 vim.keymap.set('n', '<S-Left>', '<CMD>vertical resize -2<CR>')
 vim.keymap.set('n', '<S-Right>', '<CMD>vertical resize +2<CR>')
 
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 vim.keymap.set('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'Quit all' })
 vim.keymap.set('n', '<leader>bw', '<CMD>update!<CR>', { desc = 'Save' })
 vim.keymap.set('n', '<leader>bW', '<CMD>wa<CR>', { desc = '[W]rite [A]ll' })
 vim.keymap.set('n', '<leader>bd', '<CMD>bdelete<CR>', { desc = 'Buffer Delete' })
 vim.keymap.set('n', '<leader>bx', '<C-W>c', { desc = 'Buffer Close' })
-vim.keymap.set('n', '<C-j>', '<C-W>j', { desc = 'Window Down' })
-vim.keymap.set('n', '<C-k>', '<C-W>k', { desc = 'Window Up' })
-vim.keymap.set('n', '<C-h>', '<C-W>h', { desc = 'Window Left' })
-vim.keymap.set('n', '<C-l>', '<C-W>l', { desc = 'Window Right' })
 
 -- Quickfix navigation
-vim.keymap.set('n', '<C-Down>', '<CMD>cnext<CR>', { desc = 'Quickfix next' })
-vim.keymap.set('n', '<C-Up>', '<CMD>cprev<CR>', { desc = 'Quickfix prev' })
+vim.keymap.set('n', '<C-j>', vim.cmd.cnext, { desc = 'Quickfix next' })
+vim.keymap.set('n', '<C-k>', vim.cmd.cprev, { desc = 'Quickfix prev' })
+vim.keymap.set('n', '<leader>co', vim.cmd.copen, { desc = 'Next Diagnostic' })
 
 -- Tabs
 vim.keymap.set('n', '<leader><tab>d', '<CMD>tabclose<CR>', { desc = 'Close' })
@@ -54,7 +49,7 @@ vim.keymap.set('n', '<F10>', "<CMD>let $VIM_DIR=expand('%:p:h')<CR><cmd>terminal
 vim.keymap.set('n', '<leader>cj', '<CMD>lua vim.diagnostic.goto_next()<CR>', { desc = 'Next Diagnostic' })
 vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
 
- vim.keymap.set( 'n','<leader>sf', '<CMD>Oil<CR>', {desc = 'Explore' })
+ vim.keymap.set( 'n','-', '<CMD>Oil<CR>', {desc = 'Explore' })
  vim.keymap.set( 'n','<leader>sF', function ()
   local git_root_path = vim.fn.finddir(".git", ".;")
   vim.cmd("Oil " .. git_root_path)
