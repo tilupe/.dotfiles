@@ -96,5 +96,8 @@ git = "nvim-lualine/lualine.nvim"
 [plugins.undotree]
 git = "mbbill/undotree"
 
+[plugins.mini-starter]
+git = "echasnovski/mini.starter"
+
 [config]
 auto_setup = true
