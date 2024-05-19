@@ -1,8 +1,68 @@
 keybinds {
     normal clear-defaults=true {
         // tmux
-        bind "Ctrl a" { SwitchToMode "Tmux"; }
+        bind "Alt f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "Alt F" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "Alt p" { SwitchToMode "Pane"; }
+        bind "Alt P" { SwitchToMode "RenamePane"; }
+        bind "Alt m" { SwitchToMode "Move"; }
+        bind "Alt t" { SwitchToMode "Tab"; }
+        bind "Alt T" { SwitchToMode "RenameTab"; }
+        bind "Alt s" { SwitchToMode "Session"; }
+        bind "Alt o" { SwitchToMode "Search"; }
+        bind "Alt O" { SwitchToMode "EnterSearch"; }
+        bind "Alt r" { SwitchToMode "Resize"; }
+        bind "Alt n" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "Alt v" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "Alt u" { SwitchToMode "Locked"; }
+        bind "Alt e" { SwitchToMode "Scroll"; }
+        bind "Alt h" { MoveFocusOrTab "Left"; SwitchToMode "Normal"; }
+        bind "Alt j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "Alt k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; SwitchToMode "Normal"; }
+        bind "Alt x" { CloseFocus ; }
     }
+
+    locked {
+        bind "Alt u" { SwitchToMode "Normal"; }
+      }
+
+    pane {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    move {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    scroll {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    session {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    resize {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    renametab {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    renamepane {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    search {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
+    entersearch {
+        bind "Esc" { SwitchToMode "Normal"; }
+      }
+
     tmux clear-defaults=true {
         bind "Ctrl a" { Write 2; SwitchToMode "Normal"; }
 
@@ -19,6 +79,7 @@ keybinds {
 
         bind "t" { NewTab; SwitchToMode "Normal"; }
 
+
         bind "v" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "n" { NewPane "Down"; SwitchToMode "Normal"; }
 
@@ -34,6 +95,7 @@ keybinds {
         bind "q" { Quit; }
     }
     tab {
+        bind "Esc" { SwitchToMode "Normal"; }
         bind "l" { GoToNextTab; SwitchToMode "Normal"; }
         bind "L" { GoToNextTab; }
         bind "h" { GoToPreviousTab; SwitchToMode "Normal"; }
@@ -72,25 +134,25 @@ pane_frames false
       }
   }
  themes {
-    melange {
-        bg       "#000000"
+    everforest {
+        bg       "#1E2326"
         float    "#34302C"
-        sel      "#403A36"
+        sel      "#45443C"
         ui       "#867462"
         com      "#C1A78E"
-        fg       "#ECE1D7"
-        red      "#D47766"
-        yellow   "#EBC06D"
-        green    "#85B695"
+        fg       "#DcC6AA"
+        red      "#E67E80"
+        yellow   "#DBBC7F"
+        green    "#A7C080"
         cyan     "#89B3B6"
-        blue     "#A3A9CE"
-        magenta  "#CF9BC2"
-        orange   "#E49B5D"
+        blue     "#7FBBB3"
+        magenta  "#D699B6"
+        orange   "#E69875"
         black    "#292522"
         white    "#ECE1D7"
       }
  }
-theme "melange"
+theme "everforest"
 
 layout_dir "/home/dev-notomoro/.config/zellij/layouts"
 

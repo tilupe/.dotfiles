@@ -12,9 +12,9 @@ opt.cursorline = true
 opt.expandtab = true
 opt.tabstop = 2
 opt.hidden = true
-opt.hlsearch = false
+opt.hlsearch = true
 opt.ignorecase = true
-opt.inccommand = 'nosplit'
+opt.inccommand = 'split'
 opt.joinspaces = false
 opt.mouse = 'a'
 opt.pumblend = 10
@@ -39,6 +39,8 @@ opt.wildmode = 'longest:full,full'
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
 
+opt.updatetime = 1000
+
 opt.swapfile = false
 
 -- grep
@@ -51,7 +53,7 @@ end
 -- fold
 opt.foldcolumn = '1' -- '0' is not bad
 opt.foldenable = true
-opt.foldlevel = 2
+opt.foldlevel = 99
 opt.foldlevelstart = 2
 
 -- view
@@ -68,7 +70,8 @@ opt.fillchars = 'diff:╱'
 opt.diffopt = 'linematch:60,context:5,closeoff,algorithm:histogram'
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = ' '
+vim.g.have_nerd_font = true
 
 opt.list = true
-opt.listchars = { leadmultispace = '│   ', multispace = '│ ', tab = '│ ' }
+opt.listchars = { tab = '│ ' }

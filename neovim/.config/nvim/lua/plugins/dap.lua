@@ -1,25 +1,46 @@
-require ('mason-nvim-dap').setup({
-    ensure_installed = {'stylua', 'jq', 'netcoredbg'},
-    handlers = {
-        function(config)
-          -- all sources with no handler get passed here
-
-          -- Keep original functionality
-          require('mason-nvim-dap').default_setup(config)
-        end,
-        python = function(config)
-            config.adapters = {
-	            type = "executable",
-	            command = "/usr/bin/python3",
-	            args = {
-		            "-m",
-		            "debugpy.adapter",
-	            },
-            }
-            require('mason-nvim-dap').default_setup(config) -- don't forget this!
-        end,
-    },
-})
+--local dir = vim.loop.cwd() .. '/' .. vim.fn.glob 'bin/Debug/net*/linux-x64/'
+--local name = dir .. vim.fn.glob('*.csproj'):gsub('%.csproj$', '.dll')
+--if not exists(name) then os.execute 'dotnet build -r linux-x64' end
+--return name
+--local dap = require("dap")
+--dap.adapters.coreclr = {
+--  type = "executable",
+--  command = "netcoredbg",
+--  args = { "--interpreter=vscode" },
+--}
+--
+--dap.configurations.cs = {
+--  {
+--    type = "coreclr",
+--    name = "launch - netcoredbg",
+--    request = "launch",
+--    env = "ASPNETCORE_ENVIRONMENT=Development",
+--    args = {
+--      "/p:EnvironmentName=Development", -- this is a msbuild jk
+--      --  this is set via environment variable ASPNETCORE_ENVIRONMENT=Development
+--      "--urls=http://localhost:5002",
+--      "--environment=Development",
+--    },
+--    program = function()
+--      -- return vim.fn.getcwd() .. "/bin/Debug/net8.0/FlareHotspotServer.dll"
+--      local files = ls_dir(get_root_dir() .. "/bin/Debug/")
+--      if #files == 1 then
+--        local dotnet_dir = get_root_dir() .. "/bin/Debug/" .. files[1]
+--        files = ls_dir(dotnet_dir)
+--        for _, file in ipairs(files) do
+--          if file:match(".*%.dll") then
+--            return dotnet_dir .. "/" .. file
+--          end
+--        end
+--      end
+--      -- return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+--      return vim.fn.input({
+--        prompt = "Path to dll",
+--        default = get_root_dir() .. "/bin/Debug/",
+--      })
+--    end,
+--  },
+--}
 
 vim.keymap.set(
 'n',

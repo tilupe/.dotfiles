@@ -1,8 +1,9 @@
 local wezterm = require("wezterm")
 
 return {
-	font_size = 14.5,
+	font_size = 15,
 	cell_width = 0.9,
+  line_height = 0.95,
 	font = wezterm.font_with_fallback({
 		-- {
 		-- 	family = "Monaspace Neon Var",
@@ -171,7 +172,7 @@ return {
 		{ key = "Enter", mods = "ALT", action = wezterm.action.ActivateTab(9) },
 	},
 
-	color_scheme = "GruvboxDark",
+	color_scheme = "Everforest Dark (Gogh)",
 
 	wezterm.on("user-var-changed", function(window, pane, name, value)
 		local overrides = window:get_config_overrides() or {}

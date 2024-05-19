@@ -12,13 +12,14 @@ autocmd('TextYankPost', {
   pattern = '*',
 })
 
-autocmd('BufReadPre', {
-  callback = function()
-    require("rocks").packadd("mason-lspconfig")
-  end,
-  group = tilupe_group,
-  pattern = '*',
-})
+-- autocmd('BufReadPre', {
+--   callback = function()
+--     require("rocks").packadd("mason-lspconfig")
+--   end,
+--   group = tilupe_group,
+--   pattern = '*',
+-- })
+
 
 --autocmd('LspAttach', {
 --  group = tilupe_group,

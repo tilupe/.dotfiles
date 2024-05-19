@@ -25,7 +25,8 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export DOTNET_ROOT=/opt/dotnet
 export BROWSER="/usr/bin/firefox"
 export GPGKEY=
-
+export CARGO_TARGET_DIR="$XDG_DATA_HOME/cargo_target"
+export ZELLIJ_AUTO_ATTACH=0
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$HOME/.local/share/cargo/bin/:$XDG_DATA_HOME/zplug/bin/:
 
@@ -74,8 +75,8 @@ alias l='exa -l --icons --git --no-user'
 alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
 alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
-alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep k8s-tes)'
-alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep k8s-pro)'
+alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep test-k8)'
+alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep prod-k8)'
 alias k9='k9s -n dg-sales'
 alias v="nvim"
 alias ze="zellij"
@@ -90,6 +91,8 @@ alias cd4="cd ../../../.."
 alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
 alias cat='bat --style=plain'
 alias fd='fdfind'
+alias pbcopy='xsel --input --clipboard'
+alias pbpaste='xsel --output --clipboard'
 bindkey -s '^f' "zellij-sessionizer /home/$USER \n"
 
 
@@ -107,3 +110,5 @@ eval "$(starship init zsh)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+eval "$(fzf --zsh)"

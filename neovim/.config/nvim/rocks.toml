@@ -11,7 +11,6 @@
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
 "lua-utils.nvim" = "1.0.2"
-"plenary.nvim" = "scm"
 "rocks-config.nvim" = "1.2.3"
 "rocks-dev.nvim" = "1.1.2"
 "rocks-git.nvim" = "1.3.0"
@@ -31,7 +30,6 @@ tree-sitter-vimdoc = "scm"
 tree-sitter-query = "scm"
 tree-sitter-c_sharp = "scm"
 "gruvbox.nvim" = "2.0.0"
-"mini.files" = "0.12.0"
 "conform.nvim" = "5.6.0"
 nvim-lspconfig = { version = "0.1.7", opt = true }
 "mason.nvim" = "1.10.0"
@@ -40,16 +38,20 @@ nvim-lspconfig = { version = "0.1.7", opt = true }
 nvim-dap-ui = "4.0.0"
 "structlog.nvim" = "0.1"
 "overseer.nvim" = "1.3.1"
-"grapple.nvim" = "0.27.1"
 "neodev.nvim" = "2.5.2"
 "mason-nvim-dap.nvim" = "2.2.2"
 "oil.nvim" = "2.7.0"
+neorg = "8.4.0"
+"zen-mode.nvim" = "1.3.0"
+magick = "1.6.0"
+"image.nvim" = "1.3.0"
 
+[plugins.plenary]
+git = "nvim-lua/plenary.nvim"
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
 rev = "v0.9.1"
-
 
 [plugins.nvim-cmp]
 git = "hrsh7th/nvim-cmp"
@@ -93,11 +95,53 @@ git = "Tastyep/structlog.nvim"
 [plugins.lualine]
 git = "nvim-lualine/lualine.nvim"
 
+[plugins.harpoon]
+git = "ThePrimeagen/harpoon"
+branch = "harpoon2"
+opt = true
+
 [plugins.undotree]
 git = "mbbill/undotree"
 
+[plugins.telescope-fzf-native-nvim]
+git = "nvim-telescope/telescope-fzf-native.nvim"
+build = "make"
+
+[plugins.neorg-telescope]
+git = "nvim-neorg/neorg-telescope"
+
 [plugins.mini-starter]
 git = "echasnovski/mini.starter"
+
+[plugins.nvim-dap-cs]
+git = "NicholasMata/nvim-dap-cs"
+
+[plugins.monet]
+git = "fynnfluegge/monet.nvim"
+
+[plugins.rosepine]
+git = "rose-pine/neovim"
+#[plugins.everforest]
+#git = "sainnhe/everforest"
+
+[plugins.everforest-nvim]
+git = "neanias/everforest-nvim"
+
+[plugins.melange]
+git = "savq/melange-nvim"
+
+
+[plugins.lush]
+git = "rktjmp/lush.nvim"
+
+[plugins.colorizer]
+git = "norcalli/nvim-colorizer.lua"
+
+[plugins.razor-nvim]
+git = "moreiraio/razor.nvim"
+
+# [plugins.img-clip-nvim]
+# git = "HakonHarnes/img-clip.nvim"
 
 [config]
 auto_setup = true
