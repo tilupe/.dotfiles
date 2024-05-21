@@ -1,41 +1,33 @@
 require("img-clip").setup({
-  default = {
     -- file and directory options
+    default = {
+    copy_images = false,
     dir_path = "~/notes/neorg/assets/imgs", ---@type string
-    file_name = "%Y-%m-%d-%H-%M-%S", ---@type string
-    use_absolute_path = true, ---@type boolean
-    relative_to_current_file = false, ---@type boolean
-
-    -- template options
-    template = ".image $FILE_PATH", ---@type string
-    url_encode_path = false, ---@type boolean
-    relative_template_path = true, ---@type boolean
-    use_cursor_in_template = true, ---@type boolean
-    insert_mode_after_paste = true, ---@type boolean
-
-    -- prompt options
-    prompt_for_file_name = true, ---@type boolean
-    show_dir_path_in_prompt = true, ---@type boolean
-
-    -- base64 options
-    max_base64_size = 10, ---@type number
-    embed_image_as_base64 = false, ---@type boolean
-
-    -- image options
-    process_cmd = "", ---@type string
-    copy_images = false, ---@type boolean
-    download_images = true, ---@type boolean
-
-    -- drag and drop options
+    download_images = true,
     drag_and_drop = {
-      enabled = true, ---@type boolean
-      insert_mode = false, ---@type boolean
+      enabled = true,
+      insert_mode = false
     },
+    embed_image_as_base64 = false,
+    file_name = "%Y-%m-%d-%H-%M-%S",
+    insert_mode_after_paste = true,
+    max_base64_size = 10,
+    process_cmd = "",
+    prompt_for_file_name = true,
+    relative_template_path = true,
+    relative_to_current_file = false,
+    show_dir_path_in_prompt = false,
+    template = ".image $FILE_PATH", ---@type string
+    url_encode_path = false,
+    use_absolute_path = true,
+    use_cursor_in_template = true
   },
 
   -- filetype specific options
   filetypes = {
     norg = {
+      use_absolute_path = true,
+      dir_path = "~/notes/neorg/assets/imgs", ---@type string
       template = ".image ![$CURSOR]($FILE_PATH)", ---@type string
       download_images = false, ---@type boolean
     },
@@ -104,3 +96,14 @@ require("img-clip").setup({
   dirs = {}, ---@type table
   custom = {}, ---@type table
 })
+
+
+ vim.keymap.set('n', '<leader>po', function ()
+  local oil = require("oil")
+  local filename = oil.get_cursor_entry().name
+  local dir = oil.get_current_dir()
+  oil.close()
+
+  local img_clip = require("img-clip")
+  img_clip.paste_image({}, dir .. filename)
+ end, { desc = 'Blame' })

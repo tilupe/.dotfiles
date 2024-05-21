@@ -1,7 +1,10 @@
 require('telescope').load_extension('fzf')
+
 vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
     { desc = "Open harpoon window" })
 
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
 local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sx', builtin.oldfiles, { desc = '[R]ecent' })
 
@@ -23,3 +26,25 @@ local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = '[S]ymbols' })
+    vim.keymap.set('n', '<leader>si', function()
+        builtin.find_files {
+        find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
+        previewer = false,
+        attach_mappings = function(_, map)
+          local function embed_image(prompt_bufnr)
+            local entry = action_state.get_selected_entry()
+            local filepath = entry[1]
+            actions.close(prompt_bufnr)
+
+            local img_clip = require("img-clip")
+            img_clip.paste_image(nil, filepath)
+          end
+
+          map("i", "<CR>", embed_image)
+          map("n", "<CR>", embed_image)
+
+          return true
+        end,
+
+      } end, { desc = '[s]earch [i]mages' })
+

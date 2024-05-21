@@ -71,7 +71,7 @@ export EDITOR=nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias l='exa -l --icons --git --no-user'
+alias l='exa --icons --git --no-user'
 alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
 alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'

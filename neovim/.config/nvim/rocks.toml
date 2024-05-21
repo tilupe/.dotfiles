@@ -140,8 +140,8 @@ git = "norcalli/nvim-colorizer.lua"
 [plugins.razor-nvim]
 git = "moreiraio/razor.nvim"
 
-# [plugins.img-clip-nvim]
-# git = "HakonHarnes/img-clip.nvim"
+[plugins.img-clip-nvim]
+git = "HakonHarnes/img-clip.nvim"
 
 [config]
 auto_setup = true

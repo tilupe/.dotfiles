@@ -54,7 +54,6 @@ end
 opt.foldcolumn = '1' -- '0' is not bad
 opt.foldenable = true
 opt.foldlevel = 99
-opt.foldlevelstart = 2
 
 -- view
 opt.wrap = true
@@ -64,6 +63,7 @@ opt.relativenumber = true
 -- langauge
 opt.spelllang = { 'en_us', 'de_ch' }
 opt.spell = true
+opt.spelloptions = "camel"
 
 -- Diff
 opt.fillchars = 'diff:╱'
