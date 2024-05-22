@@ -121,8 +121,6 @@ git = "fynnfluegge/monet.nvim"
 
 [plugins.rosepine]
 git = "rose-pine/neovim"
-#[plugins.everforest]
-#git = "sainnhe/everforest"
 
 [plugins.everforest-nvim]
 git = "neanias/everforest-nvim"

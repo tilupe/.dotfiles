@@ -17,7 +17,7 @@ require "neorg".setup({
     },
     ['core.export'] = {},
     ['core.export.markdown'] = {},
-    ['core.manoeuvre'] = {},
+    --['core.manoeuvre'] = {},
     ['core.ui.calendar'] = {},
     ['core.integrations.telescope'] = {},
     ['core.presenter'] = {
