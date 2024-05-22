@@ -15,34 +15,13 @@ local servers = {
   jdtls = {},
   kotlin_language_server = {},
 }
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-capabilities = vim.tbl_deep_extend('force', capabilities, {
-  filetypes = { 'cs', 'razor' },
-  workspace = {
-    didChangeWatchedFiles = {
-      dynamicRegistration = false,
-    },
-  },
-})
 
--- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
 local on_attach = function(_, bufnr)
-  local function sign_define(args)
-    vim.fn.sign_define(args.name, {
-      texthl = args.name,
-      text = args.text,
-      numhl = '',
-    })
-  end
-
-
     local opts = { buffer = bufnr }
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = '[N]ame' }))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('force', opts, { desc = '[G]oto [D]efinition' }))
@@ -61,6 +40,13 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, vim.tbl_extend('force', opts, { desc = '[c]ode [f]ormat' }))
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = '[G]oto [D]eclaration' }))
 
+  local function sign_define(args)
+    vim.fn.sign_define(args.name, {
+      texthl = args.name,
+      text = args.text,
+      numhl = '',
+    })
+  end
   local icon = require('icons').diagnostics
   sign_define { name = 'DiagnosticSignError', text = icon.BoldError }
   sign_define { name = 'DiagnosticSignWarn', text = icon.BoldWarning }
@@ -68,11 +54,22 @@ local on_attach = function(_, bufnr)
   sign_define { name = 'DiagnosticSignInfo', text = icon.BoldInformation }
 end
 
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = vim.tbl_deep_extend('force', capabilities, {
+  filetypes = { 'cs', 'razor' },
+  workspace = {
+    didChangeWatchedFiles = {
+      dynamicRegistration = false,
+    },
+  },
+})
+
 require('roslyn').setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
-
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
