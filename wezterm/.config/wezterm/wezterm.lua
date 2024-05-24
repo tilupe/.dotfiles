@@ -208,4 +208,6 @@ return {
 			action = wezterm.action.OpenLinkAtMouseCursor,
 		},
 	},
+
+  -- default_prog = { 'zellij', '-l', 'welcome' }
 }

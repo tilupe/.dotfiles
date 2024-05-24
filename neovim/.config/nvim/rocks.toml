@@ -97,8 +97,7 @@ git = "nvim-lualine/lualine.nvim"
 
 [plugins.harpoon]
 git = "ThePrimeagen/harpoon"
-branch = "harpoon2"
-opt = true
+#branch = "harpoon2"
 
 [plugins.undotree]
 git = "mbbill/undotree"
