@@ -1,5 +1,5 @@
-print("hello")
-require('lua.plugins.lspsaga-nvim').setup({
+print("lspsaga-nvim.lua")
+require('lspsaga').setup({
   ui = {
     code_action = '',
   }

@@ -1,3 +1,4 @@
+print("test")
 require("img-clip").setup({
     -- file and directory options
     default = {
