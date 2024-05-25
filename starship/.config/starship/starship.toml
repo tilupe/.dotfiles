@@ -11,6 +11,7 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$git_commit\
 $line_break\
 $python\
 $character"""
@@ -22,19 +23,25 @@ $cmd_duration\
 """
 
 [username]
-style_user = 'white bold'
-style_root = 'black bold'
+style_user = 'blue dimmed'
+style_root = 'red bold'
 format = '[$user]($style) '
 disabled = false
 show_always = true
 
 [directory]
-style = "blue"
+style = "green bold dimmed"
+truncation_length = 6
+truncation_symbol = '…/'
 
 [character]
 success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = '🔖 '
 
 [git_branch]
 symbol = " "

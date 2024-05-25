@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.macro_recording = function()
   local recording_register = vim.fn.reg_recording()
   if recording_register == '' then
@@ -28,7 +29,7 @@ require('lualine').setup {
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch' },
-          lualine_c = { 'filename', 'location', 
+          lualine_c = { 'filename', 'location',
             {
                 "macro-recording",
                 fmt = M.macro_recording,

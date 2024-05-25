@@ -99,3 +99,20 @@ vim.keymap.set("n", "<leader>ps", "<cmd>source ~/.config/nvim/lua/plugins/luasni
 
 -- Image Paste
 
+-- Lspsaga
+vim.keymap.set(
+  'n',
+  '<leader>lo',
+  function()
+    vim.cmd("Lspsaga outline")
+  end,
+  { desc = '[L]sp [O]utline' })
+
+vim.keymap.set(
+  'n',
+  '<leader>ld',
+  function()
+    vim.cmd("Lspsaga peek_definition")
+  end,
+  { desc = '[l]sp [d]efinition' })
+

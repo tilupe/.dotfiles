@@ -26,7 +26,7 @@ return {
 		-- 		"ss08",
 		-- 	},
 		-- },
-		{ family = "JetBrainsMono NF", weight = "Light" },
+		{ family = "JetBrainsMono NFM", weight = "Thin" },
 		{ family = "RobotoMonoNerdFont", weight = "Regular" },
 		{ family = "DejaVuSansMono", weight = "Medium" },
 		{ family = "UbuntuMonoNerdFont", weight = "Medium" },
