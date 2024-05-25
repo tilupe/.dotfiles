@@ -46,7 +46,7 @@ neorg = "8.5.0"
 magick = "1.6.0"
 "image.nvim" = "1.3.0"
 nvim-nio= "1.9.3"
-"lspsaga.nvim" = "scm"
+#"lspsaga.nvim" = "scm"
 
 [plugins.plenary]
 git = "nvim-lua/plenary.nvim"
