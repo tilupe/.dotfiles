@@ -1,11 +1,26 @@
 require('telescope').load_extension('fzf')
 
-vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
-
 local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
 local action_state = require("telescope.actions.state")
 local builtin = require 'telescope.builtin'
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
+local telescope = require("telescope")
+
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = open_with_trouble },
+      n = { ["<c-t>"] = open_with_trouble },
+    },
+  },
+})
+
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
     vim.keymap.set('n', '<leader>sx', builtin.oldfiles, { desc = '[R]ecent' })
 
     vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[R]ecent' })
