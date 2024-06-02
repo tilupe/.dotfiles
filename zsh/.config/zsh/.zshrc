@@ -93,6 +93,7 @@ alias cat='bat --style=plain'
 alias fd='fdfind'
 alias pbcopy='xsel --input --clipboard'
 alias pbpaste='xsel --output --clipboard'
+alias ip='ip -c'
 bindkey -s '^f' "zellij-sessionizer /home/$USER \n"
 
 
