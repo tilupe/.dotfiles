@@ -20,7 +20,7 @@ keybinds {
         bind "Alt j" { MoveFocus "Down"; SwitchToMode "Normal"; }
         bind "Alt k" { MoveFocus "Up"; SwitchToMode "Normal"; }
         bind "Alt l" { MoveFocusOrTab "Right"; SwitchToMode "Normal"; }
-        bind "Alt x" { CloseFocus ; }
+        bind "Alt q" { CloseFocus ; }
     }
 
     locked {
@@ -112,7 +112,7 @@ plugins {
     tab-bar { path "tab-bar"; }
     // status-bar { path "status-bar"; }
     strider { path "strider";}
-    //compact-bar { path "compact-bar"; }
+    compact-bar { path "compact-bar"; }
 }
 pane_frames false
 
