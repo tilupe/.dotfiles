@@ -90,6 +90,7 @@ vim.keymap.set("n", "<leader>ps", "<cmd>source ~/.config/nvim/lua/plugins/luasni
  vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' })
  vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' })
  vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' })
+ -- Blame
 -- Fugit2
 
 vim.keymap.set( 'n', '<leader>gg', function() vim.cmd('Fugit2') end, { desc = '[g]it' })
