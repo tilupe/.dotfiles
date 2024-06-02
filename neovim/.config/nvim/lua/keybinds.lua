@@ -62,10 +62,6 @@ vim.keymap.set('n', ']d', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'P
  end, {desc = 'Explore' })
 
 -------------------- Plugins --------------------------
-vim.keymap.set('n', '<leader>ct', '<CMD>Trouble diagnostic toggle filter.buf=0<CR>', { desc = '[T]rouble Document' })
-vim.keymap.set('n', '<leader>cT', '<CMD>Trouble diagnostic toggle <CR>', { desc = '[T]rouble' })
-vim.keymap.set('n', '<leader>xq', '<CMD>Trouble qflist toggle <CR>', { desc = '[T]rouble' })
-vim.keymap.set('n', '<leader>xl', '<CMD>Trouble loclist toggle <CR>', { desc = '[T]rouble' })
 
 -- UndoTree
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
@@ -94,25 +90,11 @@ vim.keymap.set("n", "<leader>ps", "<cmd>source ~/.config/nvim/lua/plugins/luasni
  vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' })
  vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' })
  vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' })
- -- Blame
- vim.keymap.set('n', '<leader>gB', '<CMD>ToggleBlame<CR>', { desc = 'Blame' })
+-- Fugit2
+
+vim.keymap.set( 'n', '<leader>gg', function() vim.cmd('Fugit2') end, { desc = '[g]it' })
+vim.keymap.set('n', '<leader>gB', function() vim.cmd('Fugit2Blame') end, { desc = 'Blame' })
+vim.keymap.set('n', '<leader>gl', function() vim.cmd('Fugit2Graph') end, { desc = 'Log' })
+
 
 -- Image Paste
-
--- Lspsaga
-vim.keymap.set(
-  'n',
-  '<leader>lo',
-  function()
-    vim.cmd("Lspsaga outline")
-  end,
-  { desc = '[L]sp [O]utline' })
-
-vim.keymap.set(
-  'n',
-  '<leader>ld',
-  function()
-    vim.cmd("Lspsaga peek_definition")
-  end,
-  { desc = '[l]sp [d]efinition' })
-
