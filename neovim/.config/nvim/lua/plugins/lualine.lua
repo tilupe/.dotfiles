@@ -9,8 +9,20 @@ M.macro_recording = function()
     return 'Recording @' .. recording_register
   end
 end
+
+local trouble = require("trouble")
+    local symbols = trouble.statusline({
+      mode = "lsp_document_symbols",
+      groups = {},
+      title = false,
+      filter = { range = true },
+      format = "{kind_icon}{symbol.name:Normal}",
+      -- The following line is needed to fix the background color
+      -- Set it to the lualine section you want to use
+      hl_group = "lualine_c_normal",
+    })
 require('lualine').setup {
-        options = {
+                  options = {
           icons_enabled = true,
           theme = 'auto',
           component_separators = {},
@@ -34,6 +46,10 @@ require('lualine').setup {
                 "macro-recording",
                 fmt = M.macro_recording,
             },
+      {
+        symbols.get,
+        cond = symbols.has
+      },
           },
           lualine_x = { 'encoding', 'fileformat', 'filetype', 'progress' },
           lualine_y = {},
