@@ -26,9 +26,7 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set( 'n',
     '<leader>rn',
-    function ()
-      vim.cmd('Lspsaga rename')
-    end,
+    vim.lsp.buf.rename,
     vim.tbl_extend('force', opts, { desc = '[N]ame' }))
 
     vim.keymap.set('n',
@@ -40,7 +38,6 @@ local on_attach = function(_, bufnr)
     '<leader>D',
     vim.lsp.buf.type_definition,
     vim.tbl_extend('force', opts, { desc = 'Type [D]efinition' }))
-
     vim.keymap.set(
       'n',
       '<leader>ws',
@@ -51,13 +48,7 @@ local on_attach = function(_, bufnr)
     'K',
     vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover Documentation' }))
     vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, vim.tbl_extend('force', opts, { desc = '[G]oto [Implementation]' }))
-    vim.keymap.set(
-    'n',
-    '<leader>ca',
-    function ()
-      vim.cmd('Lspsaga code_action')
-    end,
-    vim.tbl_extend('force', opts, { desc = '[c]ode [a]ction' }))
+    vim.keymap.set( 'n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]ode [a]ction' })
     vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = 'Signature Documentation' }))
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = '[g]oto [D]eclaration' }))
     vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, vim.tbl_extend('force', opts, { desc = '[c]ode [f]ormat' }))
