@@ -75,8 +75,8 @@ alias l='exa --icons --git --no-user'
 alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
 alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
-alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep test-k8)'
-alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep prod-k8)'
+alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep core-test)'
+alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep core-prod)'
 alias k9='k9s -n dg-sales'
 alias v="nvim"
 alias ze="zellij"
