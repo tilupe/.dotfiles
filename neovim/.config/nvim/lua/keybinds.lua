@@ -20,7 +20,7 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- Paste over currently selected text without yanking it
-vim.keymap.set('v', 'p', '"_dP')
+--vim.keymap.set('v', 'p', '"_dP')
 
 -- Resize window using <shift> arrow keys
 vim.keymap.set('n', '<S-Up>', '<CMD>resize +2<CR>')
@@ -90,9 +90,7 @@ vim.keymap.set("n", "<leader>ps", "<cmd>source ~/.config/nvim/lua/plugins/luasni
  vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' })
  vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' })
  vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' })
- -- Blame
 -- Fugit2
-
 vim.keymap.set( 'n', '<leader>gg', function() vim.cmd('Fugit2') end, { desc = '[g]it' })
 vim.keymap.set('n', '<leader>gB', function() vim.cmd('Fugit2Blame') end, { desc = 'Blame' })
 vim.keymap.set('n', '<leader>gl', function() vim.cmd('Fugit2Graph') end, { desc = 'Log' })
