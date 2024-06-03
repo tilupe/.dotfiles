@@ -70,8 +70,6 @@ git = "jmederosalvarado/roslyn.nvim"
 # Git
 [plugins.diffview]
 git = "sindrets/diffview.nvim"
-[plugins.blame]
-git = "FabijanZulj/blame.nvim"
 
 [plugins."gitsigns.nvim"]
 git = "lewis6991/gitsigns.nvim"
