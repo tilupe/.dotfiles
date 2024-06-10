@@ -1,6 +1,8 @@
 print("test")
 require("img-clip").setup({
+  default = {
     dir_path = "~/notes/neorg/assets/imgs", ---@type string
+  }
 })
 
 
