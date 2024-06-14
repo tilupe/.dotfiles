@@ -12,9 +12,9 @@
 [plugins]
 "lua-utils.nvim" = "1.0.2"
 "rocks-config.nvim" = "1.6.0"
-"rocks-dev.nvim" = "1.2.2"
+"rocks-dev.nvim" = "1.2.3"
 "rocks-git.nvim" = "1.5.1"
-"rocks.nvim" = "2.30.0"
+"rocks.nvim" = "2.31.0"
 "telescope.nvim" = "scm"
 luasnip = "2.3.0"
 nvim-dap = "0.8.0"
@@ -30,7 +30,7 @@ tree-sitter-vimdoc = "scm"
 tree-sitter-query = "scm"
 tree-sitter-c_sharp = "scm"
 "gruvbox.nvim" = "2.0.0"
-"conform.nvim" = "5.8.0"
+"conform.nvim" = "5.9.0"
 nvim-lspconfig = { version = "0.1.8", opt = true }
 "mason.nvim" = "1.10.0"
 "mason-lspconfig.nvim" = { version = "1.29.0" }
@@ -41,12 +41,13 @@ nvim-dap-ui = "4.0.0"
 "neodev.nvim" = "3.0.0"
 "mason-nvim-dap.nvim" = "2.3.0"
 "oil.nvim" = "2.9.0"
-neorg = "8.6.0"
+neorg = "8.7.1"
 "zen-mode.nvim" = "1.3.0"
 magick = "1.6.0"
 "image.nvim" = "1.3.0"
 nvim-nio= "1.9.4"
 "fugit2.nvim" = "0.2.0"
+"mini.diff" = "0.13.0"
 
 [plugins.plenary]
 git = "nvim-lua/plenary.nvim"
@@ -73,7 +74,7 @@ git = "sindrets/diffview.nvim"
 
 [plugins."gitsigns.nvim"]
 git = "lewis6991/gitsigns.nvim"
-rev = "v0.8.1"
+rev = "v0.9.0"
 
 # Testing
 [plugins.nvim-neotest]
