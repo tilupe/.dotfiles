@@ -130,11 +130,8 @@ git = "HakonHarnes/img-clip.nvim"
 [plugins.trouble]
 git = "folke/trouble.nvim"
 
-[plugins.copilot-vim]
-git = "github/copilot.vim"
-
-[plugins.copilot-cmp]
-git = "zbirenbaum/copilot-cmp"
+[plugins.copilot-lua]
+git = "zbirenbaum/copilot.lua"
 
 [config]
 auto_setup = true
