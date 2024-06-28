@@ -37,3 +37,7 @@
 
 [credential]
 	helper = libsecret
+[alias]
+	staash = stash --all
+[maintenance]
+	repo = /home/dev-notomoro/Development/Dg.Sales

@@ -63,6 +63,16 @@ export EDITOR=nvim
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# custom functions
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -75,6 +85,7 @@ alias l='exa --icons --git --no-user'
 alias ll='exa -l --icons --git -a'
 alias lt='exa --tree --level=2 --long --icons --git'
 alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
+alias kdev='kubectl config use-context $(kubectl config get-contexts -o name | grep core-dev)'
 alias ktest='kubectl config use-context $(kubectl config get-contexts -o name | grep core-test)'
 alias kprod='kubectl config use-context $(kubectl config get-contexts -o name | grep core-prod)'
 alias k9='k9s -n dg-sales'
