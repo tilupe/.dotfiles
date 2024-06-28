@@ -1,0 +1,17 @@
+@document.meta
+  id: {OS_DATE_ID}
+  title: {TITLE_INPUT}
+  description: 
+  authors: tilupe
+  categories: 
+  created: {TODAY}
+  updated: {TODAY}
+  version: 1.1.1
+@end
+
+* {TITLE_INPUT}
+
+  {CURSOR}
+
+  =====
+
