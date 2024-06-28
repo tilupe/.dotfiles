@@ -1,4 +1,4 @@
-require("options")
-require("keybinds")
-require("rocks-setup")
-require("autocommands")
+require 'options'
+require 'config.lazy'
+require 'config.keymaps'
+require 'autocommands'

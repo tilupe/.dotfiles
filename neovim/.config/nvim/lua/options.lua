@@ -13,8 +13,6 @@ opt.expandtab = true
 opt.tabstop = 2
 opt.hidden = true
 opt.hlsearch = true
-opt.ignorecase = true
-opt.inccommand = 'split'
 opt.joinspaces = false
 opt.mouse = 'a'
 opt.pumblend = 10
@@ -27,6 +25,8 @@ opt.shiftwidth = 2
 opt.showmode = false
 opt.sidescrolloff = 8
 opt.signcolumn = 'yes'
+opt.ignorecase = true
+opt.inccommand = 'split'
 opt.smartcase = true
 opt.smartindent = true
 opt.splitbelow = true
@@ -34,8 +34,36 @@ opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 300
 opt.title = true
-opt.undofile = true
-opt.wildmode = 'longest:full,full'
+
+vim.opt.undofile = true -- save undo history
+local keyset = vim.keymap.set
+keyset('i', ',', ',<C-g>U')
+keyset('i', '.', '.<C-g>U')
+keyset('i', '!', '!<C-g>U')
+keyset('i', '?', '?<C-g>U')
+
+opt.wildmode = 'list:longest,list:full' -- for : stuff
+opt.wildignore:append { '.javac', 'node_modules', '*.pyc' }
+opt.wildignore:append { '.aux', '.out', '.toc' } -- LaTeX
+opt.wildignore:append {
+  '.o',
+  '.obj',
+  '.dll',
+  '.exe',
+  '.so',
+  '.a',
+  '.lib',
+  '.pyc',
+  '.pyo',
+  '.pyd',
+  '.swp',
+  '.swo',
+  '.class',
+  '.DS_Store',
+  '.git',
+  '.hg',
+  '.orig',
+}
 opt.splitkeep = 'screen'
 opt.shortmess:append { C = true }
 
@@ -45,9 +73,9 @@ opt.swapfile = false
 
 -- grep
 --
-if vim.fn.executable('rg') == 1 then
+if vim.fn.executable 'rg' == 1 then
   opt.grepprg = 'rg --vimgrep --hidden --smart-case'
-  opt.grepformat = "%f:%l:%c:%m"
+  opt.grepformat = '%f:%l:%c:%m'
 end
 
 -- fold
@@ -63,7 +91,7 @@ opt.relativenumber = true
 -- langauge
 opt.spelllang = { 'en_us', 'de_ch' }
 opt.spell = true
-opt.spelloptions = "camel"
+opt.spelloptions = 'camel'
 
 -- Diff
 opt.fillchars = 'diff:╱'
