@@ -2,6 +2,7 @@ return {
 
   {
     'nvim-neotest/nvim-nio',
+    dependencies = { 'stevearc/overseer.nvim' },
     version = '*',
     config = true,
     opts = {

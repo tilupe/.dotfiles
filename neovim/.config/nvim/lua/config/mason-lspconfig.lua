@@ -23,29 +23,6 @@ mason_lspconfig.setup {
 
 local on_attach = function(_, bufnr)
   local opts = { buffer = bufnr }
-
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = '[N]ame' }))
-
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('force', opts, { desc = '[G]oto [D]efinition' }))
-
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, vim.tbl_extend('force', opts, { desc = 'Type [D]efinition' }))
-  vim.keymap.set(
-    'n',
-    '<leader>ws',
-    require('telescope.builtin').lsp_dynamic_workspace_symbols,
-    vim.tbl_extend('force', opts, { desc = '[W]orkspace [S]ymbols' })
-  )
-
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover Documentation' }))
-  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, vim.tbl_extend('force', opts, { desc = '[G]oto [Implementation]' }))
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]ode [a]ction' })
-  vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = 'Signature Documentation' }))
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = '[g]oto [D]eclaration' }))
-  vim.keymap.set('n', '<leader>cf', function()
-    vim.cmd 'Neoformat'
-  end, vim.tbl_extend('force', opts, { desc = '[c]ode [f]ormat' }))
-  vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = '[G]oto [D]eclaration' }))
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -59,10 +36,6 @@ capabilities = vim.tbl_deep_extend('force', capabilities, {
   },
 })
 
-require('roslyn').setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
