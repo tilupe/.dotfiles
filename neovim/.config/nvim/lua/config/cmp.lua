@@ -1,6 +1,7 @@
 local cmp = require 'cmp'
 local icons = require 'config.icons'
 local luasnip = require 'luasnip'
+local icon = require('mini.icons').cmp
 
 cmp.setup {
   snippet = {

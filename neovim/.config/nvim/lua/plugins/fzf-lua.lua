@@ -43,7 +43,9 @@ return {
       {
         '<leader>fi',
         function()
-          vim.cmd 'FzfLua lsp_implementations'
+          require('fzf-lua').lsp_implementations {
+            jump_to_single_result = true,
+          }
         end,
         desc = '[i]mplementations',
       },
@@ -57,14 +59,24 @@ return {
       {
         'gr',
         function()
-          vim.cmd 'FzfLua lsp_references'
+          require('fzf-lua').lsp_references {
+            sync = true,
+            ignore_current_line = true,
+            includeDeclaration = false,
+            jump_to_single_result = true,
+          }
         end,
         desc = '[r]eferences',
       },
       {
         'gd',
         function()
-          vim.cmd 'FzfLua lsp_definitions'
+          require('fzf-lua').lsp_definitions {
+            sync = true,
+            ignore_current_line = true,
+            includeDeclaration = false,
+            jump_to_single_result = true,
+          }
         end,
         desc = '[d]efinitions',
       },
