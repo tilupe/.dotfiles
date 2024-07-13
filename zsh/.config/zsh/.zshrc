@@ -105,8 +105,9 @@ alias fd='fdfind'
 alias pbcopy='xsel --input --clipboard'
 alias pbpaste='xsel --output --clipboard'
 alias ip='ip -c'
+alias cargi='f() { cargo install "\$1" && echo "\$1" >> ~/.dotfiles/rust/cargo_packages; unset -f f; }; f'
 bindkey -s '^f' "zellij-sessionizer /home/$USER \n"
-
+bindkey -s '^v' "fzf --preview 'bat --color=always {}' \n"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -43,7 +43,7 @@ require('neorg').setup {
       },
     },
     ['external.conceal-wrap'] = {},
-    ['external.interim-ls'] = {},
+    --['external.interim-ls'] = {},
     ['external.templates'] = {
       -- default_subcommand = "add", -- or "fload", "load"
       config = {

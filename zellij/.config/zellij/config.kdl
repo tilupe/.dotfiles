@@ -8,9 +8,9 @@ keybinds {
         bind "Alt m" { SwitchToMode "Move"; }
         bind "Alt t" { SwitchToMode "Tab"; }
         bind "Alt T" { SwitchToMode "RenameTab"; }
-        bind "Alt s" { SwitchToMode "Session"; }
-        bind "Alt o" { SwitchToMode "Search"; }
-        bind "Alt O" { SwitchToMode "EnterSearch"; }
+        bind "Alt o" { SwitchToMode "Session"; }
+        bind "Alt s" { SwitchToMode "Search"; }
+        bind "Alt S" { SwitchToMode "EnterSearch"; }
         bind "Alt r" { SwitchToMode "Resize"; }
         bind "Alt n" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "Alt v" { NewPane "Right"; SwitchToMode "Normal"; }
@@ -111,8 +111,7 @@ keybinds {
 plugins {
     tab-bar { path "tab-bar"; }
     // status-bar { path "status-bar"; }
-    strider { path "strider";}
-    compact-bar { path "compact-bar"; }
+    // compact-bar { path "compact-bar"; }
 }
 pane_frames false
 
