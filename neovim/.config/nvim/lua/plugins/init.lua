@@ -221,35 +221,57 @@ return {
   },
   { 'folke/zen-mode.nvim', version = '*' },
   { '3rd/image.nvim', version = '*' },
-  { 'SuperBo/fugit2.nvim', event = 'BufRead', version = '*' },
-  keys = {
+  {
+    'SuperBo/fugit2.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'nvim-lua/plenary.nvim',
+      {
+        'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
+        dependencies = { 'stevearc/dressing.nvim' },
+      },
+    },
 
-    {
-      '<leader>go',
-      function()
-        vim.cmd 'Fugit2'
-      end,
-      { desc = '[g]it' },
-    },
-    {
-      '<leader>gB',
-      function()
-        vim.cmd 'Fugit2Blame'
-      end,
-      { desc = 'Blame' },
-    },
-    {
-      '<leader>gl',
-      function()
-        vim.cmd 'Fugit2Graph'
-      end,
-      { desc = 'Log' },
+    config = function()
+      require('fugit2').setup {
+        libgit2_path = 'libgit2.so.1.1',
+      }
+    end,
+    cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph', 'Fugit2Blame' },
+    keys = {
+
+      {
+        '<leader>go',
+        function()
+          vim.cmd 'Fugit2'
+        end,
+        { desc = '[g]it' },
+      },
+      {
+        '<leader>gB',
+        function()
+          vim.cmd 'Fugit2Blame'
+        end,
+        { desc = 'Blame' },
+      },
+      {
+        '<leader>gl',
+        function()
+          vim.cmd 'Fugit2Graph'
+        end,
+        { desc = 'Log' },
+      },
     },
   },
   {
     'echasnovski/mini.diff',
     version = '*',
-    config = true,
+    config = function()
+      require('fugit2').setup {
+        libgit2_path = 'libgit2.so.1.1',
+      }
+    end,
     keys = {
       {
         '<leader>gp',
@@ -275,6 +297,23 @@ return {
         auto_save_enabled = true,
       }
     end,
+    keys = {
+      {
+        '<leader>qq',
+        function()
+          vim.cmd 'SessionDelete'
+          vim.cmd 'qq'
+        end,
+        { desc = 'Save Session' },
+      },
+      {
+        '<leader>sl',
+        function()
+          require('auto-session').load()
+        end,
+        { desc = 'Load Session' },
+      },
+    },
   },
   {
     'windwp/nvim-autopairs',
@@ -289,7 +328,12 @@ return {
       require('nvim-surround').setup {}
     end,
   },
-  { 'stevearc/overseer.nvim' },
+  {
+    'stevearc/overseer.nvim',
+    config = function()
+      require 'config.overseer'
+    end,
+  },
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
@@ -334,5 +378,29 @@ return {
     config = function()
       require('better_escape').setup()
     end,
+  },
+  {
+    'j-hui/fidget.nvim',
+    version = '*',
+    opts = {
+      notification = {
+        window = {
+          winblend = 100,
+        },
+      },
+      -- options
+    },
+  },
+  {
+    'https://git.sr.ht/~swaits/zellij-nav.nvim',
+    lazy = true,
+    event = 'VeryLazy',
+    keys = {
+      { '<A-h>', '<cmd>ZellijNavigateLeft<cr>', { silent = true, desc = 'navigate left' } },
+      { '<A-j>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'navigate down' } },
+      { '<A-k>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'navigate up' } },
+      { '<A-l>', '<cmd>ZellijNavigateRight<cr>', { silent = true, desc = 'navigate right' } },
+    },
+    opts = {},
   },
 }

@@ -27,6 +27,7 @@ fi
 if command -v zsh >/dev/null 2>&1; then
   echo "zsh has been installed successfully."
   chsh -s "$(which zsh)"
+  echo "switched to zsh"
 
 else
   echo "Failed to install zsh."
