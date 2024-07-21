@@ -37,9 +37,6 @@ if command -v cargo >/dev/null 2>&1; then
   alias cargi='f() { cargo install "\$1" && echo "\$1" >> ~/.dotfiles/rust/cargo_packages; unset -f f; }; f'
 fi
 
-# fuzzy finder
-export FZF_DEFAULT_OPTS='-i --height=50%'
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -50,12 +47,9 @@ source "$ZPLUG_HOME"/init.zsh
 
 zplug "woefe/wbase.zsh"
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
-zplug "junegunn/fzf", use:"shell/*.zsh"
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
-zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64-unknown-linux-gnu.tar.gz"
-zplug "junegunn/fzf"
 zplug "jeffreytse/zsh-vi-mode"
 zplug "zsh-users/zsh-completions"
+# completion based on history
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
@@ -65,6 +59,8 @@ zplug load
 # Should be called before compinit
 zmodload zsh/complist
 source "$XDG_CONFIG_HOME/zsh/completion.zsh"
+
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
 
 # Use hjlk in menu selection (during completion)
 # Doesn't work well with interactive mode
@@ -111,6 +107,7 @@ if command -v bat >/dev/null 2>&1; then
 fi
 
 if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_OPTS='-i --height=50%'
   bindkey -s '^v' "fzf --preview 'bat --color=always {}' \n"
   alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
 

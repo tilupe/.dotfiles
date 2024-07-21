@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+echo "hello from completion.zsh"
 # +---------+
 # | Options |
 # +---------+
