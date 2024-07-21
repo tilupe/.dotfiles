@@ -20,7 +20,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export ZAUTOJUMP="$XDG_DATA_HOME/autojump/autojump.txt "
 export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/.terraformrc"
 export POETRY_HOME="$XDG_DATA_HOME/poetry"
-export JIRA_API_TOKEN=$(cat ~/.config/secrets/jira_token)
+# TODO do I still need that? export JIRA_API_TOKEN=$(cat ~/.config/secrets/jira_token)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export DOTNET_ROOT=/opt/dotnet
 export BROWSER="/usr/bin/firefox"
@@ -65,12 +65,12 @@ export EDITOR=nvim
 
 # custom functions
 function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
 }
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -107,10 +107,8 @@ alias pbpaste='xsel --output --clipboard'
 alias ip='ip -c'
 bindkey -s '^f' "zellij-sessionizer /home/$USER \n"
 
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Created by `pipx` on 2023-04-18 06:15:55
 export PATH="$PATH:/home/$USER/.local/bin"
