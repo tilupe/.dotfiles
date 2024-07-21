@@ -58,7 +58,6 @@ zplug load
 
 # Should be called before compinit
 zmodload zsh/complist
-source "$XDG_CONFIG_HOME/zsh/completion.zsh"
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
 
@@ -74,6 +73,9 @@ bindkey -M menuselect '^xi' vi-insert                     # Insert
 bindkey -M menuselect '^xh' accept-and-hold               # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history # Next
 bindkey -M menuselect '^xu' undo                          # Undo
+
+_comp_options+=(globdots) # With hidden files
+source "$XDG_CONFIG_HOME/zsh/completion.zsh"
 
 ## ENVIRONEMENT VARIALES
 export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
