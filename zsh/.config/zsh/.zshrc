@@ -37,16 +37,10 @@ if command -v cargo >/dev/null 2>&1; then
   alias cargi='f() { cargo install "\$1" && echo "\$1" >> ~/.dotfiles/rust/cargo_packages; unset -f f; }; f'
 fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # User configuration
 source "$ZPLUG_HOME"/init.zsh
 
-zplug "woefe/wbase.zsh"
-zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "woefe/wbase.zsh" #Faster startup
 zplug "jeffreytse/zsh-vi-mode"
 zplug "zsh-users/zsh-completions"
 # completion based on history
