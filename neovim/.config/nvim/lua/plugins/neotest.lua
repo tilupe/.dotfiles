@@ -1,48 +1,20 @@
 return {
-
-  { 'Issafalcon/neotest-dotnet' },
+  {
+    'Issafalcon/neotest-dotnet',
+  },
   { 'nvim-neotest/neotest-python' },
   { 'nvim-neotest/neotest-plenary' },
   {
     'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/nvim-nio',
-      'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'Issafalcon/neotest-dotnet',
-    },
     version = '*',
-    config = true,
-    opts = {
-      adapters = {
-        require 'neotest-plenary',
-        require 'neotest-dotnet',
-      },
-      icons = {
-        expanded = '',
-        child_prefix = '',
-        child_indent = '',
-        final_child_prefix = '',
-        non_collapsible = '',
-        collapsed = '',
-        passed = '',
-        running = '',
-        failed = '',
-        unknown = '',
-        skipped = '',
-      },
-      -- overseer.nvim
-      consumers = {
-        overseer = require 'neotest.consumers.overseer',
-      },
-      overseer = {
-        enabled = true,
-        force_default = true,
-      },
-      loglevel = 3,
-      discovery_root = 'solution',
-    },
+    config = function ()
+      
+adapters = {
+    require("neotest-dotnet")({
+      discovery_root = "solution" -- Default
+    })
+  }
+    end,
     keys = {
 
       { '<leader>tF', "<cmd>lua require('plugins.dap.functions').run(vim.fn.expand('%'))<cr>", { desc = 'Debug File' } },
