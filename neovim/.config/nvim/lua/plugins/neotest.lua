@@ -1,8 +1,17 @@
 return {
 
+  { 'Issafalcon/neotest-dotnet' },
+  { 'nvim-neotest/neotest-python' },
+  { 'nvim-neotest/neotest-plenary' },
   {
-    'nvim-neotest/nvim-nio',
-    dependencies = { 'stevearc/overseer.nvim' },
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'Issafalcon/neotest-dotnet',
+    },
     version = '*',
     config = true,
     opts = {
@@ -41,7 +50,13 @@ return {
       { '<leader>ta', "<cmd>lua require('neotest').run.attach()<cr>", { desc = 'Attach' } },
       { '<leader>tf', "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", { desc = 'File' } },
       { '<leader>tl', "<cmd>lua require('neotest').run.run_last()<cr>", { desc = 'Last' } },
-      { '<leader>tn', "<cmd>lua require('neotest').run.run()<cr>", { desc = 'Nearest' } },
+      {
+        '<leader>tn',
+        function()
+          require('neotest').run.run()
+        end,
+        { desc = 'Nearest' },
+      },
 
       {
         '<leader>tN',

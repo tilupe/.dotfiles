@@ -228,6 +228,9 @@ local function neorg_workspace_selector()
   })
 end
 
+-- Neorg functionalities remaps
+vim.keymap.set('n', '<leader>id', '<Plug>(neorg.tempus.insert-date)')
+
 --------- Keymaps---------
 vim.keymap.set('n', '<leader>ni', '<CMD>Neorg index<CR>', { desc = '[n]eorg [i]dex' })
 vim.keymap.set('n', '<leader>no', '<CMD>Neorg return<CR>', { desc = '[n]eorg ret[o]rn' })

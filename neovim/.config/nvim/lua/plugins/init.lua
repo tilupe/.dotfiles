@@ -43,10 +43,6 @@ return {
       { '<leader>gq', '<CMD>Gitsigns setqflist<CR>', { desc = 'prev-hunk' } },
     },
   },
-  { 'nvim-neotest/neotest' },
-  { 'Issafalcon/neotest-dotnet' },
-  { 'nvim-neotest/neotest-python' },
-  { 'nvim-neotest/neotest-plenary' },
   { 'Tastyep/structlog.nvim' },
   {
     'nvim-lualine/lualine.nvim',
@@ -166,7 +162,7 @@ return {
       require 'config.luasnip'
     end,
   },
-  { 'mfussenegger/nvim-dap', version = '*' },
+  { 'mfussenegger/nvim-dap' },
   { 'nvim-tree/nvim-web-devicons', version = '*' },
   {
     'NeogitOrg/neogit',
@@ -339,6 +335,14 @@ return {
     event = 'VeryLazy',
     opts = {},
     keys = {
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump()
+        end,
+        desc = 'Flash',
+      },
       {
         'S',
         mode = { 'n', 'x', 'o' },
