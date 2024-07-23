@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
 if command -v cargo >/dev/null 2>&1; then
-  cargo install exa
+  cargo install eza
   cargo install fd-find
   cargo install starship
   cargo install ripgrep
