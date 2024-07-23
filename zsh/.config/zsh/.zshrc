@@ -26,13 +26,12 @@ export DOTNET_ROOT=/opt/dotnet
 export BROWSER="/usr/bin/firefox"
 export GPGKEY=
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$XDG_DATA_HOME/zplug/bin/:
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$XDG_DATA_HOME/zplug/bin/:$HOME/.local/share/cargo/bin/:
 
 # Cargo
 if command -v cargo >/dev/null 2>&1; then
   export CARGO_HOME="$XDG_DATA_HOME"/cargo
   export CARGO_TARGET_DIR="$XDG_DATA_HOME/cargo_target"
-  export PATH=$PATH:$HOME/.local/share/cargo/bin/
 
   alias cargi='f() { cargo install "\$1" && echo "\$1" >> ~/.dotfiles/rust/cargo_packages; unset -f f; }; f'
 fi
@@ -147,7 +146,6 @@ fi
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
-eval "$(starship init zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

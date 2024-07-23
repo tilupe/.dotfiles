@@ -22,6 +22,10 @@ $time\
 $cmd_duration\
 """
 
+[hostname]
+ssh_symbol = " "
+ssh_only = true
+
 [username]
 style_user = 'blue dimmed'
 style_root = 'red bold'
@@ -161,8 +165,6 @@ symbol = " "
 [hg_branch]
 symbol = " "
 
-[hostname]
-ssh_symbol = " "
 
 [java]
 symbol = " "

@@ -4,6 +4,7 @@ if command -v cargo >/dev/null 2>&1; then
   cargo install exa
   cargo install fd-find
   cargo install starship
+  cargo install ripgrep
 fi
 
 if command -v brew >/dev/null 2>&1; then
