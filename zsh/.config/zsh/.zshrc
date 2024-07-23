@@ -84,10 +84,10 @@ function yy() {
   rm -f -- "$tmp"
 }
 
-if command -v exa >/dev/null 2>&1; then
-  alias l='exa --icons --git --no-user'
-  alias ll='exa -l --icons --git -a'
-  alias lt='exa --tree --level=2 --long --icons --git'
+if command -v eza >/dev/null 2>&1; then
+  alias l='eza --icons --git --no-user'
+  alias ll='eza -l --icons --git -a'
+  alias lt='eza --tree --level=2 --long --icons --git'
 else
   alias l='ls'
   alias ll='ls -la'

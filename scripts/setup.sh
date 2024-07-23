@@ -17,7 +17,7 @@ curl https://sh.rustup.rs -sSf | sh
 source "$HOME/.cargo/bin"
 cargo install sd      # sed replacement
 cargo install du-dust # du replacement
-cargo install exa
+cargo install eza
 
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
