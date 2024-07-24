@@ -7,13 +7,15 @@ return {
   {
     'nvim-neotest/neotest',
     version = '*',
-    config = function ()
-      
-adapters = {
-    require("neotest-dotnet")({
-      discovery_root = "solution" -- Default
-    })
-  }
+    event = 'VeryLazy',
+    config = function()
+      require('neotest').setup {
+        adapters = {
+          require 'neotest-dotnet' {
+            discovery_root = 'solution', -- Default
+          },
+        },
+      }
     end,
     keys = {
 
