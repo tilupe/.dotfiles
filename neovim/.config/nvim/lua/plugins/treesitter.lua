@@ -16,6 +16,8 @@ return {
           'go',
           'heex',
           'html',
+          'markdown',
+          'markdown_inline',
           'javascript',
           'json',
           'lua',

@@ -15,6 +15,7 @@ local servers = {
   yamlls = {},
   jdtls = {},
   kotlin_language_server = {},
+  html = {},
 }
 
 local mason_lspconfig = require 'mason-lspconfig'

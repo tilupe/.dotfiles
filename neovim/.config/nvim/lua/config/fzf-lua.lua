@@ -23,6 +23,10 @@ fzf.setup {
     hl = { normal = 'Pmenu' },
     split = 'belowright new',
     border = 'none',
+    -- backddrop = 10, Todo check what that is
+    preview = {
+      --border = 'noborder',
+    },
   },
   fzf_opts = {
     ['--highlight-line'] = true,
@@ -73,128 +77,14 @@ fzf.setup {
     },
   },
 }
---   buffers = {
---     formatter = 'path.filename_first',
---     prompt = 'buffers:',
---     preview_opts = 'hidden',
---     no_header = true,
---     fzf_opts = { ['--delimiter'] = ' ', ['--with-nth'] = '-1..' },
---   },
---   helptags = {
---     prompt = '💡:',
---     preview_opts = 'hidden',
---     winopts = {
---       row = 1,
---       width = vim.api.nvim_win_get_width(0),
---       height = 0.3,
---     },
---   },
---   git = {
---     bcommits = {
---       prompt = 'logs:',
---       cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen%><(12)%cr%><|(12)%Creset %s' <file>",
---       preview = "git show --stat --color --format='%C(cyan)%an%C(reset)%C(bold yellow)%d%C(reset): %s' {1} -- <file>",
---       actions = {
---         ['ctrl-d'] = function(...)
---           fzf.actions.git_buf_vsplit(...)
---           vim.cmd 'windo diffthis'
---           local switch = vim.api.nvim_replace_termcodes('<C-w>h', true, false, true)
---           vim.api.nvim_feedkeys(switch, 't', false)
---         end,
---       },
---       preview_opts = 'nohidden',
---       winopts = {
---         preview = {
---           layout = 'vertical',
---           vertical = 'right:50%',
---           wrap = 'wrap',
---         },
---         row = 1,
---         width = vim.api.nvim_win_get_width(0),
---         height = 0.3,
---       },
---     },
---     branches = {
---       prompt = 'branches:',
---       cmd = 'git branch --all --color',
---       winopts = {
---         preview = {
---           layout = 'vertical',
---           vertical = 'right:50%',
---           wrap = 'wrap',
---         },
---         row = 1,
---         width = vim.api.nvim_win_get_width(0),
---         height = 0.3,
---       },
---     },
---   },
---   autocmds = {
---     prompt = 'autocommands:',
---     winopts = {
---       width = 0.8,
---       height = 0.7,
---       preview = {
---         layout = 'horizontal',
---         horizontal = 'down:40%',
---         wrap = 'wrap',
---       },
---     },
---   },
---   keymaps = {
---     prompt = 'keymaps:',
---     winopts = {
---       width = 0.8,
---       height = 0.7,
---     },
---     actions = {
---       ['default'] = function(selected)
---         local lines = vim.split(selected[1], '│', {})
---         local mode, key = lines[1]:gsub('%s+', ''), lines[2]:gsub('%s+', '')
---         vim.cmd('verbose ' .. mode .. 'map ' .. key)
---       end,
---     },
---   },
---   highlights = {
---     prompt = 'highlights:',
---     winopts = {
---       width = 0.8,
---       height = 0.7,
---       preview = {
---         layout = 'horizontal',
---         horizontal = 'down:40%',
---         wrap = 'wrap',
---       },
---     },
---     actions = {
---       ['default'] = function(selected)
---         print(vim.cmd.highlight(selected[1]))
---       end,
---     },
---   },
---   lsp = {
---     code_actions = {
---       prompt = 'code actions:',
---       winopts = {
---         width = 0.8,
---         height = 0.7,
---         preview = {
---           layout = 'horizontal',
---           horizontal = 'up:75%',
---         },
---       },
---     },
---   },
---   registers = {
---     prompt = 'registers:',
---     preview_opts = 'hidden',
---     winopts = {
---       width = 0.8,
---       height = 0.7,
---       preview = {
---         layout = 'horizontal',
---         horizontal = 'down:45%',
---       },
---     },
---   },
--- }
+
+      vim.keymap.set('n', '<leader><space>', function() vim.cmd 'FzfLua files' end, { desc = 'files'})
+      vim.keymap.set('n', '<leader>ff', function() vim.cmd 'FzfLua' end, { desc = '[f]zfLua'})
+      vim.keymap.set('n', '<leader>fs', function() vim.cmd 'FzfLua live_grep_native' end, { desc = '[s]tring'})
+      vim.keymap.set('n', '<leader>fr', function() vim.cmd 'FzfLua resume' end, { desc = '[r]esume'})
+      vim.keymap.set('n', '<leader>fw', function() vim.cmd 'FzfLua grep_cWORD' end, { desc = '[w]ord'})
+      vim.keymap.set('n', '<leader>fi', function() require('fzf-lua').lsp_implementations { jump_to_single_result = true, } end, { desc = '[i]mplementations'})
+      vim.keymap.set('n', '<leader>ca', function() require('fzf-lua').lsp_code_actions { winopts = { height = 0.25, width = 0.8 } } end, { desc = '[c]ode [a]ctions'})
+      vim.keymap.set('n', 'gr', function() require('fzf-lua').lsp_references { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true, } end, { desc = '[r]eferences'})
+      vim.keymap.set('n', 'gd', function() require('fzf-lua').lsp_definitions { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true, } end, { desc = '[d]efinitions'})
+      vim.keymap.set('v', '<C-f>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})

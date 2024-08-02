@@ -1,10 +1,28 @@
 return {
   { 'nvim-lua/plenary.nvim' },
+  { 'nvim-neotest/nvim-nio'},
   {
     'seblj/roslyn.nvim',
     config = function()
       require('roslyn').setup {
-        exe = vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'roslyn', 'Microsoft.CodeAnalysis.LanguageServer.dll'),
+        config = {
+          settings = {
+            ['csharp|inlay_hints'] = {
+              csharp_enable_inlay_hints_for_implicit_object_creation = true,
+              csharp_enable_inlay_hints_for_implicit_variable_types = true,
+              csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+              csharp_enable_inlay_hints_for_types = true,
+              dotnet_enable_inlay_hints_for_indexer_parameters = true,
+              dotnet_enable_inlay_hints_for_literal_parameters = true,
+              dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+              dotnet_enable_inlay_hints_for_other_parameters = true,
+              dotnet_enable_inlay_hints_for_parameters = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+            },
+          },
+        },
         filewatching = true,
       }
     end,
@@ -79,7 +97,7 @@ return {
     'HakonHarnes/img-clip.nvim',
     opts = {
       default = {
-        dir_path = '~/notes/neorg/assets/imgs', ---@type string
+        dir_path = '~/Pictures/', ---@type string
       },
     },
     keys = {
@@ -406,4 +424,22 @@ return {
     },
     opts = {},
   },
+  {
+    'ramilito/kubectl.nvim',
+    config = function()
+      require('kubectl').setup()
+    end,
+    keys = {
+      { '<leader>k', '<cmd>lua require("kubectl").open()<cr>', { noremap = true, silent = true } },
+    },
+  },
+  {
+    'vague2k/vague.nvim',
+    config = function()
+      require('vague').setup {
+        transparent = true,
+      }
+    end,
+  },
+{ 'echasnovski/mini.ai', version = '*' },
 }
