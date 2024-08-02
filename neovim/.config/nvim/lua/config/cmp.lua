@@ -42,7 +42,6 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'path' },
-    { name = 'neorg' },
   },
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
