@@ -78,13 +78,31 @@ fzf.setup {
   },
 }
 
-      vim.keymap.set('n', '<leader><space>', function() vim.cmd 'FzfLua files' end, { desc = 'files'})
-      vim.keymap.set('n', '<leader>ff', function() vim.cmd 'FzfLua' end, { desc = '[f]zfLua'})
-      vim.keymap.set('n', '<leader>fs', function() vim.cmd 'FzfLua live_grep_native' end, { desc = '[s]tring'})
-      vim.keymap.set('n', '<leader>fr', function() vim.cmd 'FzfLua resume' end, { desc = '[r]esume'})
-      vim.keymap.set('n', '<leader>fw', function() vim.cmd 'FzfLua grep_cWORD' end, { desc = '[w]ord'})
-      vim.keymap.set('n', '<leader>fi', function() require('fzf-lua').lsp_implementations { jump_to_single_result = true, } end, { desc = '[i]mplementations'})
-      vim.keymap.set('n', '<leader>ca', function() require('fzf-lua').lsp_code_actions { winopts = { height = 0.25, width = 0.8 } } end, { desc = '[c]ode [a]ctions'})
-      vim.keymap.set('n', 'gr', function() require('fzf-lua').lsp_references { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true, } end, { desc = '[r]eferences'})
-      vim.keymap.set('n', 'gd', function() require('fzf-lua').lsp_definitions { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true, } end, { desc = '[d]efinitions'})
-      vim.keymap.set('v', '<C-f>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})
+vim.keymap.set('n', '<leader><space>', function()
+  vim.cmd 'FzfLua files'
+end, { desc = 'files' })
+vim.keymap.set('n', '<leader>ff', function()
+  vim.cmd 'FzfLua'
+end, { desc = '[f]zfLua' })
+vim.keymap.set('n', '<leader>fs', function()
+  vim.cmd 'FzfLua live_grep_native'
+end, { desc = '[s]tring' })
+vim.keymap.set('n', '<leader>fr', function()
+  vim.cmd 'FzfLua resume'
+end, { desc = '[r]esume' })
+vim.keymap.set('n', '<leader>fw', function()
+  vim.cmd 'FzfLua grep_cWORD'
+end, { desc = '[w]ord' })
+vim.keymap.set('n', '<leader>fi', function()
+  require('fzf-lua').lsp_implementations { jump_to_single_result = true }
+end, { desc = '[i]mplementations' })
+vim.keymap.set('n', '<leader>ca', function()
+  require('fzf-lua').lsp_code_actions { winopts = { height = 0.25, width = 0.8 } }
+end, { desc = '[c]ode [a]ctions' })
+vim.keymap.set('n', 'gr', function()
+  require('fzf-lua').lsp_references { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true }
+end, { desc = '[r]eferences' })
+vim.keymap.set('n', 'gd', function()
+  require('fzf-lua').lsp_definitions { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true }
+end, { desc = '[d]efinitions' })
+--vim.keymap.set('v', '<C-f>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})

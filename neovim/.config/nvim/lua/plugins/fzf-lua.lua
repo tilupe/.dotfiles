@@ -80,14 +80,6 @@ return {
         end,
         desc = '[d]efinitions',
       },
-      {
-        '<C-f>',
-        function()
-          vim.cmd 'FzfLua grep_visual'
-        end,
-        mode = 'v',
-        desc = 'Resume',
-      },
     },
   },
 }

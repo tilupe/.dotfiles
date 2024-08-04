@@ -1,126 +1,175 @@
-require('render-markdown').setup {
-file_types = { 'markdown', 'vimwiki' },
-  heading = {
-    -- Turn on / off heading icon & background rendering
+require('render-markdown').setup({
     enabled = true,
-    -- Turn on / off any sign column related rendering
-    sign = true,
-    -- Determines how the icon fills the available space:
-    --  inline: underlying '#'s are concealed resulting in a left aligned icon
-    --  overlay: result is left padded with spaces to hide any additional '#'
-    position = 'overlay',
-    -- Replaces '#+' of 'atx_h._marker'
-    -- The number of '#' in the heading determines the 'level'
-    -- The 'level' is used to index into the array using a cycle
-    icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
-    -- Added to the sign column if enabled
-    -- The 'level' is used to index into the array using a cycle
-    signs = { '󰫎 ' },
-    -- Width of the heading background:
-    --  block: width of the heading text
-    --  full: full width of the window
-    width = 'full',
-    -- The 'level' is used to index into the array using a clamp
-    -- Highlight for the heading icon and extends through the entire line
-    backgrounds = {
-      'RenderMarkdownH1Bg',
-      'RenderMarkdownH2Bg',
-      'RenderMarkdownH3Bg',
-      'RenderMarkdownH4Bg',
-      'RenderMarkdownH5Bg',
-      'RenderMarkdownH6Bg',
-    },
-    -- The 'level' is used to index into the array using a clamp
-    -- Highlight for the heading and sign icons
-    foregrounds = {
-      'RenderMarkdownH1',
-      'RenderMarkdownH2',
-      'RenderMarkdownH3',
-      'RenderMarkdownH4',
-      'RenderMarkdownH5',
-      'RenderMarkdownH6',
-    },
-  },
-  code = {
-    -- Turn on / off code block & inline code rendering
-    enabled = true,
-    -- Turn on / off any sign column related rendering
-    sign = true,
-    -- Determines how code blocks & inline code are rendered:
-    --  none: disables all rendering
-    --  normal: adds highlight group to code blocks & inline code, adds padding to code blocks
-    --  language: adds language icon to sign column if enabled and icon + name above code blocks
-    --  full: normal + language
-    style = 'full',
-    -- Determines where language icon is rendered:
-    --  right: Right side of code block
-    --  left: Left side of code block
-    position = 'left',
-    -- An array of language names for which background highlighting will be disabled
-    -- Likely because that language has background highlights itself
-    disable_background = { 'diff' },
-    -- Amount of padding to add to the left of code blocks
-    left_pad = 0,
-    -- Amount of padding to add to the right of code blocks when width is 'block'
-    right_pad = 0,
-    -- Width of the code block background:
-    --  block: width of the code block
-    --  full: full width of the window
-    width = 'full',
-    -- Determins how the top / bottom of code block are rendered:
-    --  thick: use the same highlight as the code body
-    --  thin: when lines are empty overlay the above & below icons
-    border = 'thin',
-    -- Used above code blocks for thin border
-    above = '▄',
-    -- Used below code blocks for thin border
-    below = '▀',
-    -- Highlight for code blocks
-    highlight = 'RenderMarkdownCode',
-    -- Highlight for inline code
-    highlight_inline = 'RenderMarkdownCodeInline',
-  },
-dash = {
-        -- Turn on / off thematic break rendering
+    max_file_size = 1.5,
+    debounce = 100,
+    -- Capture groups that get pulled from markdown
+    markdown_query = [[
+        (atx_heading [
+            (atx_h1_marker)
+            (atx_h2_marker)
+            (atx_h3_marker)
+            (atx_h4_marker)
+            (atx_h5_marker)
+            (atx_h6_marker)
+        ] @heading)
+
+        (thematic_break) @dash
+
+        (fenced_code_block) @code
+
+        [
+            (list_marker_plus)
+            (list_marker_minus)
+            (list_marker_star)
+        ] @list_marker
+
+        (task_list_marker_unchecked) @checkbox_unchecked
+        (task_list_marker_checked) @checkbox_checked
+
+        (block_quote) @quote
+
+        (pipe_table) @table
+    ]],
+    -- Capture groups that get pulled from quote nodes
+    markdown_quote_query = [[
+        [
+            (block_quote_marker)
+            (block_continuation)
+        ] @quote_marker
+    ]],
+    -- Capture groups that get pulled from inline markdown
+    inline_query = [[
+        (code_span) @code
+
+        (shortcut_link) @shortcut
+
+        [(inline_link) (full_reference_link) (image)] @link
+    ]],
+    log_level = 'error',
+    file_types = { 'markdown' },
+    -- Vim modes that will show a rendered view of the markdown file
+    -- All other modes will be uneffected by this plugin
+    render_modes = { 'n', 'c', 'i' },
+    -- Set to avoid seeing warnings for conflicts in health check
+    acknowledge_conflicts = false,
+    anti_conceal = {
+        -- This enables hiding any added text on the line the cursor is on
+        -- This does have a performance penalty as we must listen to the 'CursorMoved' event
         enabled = true,
-        -- Replaces '---'|'***'|'___'|'* * *' of 'thematic_break'
-        -- The icon gets repeated across the window's width
-        icon = '─',
-        -- Width of the generated line:
-        --  <integer>: a hard coded width value
+    },
+    latex = {
+        -- Whether LaTeX should be rendered, mainly used for health check
+        enabled = true,
+        -- Executable used to convert latex formula to rendered unicode
+        converter = 'latex2text',
+        -- Highlight for LaTeX blocks
+        highlight = 'RenderMarkdownMath',
+        -- Amount of empty lines above LaTeX blocks
+        top_pad = 0,
+        -- Amount of empty lines below LaTeX blocks
+        bottom_pad = 0,
+    },
+    heading = {
+        -- Turn on / off heading icon & background rendering
+        enabled = true,
+        -- Turn on / off any sign column related rendering
+        sign = true,
+        -- Determines how the icon fills the available space:
+        --  inline: underlying '#'s are concealed resulting in a left aligned icon
+        --  overlay: result is left padded with spaces to hide any additional '#'
+        position = 'overlay',
+        -- Replaces '#+' of 'atx_h._marker'
+        -- The number of '#' in the heading determines the 'level'
+        -- The 'level' is used to index into the array using a cycle
+        icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+        -- Added to the sign column if enabled
+        -- The 'level' is used to index into the array using a cycle
+        signs = { '󰫎 ' },
+        -- Width of the heading background:
+        --  block: width of the heading text
         --  full: full width of the window
         width = 'full',
-        -- Highlight for the whole line generated from the icon
+        -- The 'level' is used to index into the array using a clamp
+        -- Highlight for the heading icon and extends through the entire line
+        backgrounds = {
+            'RenderMarkdownH1Bg',
+            'RenderMarkdownH2Bg',
+            'RenderMarkdownH3Bg',
+            'RenderMarkdownH4Bg',
+            'RenderMarkdownH5Bg',
+            'RenderMarkdownH6Bg',
+        },
+        -- The 'level' is used to index into the array using a clamp
+        -- Highlight for the heading and sign icons
+        foregrounds = {
+            'RenderMarkdownH1',
+            'RenderMarkdownH2',
+            'RenderMarkdownH3',
+            'RenderMarkdownH4',
+            'RenderMarkdownH5',
+            'RenderMarkdownH6',
+        },
+    },
+    code = {
+        -- Turn on / off code block & inline code rendering
+        enabled = true,
+        -- Turn on / off any sign column related rendering
+        sign = true,
+        -- Determines how code blocks & inline code are rendered:
+        --  none: disables all rendering
+        --  normal: adds highlight group to code blocks & inline code, adds padding to code blocks
+        --  language: adds language icon to sign column if enabled and icon + name above code blocks
+        --  full: normal + language
+        style = 'full',
+        -- Determines where language icon is rendered:
+        --  right: Right side of code block
+        --  left: Left side of code block
+        position = 'left',
+        -- An array of language names for which background highlighting will be disabled
+        -- Likely because that language has background highlights itself
+        disable_background = { 'diff' },
+        -- Amount of padding to add to the left of code blocks
+        left_pad = 0,
+        -- Amount of padding to add to the right of code blocks when width is 'block'
+        right_pad = 0,
+        -- Width of the code block background:
+        --  block: width of the code block
+        --  full: full width of the window
+        width = 'full',
+        -- Determins how the top / bottom of code block are rendered:
+        --  thick: use the same highlight as the code body
+        --  thin: when lines are empty overlay the above & below icons
+        border = 'thin',
+        -- Used above code blocks for thin border
+        above = '▄',
+        -- Used below code blocks for thin border
+        below = '▀',
+        -- Highlight for code blocks
+        highlight = 'RenderMarkdownCode',
+        -- Highlight for inline code
+        highlight_inline = 'RenderMarkdownCodeInline',
+    },
+    dash = {
+        -- Turn on / off thematic break rendering
+        enabled = true,
+        icon = '─',
+        width = 'full',
         highlight = 'RenderMarkdownDash',
     },
     bullet = {
-        -- Turn on / off list bullet rendering
         enabled = true,
-        -- Replaces '-'|'+'|'*' of 'list_item'
-        -- How deeply nested the list is determines the 'level'
-        -- The 'level' is used to index into the array using a cycle
-        -- If the item is a 'checkbox' a conceal is used to hide the bullet instead
-        icons = { '●', '○', '◆', '◇' },
-        -- Padding to add to the right of bullet point
+        icons = {'•', '‣', '◦', '◉', '●' },
         right_pad = 0,
-        -- Highlight for the bullet icon
         highlight = 'RenderMarkdownBullet',
     },
-    -- Checkboxes are a special instance of a 'list_item' that start with a 'shortcut_link'
-    -- There are two special states for unchecked & checked defined in the markdown grammar
     checkbox = {
-        -- Turn on / off checkbox state rendering
         enabled = true,
         unchecked = {
-            -- Replaces '[ ]' of 'task_list_marker_unchecked'
-            icon = '󰄱 ',
-            -- Highlight for the unchecked icon
+            icon = '☐',
             highlight = 'RenderMarkdownUnchecked',
         },
         checked = {
-            -- Replaces '[x]' of 'task_list_marker_checked'
-            icon = '󰱒 ',
-            -- Highligh for the checked icon
+            icon = '✔',
             highlight = 'RenderMarkdownChecked',
         },
         -- Define custom checkbox states, more involved as they are not part of the markdown grammar
@@ -131,15 +180,13 @@ dash = {
         --   'rendered': Replaces the 'raw' value when rendering
         --   'highlight': Highlight for the 'rendered' icon
         custom = {
-            todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo' },
+            waiting_todo = { raw = '[-]', rendered = '󰥔', highlight = 'RenderMarkdownTodo' },
+            unclear_todo = { raw = '[?]', rendered = '❓', highlight = 'RenderMarkdownTodo' },
         },
     },
     quote = {
-        -- Turn on / off block quote & callout rendering
         enabled = true,
-        -- Replaces '>' of 'block_quote'
         icon = '▋',
-        -- Highlight for the quote icon
         highlight = 'RenderMarkdownQuote',
     },
     pipe_table = {
@@ -173,6 +220,12 @@ dash = {
         -- Highlight for inline padding used to add back concealed space
         filler = 'RenderMarkdownTableFill',
     },
+    -- Callouts are a special instance of a 'block_quote' that start with a 'shortcut_link'
+    -- Can specify as many additional values as you like following the pattern from any below, such as 'note'
+    --   The key in this case 'note' is for healthcheck and to allow users to change its values
+    --   'raw': Matched against the raw text of a 'shortcut_link', case insensitive
+    --   'rendered': Replaces the 'raw' value when rendering
+    --   'highlight': Highlight for the 'rendered' text and quote markers
     callout = {
         note = { raw = '[!NOTE]', rendered = '󰋽 Note', highlight = 'RenderMarkdownInfo' },
         tip = { raw = '[!TIP]', rendered = '󰌶 Tip', highlight = 'RenderMarkdownSuccess' },
@@ -206,6 +259,39 @@ dash = {
         -- Applies to background of sign text
         highlight = 'RenderMarkdownSign',
     },
-}
+    -- Window options to use that change between rendered and raw view
+    win_options = {
+        -- See :h 'conceallevel'
+        conceallevel = {
+            -- Used when not being rendered, get user setting
+            default = vim.api.nvim_get_option_value('conceallevel', {}),
+            -- Used when being rendered, concealed text is completely hidden
+            rendered = 3,
+        },
+        -- See :h 'concealcursor'
+        concealcursor = {
+            -- Used when not being rendered, get user setting
+            default = vim.api.nvim_get_option_value('concealcursor', {}),
+            -- Used when being rendered, disable concealing text in all modes
+            rendered = '',
+        },
+    },
+    -- More granular configuration mechanism, allows different aspects of buffers
+    -- to have their own behavior. Values default to the top level configuration
+    -- if no override is provided. Supports the following fields:
+    --   enabled, max_file_size, debounce, render_modes, anti_conceal, heading, code,
+    --   dash, bullet, checkbox, quote, pipe_table, callout, link, sign, win_options
+    overrides = {
+        -- Overrides for different buftypes, see :h 'buftype'
+        buftype = {
+            nofile = {
+                sign = { enabled = false },
+            },
+        },
+    },
+    -- Mapping from treesitter language to user defined handlers
+    -- See 'Custom Handlers' document for more info
+    custom_handlers = {},
+})
 
 vim.treesitter.language.register('markdown', 'vimwiki')

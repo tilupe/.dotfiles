@@ -73,3 +73,6 @@ local opts = {
 }
 
 require('obsidian').setup(opts)
+    vim.keymap.set('n', '<leader>on', function ()
+    require('obsidian').new_note()
+    end , { desc = '[o]bsidian [n]ew note' })

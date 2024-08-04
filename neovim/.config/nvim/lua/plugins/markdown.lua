@@ -5,6 +5,9 @@ return {
     opts = {},
     name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
+    config = function ()
+      require"config.markdown"
+    end
   },
   {'bullets-vim/bullets.vim'},
   {
