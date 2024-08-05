@@ -1,6 +1,6 @@
 return {
   { 'nvim-lua/plenary.nvim' },
-  { 'nvim-neotest/nvim-nio'},
+  { 'nvim-neotest/nvim-nio' },
   {
     'seblj/roslyn.nvim',
     config = function()
@@ -268,13 +268,13 @@ return {
         end,
         { desc = 'Blame' },
       },
-      {
-        '<leader>gl',
-        function()
-          vim.cmd 'Fugit2Graph'
-        end,
-        { desc = 'Log' },
-      },
+      -- {
+      --   '<leader>gl',
+      --   function()
+      --     vim.cmd 'Fugit2Graph'
+      --   end,
+      --   { desc = 'Log' },
+      -- },
     },
   },
   {
@@ -441,5 +441,24 @@ return {
       }
     end,
   },
-{ 'echasnovski/mini.ai', version = '*' },
+  { 'echasnovski/mini.ai', version = '*' },
+  {
+    'isakbm/gitgraph.nvim',
+    dependencies = { 'sindrets/diffview.nvim' },
+    opts = {
+      symbols = {
+        merge_commit = 'M',
+        commit = '*',
+      },
+      format = {
+        timestamp = '%H:%M:%S %d-%m-%Y',
+        fields = { 'hash', 'timestamp', 'author', 'branch_name', 'tag' },
+      },
+    },
+    init = function()
+      vim.keymap.set('n', '<leader>gl', function()
+        require('gitgraph').draw({}, { all = true, max_count = 5000 })
+      end, { desc = 'new git graph' })
+    end,
+  },
 }
