@@ -114,6 +114,13 @@ return {
         end,
         { desc = 'Past img' },
       },
+      {
+        '<leader>fc',
+        function()
+          require('oil').close()
+        end,
+        { desc = '[f]iles [c]lose' },
+      },
     },
   },
   {
@@ -335,82 +342,71 @@ return {
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
   },
-  {
-    'kylechui/nvim-surround', -- surround objects
-    config = function()
-      require('nvim-surround').setup {}
-    end,
-  },
+  -- {
+  --   'kylechui/nvim-surround', -- surround objects
+  --   config = function()
+  --     require('nvim-surround').setup {}
+  --   end,
+  -- },
+  { 'echasnovski/mini.surround', version = '*', config = true },
   {
     'stevearc/overseer.nvim',
     config = function()
       require 'config.overseer'
     end,
   },
-  {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-      {
-        's',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').jump()
-        end,
-        desc = 'Flash',
-      },
-      {
-        'S',
-        mode = { 'n', 'x', 'o' },
-        function()
-          require('flash').treesitter()
-        end,
-        desc = 'Flash Treesitter',
-      },
-      {
-        'r',
-        mode = 'o',
-        function()
-          require('flash').remote()
-        end,
-        desc = 'Remote Flash',
-      },
-      {
-        'R',
-        mode = { 'o', 'x' },
-        function()
-          require('flash').treesitter_search()
-        end,
-        desc = 'Treesitter Search',
-      },
-      {
-        '<c-s>',
-        mode = { 'c' },
-        function()
-          require('flash').toggle()
-        end,
-        desc = 'Toggle Flash Search',
-      },
-    },
-  },
+  -- {
+  --   'folke/flash.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       's',
+  --       mode = { 'n', 'x', 'o' },
+  --       function()
+  --         require('flash').jump()
+  --       end,
+  --       desc = 'Flash',
+  --     },
+  --     {
+  --       'S',
+  --       mode = { 'n', 'x', 'o' },
+  --       function()
+  --         require('flash').treesitter()
+  --       end,
+  --       desc = 'Flash Treesitter',
+  --     },
+  --     {
+  --       'r',
+  --       mode = 'o',
+  --       function()
+  --         require('flash').remote()
+  --       end,
+  --       desc = 'Remote Flash',
+  --     },
+  --     {
+  --       'R',
+  --       mode = { 'o', 'x' },
+  --       function()
+  --         require('flash').treesitter_search()
+  --       end,
+  --       desc = 'Treesitter Search',
+  --     },
+  --     {
+  --       '<c-s>',
+  --       mode = { 'c' },
+  --       function()
+  --         require('flash').toggle()
+  --       end,
+  --       desc = 'Toggle Flash Search',
+  --     },
+  --   },
+  -- },
   {
     'max397574/better-escape.nvim',
     config = function()
       require('better_escape').setup()
     end,
-  },
-  {
-    'j-hui/fidget.nvim',
-    version = '*',
-    opts = {
-      notification = {
-        window = {
-          winblend = 100,
-        },
-      },
-      -- options
-    },
   },
   {
     'https://git.sr.ht/~swaits/zellij-nav.nvim',
@@ -433,7 +429,7 @@ return {
       { '<leader>k', '<cmd>lua require("kubectl").open()<cr>', { noremap = true, silent = true } },
     },
   },
-  {
+  { --  colorscheme
     'vague2k/vague.nvim',
     config = function()
       require('vague').setup {
@@ -446,13 +442,89 @@ return {
     'isakbm/gitgraph.nvim',
     dependencies = { 'sindrets/diffview.nvim' },
     opts = {
-      symbols = {
-        merge_commit = 'M',
-        commit = '*',
+      hooks = {
+        -- Check diff of a commit
+        on_select_commit = function(commit)
+          vim.notify('DiffviewOpen ' .. commit.hash .. '^!')
+          vim.cmd(':DiffviewOpen ' .. commit.hash .. '^!')
+        end,
+        -- Check diff from commit a -> commit b
+        on_select_range_commit = function(from, to)
+          vim.notify('DiffviewOpen ' .. from.hash .. '~1..' .. to.hash)
+          vim.cmd(':DiffviewOpen ' .. from.hash .. '~1..' .. to.hash)
+        end,
       },
-      format = {
-        timestamp = '%H:%M:%S %d-%m-%Y',
-        fields = { 'hash', 'timestamp', 'author', 'branch_name', 'tag' },
+      symbols = {
+        merge_commit = '',
+        commit = '◯',
+        merge_commit_end = '',
+        commit_end = '',
+        --
+        --   -- Advanced symbols
+        --   -- GVER = '',
+        --   -- GHOR = '',
+        GCLD = '╮',
+        GCRD = '╭',
+        --    '': [hline],
+        -- '': [vline],
+        -- '': [p(fading_hline, num=4, fade='right')],
+        -- '': [p(fading_hline, num=4, fade='left')],
+        -- '': [p(fading_vline, num=5, fade='down')],
+        -- '': [p(fading_vline, num=5, fade='up')],
+        -- '': [p(rounded_corner, which='╭')],
+        -- '': [p(rounded_corner, which='╮')],
+        -- '': [p(rounded_corner, which='╰')],
+        -- '': [p(rounded_corner, which='╯')],
+        -- '': [vline, p(rounded_corner, which='╰')],
+        -- '': [vline, p(rounded_corner, which='╭')],
+        -- '': [p(rounded_corner, which='╰'), p(rounded_corner, which='╭')],
+        -- '': [vline, p(rounded_corner, which='╯')],
+        -- '': [vline, p(rounded_corner, which='╮')],
+        -- '': [p(rounded_corner, which='╮'), p(rounded_corner, which='╯')],
+        -- '': [hline, p(rounded_corner, which='╮')],
+        -- '': [hline, p(rounded_corner, which='╭')],
+        -- '': [p(rounded_corner, which='╭'), p(rounded_corner, which='╮')],
+        -- '': [hline, p(rounded_corner, which='╯')],
+        -- '': [hline, p(rounded_corner, which='╰')],
+        -- '': [p(rounded_corner, which='╰'), p(rounded_corner, which='╯')],
+        -- '': [vline, p(rounded_corner, which='╰'), p(rounded_corner, which='╯')],
+        -- '': [vline, p(rounded_corner, which='╭'), p(rounded_corner, which='╮')],
+        -- '': [hline, p(rounded_corner, which='╮'), p(rounded_corner, which='╯')],
+        -- '': [hline, p(rounded_corner, which='╰'), p(rounded_corner, which='╭')],
+        -- '': [vline, p(rounded_corner, which='╭'), p(rounded_corner, which='╯')],
+        -- '': [vline, p(rounded_corner, which='╮'), p(rounded_corner, which='╰')],
+        -- '': [hline, p(rounded_corner, which='╭'), p(rounded_corner, which='╯')],
+        -- '': [hline, p(rounded_corner, which='╮'), p(rounded_corner, which='╰')],
+        -- '': [commit],
+        -- '': [p(commit, solid=False)],
+        -- '': [p(commit, line='right')],
+        -- '': [p(commit, solid=False, line='right')],
+        -- '': [p(commit, line='left')],
+        -- '': [p(commit, solid=False, line='left')],
+        -- '': [p(commit, line='horizontal')],
+        -- '': [p(commit, solid=False, line='horizontal')],
+        -- '': [p(commit, line='down')],
+        -- '': [p(commit, solid=False, line='down')],
+        -- '': [p(commit, line='up')],
+        -- '': [p(commit, solid=False, line='up')],
+        -- '': [p(commit, line='vertical')],
+        -- '': [p(commit, solid=False, line='vertical')],
+        --   GCLU = '',
+        --   GCRU = '',
+        --   GLRU = '',
+        --   GLRD = '',
+        --   GLUD = '',
+        --   GRUD = '',
+        --   GFORKU = '',
+        --   GFORKD = '',
+        --   GRUDCD = '',
+        --   GRUDCU = '',
+        --   GLUDCD = '',
+        --   GLUDCU = '',
+        --   GLRDCL = '',
+        --   GLRDCR = '',
+        --   GLRUCL = '',
+        --   GLRUCR = '',
       },
     },
     init = function()

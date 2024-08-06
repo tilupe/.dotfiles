@@ -7,10 +7,10 @@ local opts = {
   },
   daily_notes = {
     -- Optional, if you keep daily notes in a separate directory.
-    folder = 'projects/journal/dailies',
+    folder = 'daily-notes',
     date_format = '%Y-%m-%d',
-    default_tags = { 'daily-notes' },
-    template = 'resources/templates/obsidian/daily_note.md',
+    default_tags = { 'daily-note' },
+    template = '~/Documents/notes/resources/templates/obsidian/daily_note.md',
   },
   log_level = vim.log.levels.INFO,
   completion = {
@@ -23,12 +23,6 @@ local opts = {
         return require('obsidian').util.gf_passthrough()
       end,
       opts = { noremap = false, expr = true, buffer = true },
-    },
-    ['<leader>ch'] = {
-      action = function()
-        return require('obsidian').util.toggle_checkbox()
-      end,
-      opts = { buffer = true },
     },
     ['<cr>'] = {
       action = function()
@@ -44,8 +38,7 @@ local opts = {
     -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
     local suffix = ''
     if title ~= nil then
-      -- If title is given, transform it into valid file name.
-      suffix = title:gsub(' ', '_'):gsub('[^A-Za-z0-9-]', ''):lower()
+      suffix = title:gsub(' ', '-')
     else
       for _ = 1, 4 do
         suffix = suffix .. string.char(math.random(65, 90))
@@ -70,9 +63,67 @@ local opts = {
   ui = {
     enable = false,
   },
+  templates = {
+      folder = "resources/templates/obsidian",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
+  },
 }
 
 require('obsidian').setup(opts)
-    vim.keymap.set('n', '<leader>on', function ()
-    require('obsidian').new_note()
-    end , { desc = '[o]bsidian [n]ew note' })
+
+vim.keymap.set('n', '<leader>on', function()
+  vim.cmd 'ObsidianNew'
+end, { desc = '[o]bsidian [n]ew note' })
+
+vim.keymap.set('n', '<leader>oN', function()
+  vim.cmd 'ObsidianNewFromTemplate'
+end, { desc = '[o]bsidian [n]ew note' })
+
+vim.keymap.set('n', '<leader>os', function()
+  vim.cmd 'ObsidianSearch'
+end, { desc = '[o]bsidian [s]tring search' })
+
+vim.keymap.set('n', '<leader>oo', function()
+  vim.cmd 'ObsidianOpen'
+end, { desc = '[o]bsidian [o]pen' })
+
+vim.keymap.set('n', '<leader>oc', function()
+  vim.cmd 'ObsidianToggleCheckbox'
+end, { desc = '[o]bsidian [c]heckbox' })
+
+vim.keymap.set('n', '<leader>of', function()
+  vim.cmd 'ObsidianQuickSwitch'
+end, { desc = '[o]bsidian [f]iles' })
+
+vim.keymap.set('n', '<leader>od', function()
+  vim.cmd 'ObsidianToday'
+end, { desc = '[o]bsidian [d]aily' })
+
+vim.keymap.set('n', '<leader>or', function()
+  vim.cmd 'ObsidianRename'
+end, { desc = '[o]bsidian [r]ename' })
+
+vim.keymap.set('n', '<leader>op', function()
+  vim.cmd 'ObsidianPasteImg'
+end, { desc = '[o]bsidian [p]aste image' })
+
+vim.keymap.set('n', '<leader>og', function()
+  vim.cmd 'ObsidianTOC'
+end, { desc = '[o]bsidian [p]aste image' })
+
+vim.keymap.set('n', '<leader>ob', function()
+  vim.cmd 'ObsidianBacklinks'
+end, { desc = '[o]bsidian [b]acklinks' })
+
+vim.keymap.set('v', '<leader>ol', function()
+  vim.cmd 'ObsidianLink'
+end, { desc = '[o]bsidian [l]ink' })
+
+vim.keymap.set('v', '<leader>on', function()
+  vim.cmd 'ObsidianLinkNew'
+end, { desc = '[o]bsidian [n]ew' })
+
+vim.keymap.set('v', '<leader>oe', function()
+  vim.cmd 'ObsidianExtractNote'
+end, { desc = '[o]bsidian [e]xtract' })
