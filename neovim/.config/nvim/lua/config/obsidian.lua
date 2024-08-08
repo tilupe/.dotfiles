@@ -32,6 +32,9 @@ local opts = {
     },
   },
   new_notes_location = 'current_dir',
+  follow_url_func = function(url)
+    vim.ui.open(url)
+  end,
   note_id_func = function(title)
     -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
     -- In this case a note with the title 'My new note' will be given an ID that looks
@@ -64,9 +67,9 @@ local opts = {
     enable = false,
   },
   templates = {
-      folder = "resources/templates/obsidian",
-      date_format = "%Y-%m-%d-%a",
-      time_format = "%H:%M",
+    folder = 'resources/templates/obsidian',
+    date_format = '%Y-%m-%d-%a',
+    time_format = '%H:%M',
   },
 }
 

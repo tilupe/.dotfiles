@@ -459,78 +459,51 @@ return {
         commit = '◯',
         merge_commit_end = '',
         commit_end = '',
-        --
-        --   -- Advanced symbols
-        --   -- GVER = '',
-        --   -- GHOR = '',
         GCLD = '╮',
         GCRD = '╭',
-        --    '': [hline],
-        -- '': [vline],
-        -- '': [p(fading_hline, num=4, fade='right')],
-        -- '': [p(fading_hline, num=4, fade='left')],
-        -- '': [p(fading_vline, num=5, fade='down')],
-        -- '': [p(fading_vline, num=5, fade='up')],
-        -- '': [p(rounded_corner, which='╭')],
-        -- '': [p(rounded_corner, which='╮')],
-        -- '': [p(rounded_corner, which='╰')],
-        -- '': [p(rounded_corner, which='╯')],
-        -- '': [vline, p(rounded_corner, which='╰')],
-        -- '': [vline, p(rounded_corner, which='╭')],
-        -- '': [p(rounded_corner, which='╰'), p(rounded_corner, which='╭')],
-        -- '': [vline, p(rounded_corner, which='╯')],
-        -- '': [vline, p(rounded_corner, which='╮')],
-        -- '': [p(rounded_corner, which='╮'), p(rounded_corner, which='╯')],
-        -- '': [hline, p(rounded_corner, which='╮')],
-        -- '': [hline, p(rounded_corner, which='╭')],
-        -- '': [p(rounded_corner, which='╭'), p(rounded_corner, which='╮')],
-        -- '': [hline, p(rounded_corner, which='╯')],
-        -- '': [hline, p(rounded_corner, which='╰')],
-        -- '': [p(rounded_corner, which='╰'), p(rounded_corner, which='╯')],
-        -- '': [vline, p(rounded_corner, which='╰'), p(rounded_corner, which='╯')],
-        -- '': [vline, p(rounded_corner, which='╭'), p(rounded_corner, which='╮')],
-        -- '': [hline, p(rounded_corner, which='╮'), p(rounded_corner, which='╯')],
-        -- '': [hline, p(rounded_corner, which='╰'), p(rounded_corner, which='╭')],
-        -- '': [vline, p(rounded_corner, which='╭'), p(rounded_corner, which='╯')],
-        -- '': [vline, p(rounded_corner, which='╮'), p(rounded_corner, which='╰')],
-        -- '': [hline, p(rounded_corner, which='╭'), p(rounded_corner, which='╯')],
-        -- '': [hline, p(rounded_corner, which='╮'), p(rounded_corner, which='╰')],
-        -- '': [commit],
-        -- '': [p(commit, solid=False)],
-        -- '': [p(commit, line='right')],
-        -- '': [p(commit, solid=False, line='right')],
-        -- '': [p(commit, line='left')],
-        -- '': [p(commit, solid=False, line='left')],
-        -- '': [p(commit, line='horizontal')],
-        -- '': [p(commit, solid=False, line='horizontal')],
-        -- '': [p(commit, line='down')],
-        -- '': [p(commit, solid=False, line='down')],
-        -- '': [p(commit, line='up')],
-        -- '': [p(commit, solid=False, line='up')],
-        -- '': [p(commit, line='vertical')],
-        -- '': [p(commit, solid=False, line='vertical')],
-        --   GCLU = '',
-        --   GCRU = '',
-        --   GLRU = '',
-        --   GLRD = '',
-        --   GLUD = '',
-        --   GRUD = '',
-        --   GFORKU = '',
-        --   GFORKD = '',
-        --   GRUDCD = '',
-        --   GRUDCU = '',
-        --   GLUDCD = '',
-        --   GLUDCU = '',
-        --   GLRDCL = '',
-        --   GLRDCR = '',
-        --   GLRUCL = '',
-        --   GLRUCR = '',
       },
     },
     init = function()
       vim.keymap.set('n', '<leader>gl', function()
         require('gitgraph').draw({}, { all = true, max_count = 5000 })
       end, { desc = 'new git graph' })
+    end,
+  },
+  {
+    'stevearc/quicker.nvim',
+    lazy = false,
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+    config = function()
+      vim.keymap.set('n', '<leader>qf', function()
+        require('quicker').toggle()
+      end, {
+        desc = 'Toggle quickfix',
+      })
+      vim.keymap.set('n', '<leader>ql', function()
+        require('quicker').toggle { loclist = true }
+      end, {
+        desc = 'Toggle loclist',
+      })
+      require('quicker').setup {
+        keys = {
+          {
+            '>',
+            function()
+              require('quicker').expand { before = 2, after = 2, add_to_existing = true }
+            end,
+            desc = 'Expand quickfix context',
+          },
+          {
+            '<',
+            function()
+              require('quicker').collapse()
+            end,
+            desc = 'Collapse quickfix context',
+          },
+        },
+      }
     end,
   },
 }
