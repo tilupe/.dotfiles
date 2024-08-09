@@ -1,3 +1,4 @@
 install.sh
 .config/zsh/.zdirs
 .config/zsh/.zsh_history
+.local

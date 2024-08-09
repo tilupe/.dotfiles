@@ -68,7 +68,6 @@ bindkey -M menuselect '^xn' accept-and-infer-next-history # Next
 bindkey -M menuselect '^xu' undo                          # Undo
 
 _comp_options+=(globdots) # With hidden files
-source "$XDG_CONFIG_HOME/zsh/completion.zsh"
 
 ## ENVIRONEMENT VARIALES
 export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
@@ -102,11 +101,11 @@ if command -v bat >/dev/null 2>&1; then
 fi
 
 if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+
   export FZF_DEFAULT_OPTS='-i --height=50%'
   bindkey -s '^v' "fzf --preview 'bat --color=always {}' \n"
-  alias txkill="tmux ls | fzf | awk '{print $1;}' | xargs -n1 tmux kill-session -t"
 
-  eval "$(fzf --zsh)"
 fi
 
 # Swap <Esc> and <Capslock> for better vim experience on foreign keyboards
@@ -132,7 +131,10 @@ if [[ -f $WORKRC ]]; then
 fi
 
 if command -v zellij >/dev/null 2>&1; then
-  source "$XDG_CONFIG_HOME/zellij/zellij.zsh"
+  export ZELLIJ_AUTO_ATTACH=0
+  alias ze="zellij"
+  bindkey '^f' "zellij-sessionizer /home/$USER \n"
+  #source "$XDG_CONFIG_HOME/zellij/zellij.zsh"
 fi
 
 # Created by `pipx` on 2023-04-18 06:15:55
