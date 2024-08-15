@@ -95,7 +95,7 @@ opt.spelloptions = 'camel'
 
 -- Diff
 opt.fillchars = 'diff:╱'
-opt.diffopt = 'linematch:60,context:5,closeoff,algorithm:histogram'
+opt.diffopt = 'linematch:150,context:5,closeoff,algorithm:histogram'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','

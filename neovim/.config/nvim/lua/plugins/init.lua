@@ -38,8 +38,14 @@ return {
   },
   {
     'sindrets/diffview.nvim',
+    opts = {
+      default_args = {
+        DiffviewOpen = { '--imply-local' },
+      },
+    },
     keys = {
       { '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' } },
+      { '<leader>gDh', '<CMD>DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>', { desc = '[D]iffview commit [h]istory' } },
       { '<leader>gq', '<CMD>DiffviewClose<CR>', { desc = '[D]iffview Close' } },
       { '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' } },
       { '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' } },
@@ -454,14 +460,15 @@ return {
           vim.cmd(':DiffviewOpen ' .. from.hash .. '~1..' .. to.hash)
         end,
       },
-      symbols = {
-        merge_commit = '',
-        commit = '◯',
-        merge_commit_end = '',
-        commit_end = '',
-        GCLD = '╮',
-        GCRD = '╭',
-      },
+      -- symbols = {
+      --   merge_commit = '',
+      --   commit = '',
+      --   merge_commit_end = '󰜝',
+      --   commit_end = '',
+      --   GVER = '│',
+      --   GHOR = '─',
+      --   GCRD = '╭',
+      -- },
     },
     init = function()
       vim.keymap.set('n', '<leader>gl', function()
@@ -505,5 +512,16 @@ return {
         },
       }
     end,
+  },
+  {
+    'OXY2DEV/helpview.nvim',
+    lazy = false, -- Recommended
+
+    -- In case you still want to lazy load
+    -- ft = "help",
+
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
   },
 }

@@ -15,10 +15,11 @@
     line-numbers = true
 
 [diff]
-    colorMoved = default
-    algorithm = patience
-    compactionHeuristic = true
+  colorMoved = default
+  algorithm = histogram
+  indentHeuristic = true
   tool = nvimdiff
+  renames = copies
 [difftool "nvimdif"]
   cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
 

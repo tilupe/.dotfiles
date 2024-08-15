@@ -1,96 +1,59 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
+local config = wezterm.config_builder()
+
+wezterm.on("update-right-status", function(window, pane)
+	window:set_right_status(window:active_workspace())
+end)
+
+local function is_vim(pane)
+	-- this is set by the plugin, and unset on ExitPre in Neovim
+	return pane:get_user_vars().IS_NVIM == "true"
+end
+
+local direction_keys = {
+	Left = "h",
+	Down = "j",
+	Up = "k",
+	Right = "l",
+	-- reverse lookup
+	h = "Left",
+	j = "Down",
+	k = "Up",
+	l = "Right",
+}
+
+local function split_nav(resize_or_move, key)
+	return {
+		key = key,
+		mods = resize_or_move == "resize" and "META" or "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+				}, pane)
+			else
+				if resize_or_move == "resize" then
+					win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+				else
+					win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+				end
+			end
+		end),
+	}
+end
 
 return {
 	font_size = 15,
 	cell_width = 0.9,
-  line_height = 0.95,
+	line_height = 0.95,
 	font = wezterm.font_with_fallback({
-		-- {
-		-- 	family = "Monaspace Neon Var",
-		-- 	-- family='Monaspace Argon Var',
-		-- 	-- family='Monaspace Xenon Var',
-		-- 	-- family='Monaspace Radon Var',
-		-- 	-- family='Monaspace Krypton Var',
-		-- 	weight = "Bold",
-		-- 	harfbuzz_features = {
-		-- 		"calt",
-		-- 		"liga",
-		-- 		"dlig",
-		-- 		"ss01",
-		-- 		"ss02",
-		-- 		"ss03",
-		-- 		"ss04",
-		-- 		"ss05",
-		-- 		"ss06",
-		-- 		"ss07",
-		-- 		"ss08",
-		-- 	},
-		-- },
 		{ family = "JetBrainsMono NFM", weight = "Thin" },
-		{ family = "RobotoMonoNerdFont", weight = "Regular" },
-		{ family = "DejaVuSansMono", weight = "Medium" },
-		{ family = "UbuntuMonoNerdFont", weight = "Medium" },
-		{ family = "FiraCodeNerdFont", weight = "Light" },
-		{ family = "HackNerdFont", weight = "Medium" },
-		{ family = "MonacoNerdFontMono", weight = "Regular" },
 		{ family = "InconsolataGoNerdFont", weight = "Medium" },
 		"MesloLGS NF",
 	}),
-	font_rules = {
-		--
-		-- Italic (comments)
-		--
-		-- {
-		-- 	intensity = "Normal",
-		-- 	italic = true,
-		-- 	font = wezterm.font({
-		-- 		family = "Monaspace Argon Var",
-		-- 		weight = "Regular",
-		-- 		stretch = "Normal",
-		-- 		style = "Normal",
-		-- 		harfbuzz_features = {
-		-- 			"calt",
-		-- 			"liga",
-		-- 			"dlig",
-		-- 			"ss01",
-		-- 			"ss02",
-		-- 			"ss03",
-		-- 			"ss04",
-		-- 			"ss05",
-		-- 			"ss06",
-		-- 			"ss07",
-		-- 			"ss08",
-		-- 		},
-		-- 	}),
-		-- },
-
-		--
-		-- -- Bold (highlighting)
-		-- --
-		-- {
-		-- 	intensity = "Bold",
-		-- 	italic = false,
-		-- 	font = wezterm.font({
-		-- 		family = "Monaspace Krypton Var",
-		-- 		weight = "Black",
-		-- 		stretch = "Normal",
-		-- 		style = "Normal",
-		-- 		harfbuzz_features = {
-		-- 			"calt",
-		-- 			"liga",
-		-- 			"dlig",
-		-- 			"ss01",
-		-- 			"ss02",
-		-- 			"ss03",
-		-- 			"ss04",
-		-- 			"ss05",
-		-- 			"ss06",
-		-- 			"ss07",
-		-- 			"ss08",
-		-- 		},
-		-- 	}),
-		-- },
-	},
+	font_rules = {},
 
 	automatically_reload_config = true,
 	adjust_window_size_when_changing_font_size = false,
@@ -156,23 +119,119 @@ return {
 	--		"#ECE1D7",
 	--	},
 	--},
+	leader = { key = "a", mods = "ALT", timeout_milliseconds = 1000 },
 	keys = {
-    { key = "l",
-    mods = "SHIFT|CTRL",
-    action = wezterm.action.DisableDefaultAssignment}
-		-- { key = "w", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-		-- { key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
-		-- { key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
-		-- { key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
-		-- { key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
-		-- { key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
-		-- { key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
-		-- { key = "6", mods = "ALT", action = wezterm.action.ActivateTab(5) },
-		-- { key = "7", mods = "ALT", action = wezterm.action.ActivateTab(6) },
-		-- { key = "8", mods = "ALT", action = wezterm.action.ActivateTab(7) },
-		-- { key = "9", mods = "ALT", action = wezterm.action.ActivateTab(8) },
-		-- { key = "0", mods = "ALT", action = wezterm.action.ActivateTab(9) },
-		-- { key = "Enter", mods = "ALT", action = wezterm.action.ActivateTab(9) },
+		{ mods = "LEADER", key = "s", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = "LEADER", key = "v", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ mods = "LEADER", key = "m", action = wezterm.action.TogglePaneZoomState },
+		-- rotate panes
+		{
+			mods = "LEADER",
+			key = "Space",
+			action = wezterm.action.RotatePanes("Clockwise"),
+		},
+		-- show the pane selection mode, but have it swap the active and selected panes
+		{
+			mods = "LEADER",
+			key = "0",
+			action = wezterm.action.PaneSelect({
+				mode = "SwapWithActive",
+			}),
+		},
+		split_nav("move", "h"),
+		split_nav("move", "j"),
+		split_nav("move", "k"),
+		split_nav("move", "l"),
+		split_nav("resize", "h"),
+		split_nav("resize", "j"),
+		split_nav("resize", "k"),
+		split_nav("resize", "l"),
+		-- activate copy mode or vim mode
+		{
+			key = "Enter",
+			mods = "LEADER",
+			action = wezterm.action.ActivateCopyMode,
+		},
+		{
+			key = "w",
+			mods = "LEADER",
+			action = act.PromptInputLine({
+				description = wezterm.format({
+					{ Attribute = { Intensity = "Bold" } },
+					{ Foreground = { AnsiColor = "Fuchsia" } },
+					{ Text = "Enter name for new workspace" },
+				}),
+				action = wezterm.action_callback(function(window, pane, line)
+					-- line will be `nil` if they hit escape without entering anything
+					-- An empty string if they just hit enter
+					-- Or the actual line of text they wrote
+					if line then
+						window:perform_action(
+							act.SwitchToWorkspace({
+								name = line,
+							}),
+							pane
+						)
+					end
+				end),
+			}),
+		},
+		{
+			key = "y",
+			mods = "LEADER",
+			action = act.SwitchToWorkspace({
+				name = "default",
+			}),
+		},
+		{
+			mods = "ALT",
+			key = "w",
+			action = wezterm.action_callback(function(window, pane)
+				-- Here you can dynamically construct a longer list if needed
+				local home = wezterm.home_dir
+				local workspaces = {
+					{ id = home, label = "Home" },
+					{ id = home .. "/Development/Dg.Sales", label = "Sales" },
+					{ id = home .. "/Development/devinite", label = "devinite" },
+					{ id = home .. "/Documents/notes", label = "Notes" },
+					{ id = home .. "/.dotfiles", label = "Dotfiles" },
+					{ id = home .. "/.config/nvim", label = "Neovim" },
+				}
+				window:perform_action(
+					act.InputSelector({
+						action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
+							if not id and not label then
+								wezterm.log_info("cancelled")
+							else
+								wezterm.log_info("id = " .. id)
+								wezterm.log_info("label = " .. label)
+								inner_window:perform_action(
+									act.SwitchToWorkspace({
+										name = label,
+										spawn = {
+											label = "Workspace: " .. label,
+											cwd = id,
+										},
+									}),
+									inner_pane
+								)
+							end
+						end),
+						title = "Choose Workspace",
+						choices = workspaces,
+						fuzzy = true,
+						-- Nightly version only: https://wezfurlong.org/wezterm/config/lua/keyassignment/InputSelector.html?h=input+selector#:~:text=These%20additional%20fields%20are%20also%20available%3A
+						-- fuzzy_description = "Fuzzy find and/or make a workspace",
+					}),
+					pane
+				)
+			end),
+		},
+		{
+			key = "q",
+			mods = "LEADER",
+			action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		},
 	},
 
 	color_scheme = "Everforest Dark (Gogh)",
@@ -209,5 +268,5 @@ return {
 		},
 	},
 
-  -- default_prog = { 'zellij', '-l', 'welcome' }
+	-- default_prog = { 'zellij', '-l', 'welcome' }
 }
