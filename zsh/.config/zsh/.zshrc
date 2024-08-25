@@ -121,6 +121,9 @@ alias pbcopy='xsel --input --clipboard'
 alias pbpaste='xsel --output --clipboard'
 alias ip='ip -c'
 
+
+bindkey -s '^f' "$HOME/.config/tmux/tmux-sessionizer\n"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
@@ -133,8 +136,6 @@ fi
 if command -v zellij >/dev/null 2>&1; then
   export ZELLIJ_AUTO_ATTACH=0
   alias ze="zellij"
-  bindkey '^f' "zellij-sessionizer /home/$USER \n"
-  #source "$XDG_CONFIG_HOME/zellij/zellij.zsh"
 fi
 
 # Created by `pipx` on 2023-04-18 06:15:55
