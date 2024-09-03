@@ -21,6 +21,20 @@ return {
               dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
               dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
             },
+            ["csharp|code_lens"] = {
+                dotnet_enable_references_code_lens = true,
+            },
+            ["csharp|symbol_search"] = {
+                dotnet_search_reference_assemblies = true,
+            },
+            ["csharp|completion"] = {
+                dotnet_show_completion_items_from_unimported_namespaces = true,
+                dotnet_show_name_completion_suggestions = true,
+            },
+            ["csharp|background_analysis"] = {
+                dotnet_analyzer_diagnostics_scope = "fullSolution",
+                dotnet_compiler_diagnostics_scope= "fullSolution",
+            },
           },
         },
         filewatching = true,
@@ -69,8 +83,9 @@ return {
   { 'Tastyep/structlog.nvim' },
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = { 'folke/trouble.nvim' },
     config = function()
-      require 'config.lualine'
+      --require 'config.lualine'
     end,
   },
   {
@@ -178,6 +193,37 @@ return {
       server_opts_overrides = {},
     },
   },
+  -- {
+  --   'stevearc/conform.nvim',
+  --   event = 'BufReadPre',
+  --   opts = {
+  --     formatters_by_ft = {
+  --       cs = { 'csharpier' },
+  --       lua = { 'stylua' },
+  --       -- Conform will run multiple formatters sequentially
+  --       python = { 'isort', 'black' },
+  --       -- You can customize some of the format options for the filetype (:help conform.format)
+  --       rust = { 'rustfmt', lsp_format = 'fallback' },
+  --       -- Conform will run the first available formatter
+  --       javascript = { 'prettierd', 'prettier', stop_after_first = true },
+  --     },
+  --     formatters = {
+  --       csharpier = {
+  --         command = 'dotnet-csharpier',
+  --         args = { '--write-stdout' },
+  --       },
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       '<leader>cf',
+  --       function()
+  --         require('conform').format()
+  --       end,
+  --       { desc = '[c]ode [f]ormat' },
+  --     },
+  --   },
+  -- },
   {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
@@ -289,6 +335,13 @@ return {
       --   { desc = 'Log' },
       -- },
     },
+  },
+  {
+    'echasnovski/mini.nvim',
+    version = '*',
+    config = function()
+      require('mini.statusline').setup()
+    end,
   },
   {
     'echasnovski/mini.diff',
@@ -415,18 +468,6 @@ return {
     end,
   },
   {
-    'https://git.sr.ht/~swaits/zellij-nav.nvim',
-    lazy = true,
-    event = 'VeryLazy',
-    keys = {
-      { '<A-h>', '<cmd>ZellijNavigateLeft<cr>', { silent = true, desc = 'navigate left' } },
-      { '<A-j>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'navigate down' } },
-      { '<A-k>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'navigate up' } },
-      { '<A-l>', '<cmd>ZellijNavigateRight<cr>', { silent = true, desc = 'navigate right' } },
-    },
-    opts = {},
-  },
-  {
     'ramilito/kubectl.nvim',
     config = function()
       require('kubectl').setup()
@@ -443,7 +484,37 @@ return {
       }
     end,
   },
-  { 'echasnovski/mini.ai', version = '*' },
+  {
+    'echasnovski/mini.ai',
+    event = 'VeryLazy',
+    opts = function()
+      local ai = require 'mini.ai'
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter { -- code block
+            a = { '@block.outer', '@conditional.outer', '@loop.outer' },
+            i = { '@block.inner', '@conditional.inner', '@loop.inner' },
+          },
+          f = ai.gen_spec.treesitter { a = '@function.outer', i = '@function.inner' }, -- function
+          c = ai.gen_spec.treesitter { a = '@class.outer', i = '@class.inner' }, -- class
+          t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
+          d = { '%f[%d]%d+' }, -- digits
+          e = { -- Word with case
+            { '%u[%l%d]+%f[^%l%d]', '%f[%S][%l%d]+%f[^%l%d]', '%f[%P][%l%d]+%f[^%l%d]', '^[%l%d]+%f[^%l%d]' },
+            '^().*()$',
+          },
+          -- i = LazyVim.mini.ai_indent, -- indent
+          -- g = LazyVim.mini.ai_buffer, -- buffer
+          u = ai.gen_spec.function_call(), -- u for "Usage"
+          U = ai.gen_spec.function_call { name_pattern = '[%w_]' }, -- without dot in function name
+        },
+      }
+    end,
+    config = function(_, opts)
+      require('mini.ai').setup(opts)
+    end,
+  },
   {
     'isakbm/gitgraph.nvim',
     dependencies = { 'sindrets/diffview.nvim' },
@@ -523,5 +594,87 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
+  },
+  {
+    'mikavilpas/yazi.nvim',
+    event = 'VeryLazy',
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        '<leader>y',
+        '<cmd>Yazi<cr>',
+        desc = 'Open yazi at the current file',
+      },
+      {
+        -- Open in the current working directory
+        '<leader>cw',
+        '<cmd>Yazi cwd<cr>',
+        desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        -- NOTE: this requires a version of yazi that includes
+        -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
+        '<c-up>',
+        '<cmd>Yazi toggle<cr>',
+        desc = 'Resume the last yazi session',
+      },
+    },
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false,
+      keymaps = {
+        show_help = '<f1>',
+      },
+    },
+  },
+  {
+    'rcarriga/nvim-notify',
+    keys = {
+      {
+        '<leader>un',
+        function()
+          require('notify').dismiss { silent = true, pending = true }
+        end,
+        desc = 'Dismiss All Notifications',
+      },
+    },
+    opts = {
+      stages = 'static',
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
+    },
+  },
+  -- lazy.nvim
+  {
+    'GustavEikaas/easy-dotnet.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('easy-dotnet').setup()
+    end,
+  },
+  {
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
+      local nvim_tmux_nav = require 'nvim-tmux-navigation'
+
+      nvim_tmux_nav.setup {
+        disable_when_zoomed = true, -- defaults to false
+      }
+
+      vim.keymap.set('n', '<C-h>', nvim_tmux_nav.NvimTmuxNavigateLeft)
+      vim.keymap.set('n', '<C-j>', nvim_tmux_nav.NvimTmuxNavigateDown)
+      vim.keymap.set('n', '<C-k>', nvim_tmux_nav.NvimTmuxNavigateUp)
+      vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
+      vim.keymap.set('n', '<C-\\>', nvim_tmux_nav.NvimTmuxNavigateLastActive)
+      vim.keymap.set('n', '<C-CR>', nvim_tmux_nav.NvimTmuxNavigateNext)
+    end,
   },
 }

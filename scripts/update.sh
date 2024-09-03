@@ -22,6 +22,6 @@ if command -v zplug &>/dev/null; then
 fi
 
 
-if command -v flatpack &>/dev/null; then
+if command -v flatpak &>/dev/null; then
   flatpak update
 fi

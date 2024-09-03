@@ -67,3 +67,7 @@ vim.keymap.set('n', '<leader>ck', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { d
 vim.keymap.set('n', ']d', '<CMD>lua vim.diagnostic.goto_prev()<CR>', { desc = 'Previous Diagnostic' })
 
 vim.keymap.set('n', '<leader>ps', '<cmd>source ~/.config/nvim/lua/config/luasnip.lua<cr>')
+vim.keymap.set('n', '<leader>pp', '<cmd>source ~/.config/nvim/lua/extras/utils.lua<cr>')
+vim.keymap.set('n', '<leader>po', function ()
+  require('extras.utils').Find_launch_settings()
+end)

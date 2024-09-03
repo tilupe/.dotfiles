@@ -2,9 +2,9 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
-    config = function ()
-      require"config.markdown"
-    end
+    config = function()
+      require 'config.markdown'
+    end,
   },
   -- {
   --   'OXY2DEV/markview.nvim',
@@ -31,7 +31,7 @@ return {
     'epwalsh/obsidian.nvim',
     version = '*',
     lazy = true,
-    event = "VeryLazy",
+    event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
     },

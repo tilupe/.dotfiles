@@ -46,9 +46,10 @@ end
 
 return {
 	font_size = 15,
-	cell_width = 0.9,
-	line_height = 0.95,
+	cell_width = 0.90,
+	line_height = 1.0,
 	font = wezterm.font_with_fallback({
+		{ family = "CommitMonoCustom", weight = "Light" },
 		{ family = "JetBrainsMono NFM", weight = "Thin" },
 		{ family = "InconsolataGoNerdFont", weight = "Medium" },
 		"MesloLGS NF",
