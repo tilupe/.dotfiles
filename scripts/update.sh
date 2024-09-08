@@ -25,3 +25,7 @@ fi
 if command -v flatpak &>/dev/null; then
   flatpak update
 fi
+
+if command -v snap &>/dev/null; then
+  snap refresh
+fi

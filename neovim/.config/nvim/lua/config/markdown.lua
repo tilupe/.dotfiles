@@ -158,7 +158,7 @@ require('render-markdown').setup {
   },
   bullet = {
     enabled = true,
-    icons = { '•', '⁃', '⁍', '⦿', '⁌', '◉', '●' },
+    icons = {  '◉', '●', '•', '⁍', '⦿', '⁌' },
     right_pad = 0,
     highlight = 'RenderMarkdownBullet',
   },

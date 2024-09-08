@@ -7,11 +7,6 @@ local actions = require 'fzf-lua.actions'
 local trouble_actions = require('trouble.sources.fzf').actions
 
 fzf.setup {
-  grep = {
-    rg_glob = true,
-    glob_flag = '--iglob',
-    glob_separator = '%s%-%-',
-  },
   winopts_fn = function()
     return {
       width = vim.o.columns > 80 and 0.75 or 0.95,

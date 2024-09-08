@@ -21,19 +21,19 @@ return {
               dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
               dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
             },
-            ["csharp|code_lens"] = {
-                dotnet_enable_references_code_lens = true,
+            ['csharp|code_lens'] = {
+              dotnet_enable_references_code_lens = true,
             },
-            ["csharp|symbol_search"] = {
-                dotnet_search_reference_assemblies = true,
+            ['csharp|symbol_search'] = {
+              dotnet_search_reference_assemblies = true,
             },
-            ["csharp|completion"] = {
-                dotnet_show_completion_items_from_unimported_namespaces = true,
-                dotnet_show_name_completion_suggestions = true,
+            ['csharp|completion'] = {
+              dotnet_show_completion_items_from_unimported_namespaces = true,
+              dotnet_show_name_completion_suggestions = true,
             },
-            ["csharp|background_analysis"] = {
-                dotnet_analyzer_diagnostics_scope = "fullSolution",
-                dotnet_compiler_diagnostics_scope= "fullSolution",
+            ['csharp|background_analysis'] = {
+              dotnet_analyzer_diagnostics_scope = 'fullSolution',
+              dotnet_compiler_diagnostics_scope = 'fullSolution',
             },
           },
         },
@@ -77,16 +77,8 @@ return {
       { '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', { desc = '[r]eset-hunk' } },
       { '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', { desc = 'next-hunk' } },
       { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'prev-hunk' } },
-      { '<leader>gb', '<CMD>Gitsigns blame_line<CR>', { desc = 'prev-hunk' } },
+      { '<leader>gb', '<CMD>Gitsigns blame<CR>', { desc = 'blame' } },
     },
-  },
-  { 'Tastyep/structlog.nvim' },
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'folke/trouble.nvim' },
-    config = function()
-      --require 'config.lualine'
-    end,
   },
   {
     'ThePrimeagen/harpoon',
@@ -100,7 +92,6 @@ return {
     { '<leader>u', ':UndotreeToggle<cr>' },
   } }, -- see undo tree
   { 'echasnovski/mini.icons', version = false, config = true },
-  { 'NicholasMata/nvim-dap-cs' },
   {
     'neanias/everforest-nvim',
     priority = 1000,
@@ -113,7 +104,6 @@ return {
   },
   { 'savq/melange-nvim' },
   { 'norcalli/nvim-colorizer.lua' },
-  { 'moreiraio/razor.nvim' },
   {
     'HakonHarnes/img-clip.nvim',
     opts = {
@@ -173,8 +163,8 @@ return {
           accept = '<C-f>',
           accept_word = false,
           accept_line = false,
-          next = '<C-j>',
-          prev = '<C-k>',
+          next = '<C-Down>',
+          prev = '<C-Up>',
           dismiss = '<C-x>',
         },
       },
@@ -193,37 +183,6 @@ return {
       server_opts_overrides = {},
     },
   },
-  -- {
-  --   'stevearc/conform.nvim',
-  --   event = 'BufReadPre',
-  --   opts = {
-  --     formatters_by_ft = {
-  --       cs = { 'csharpier' },
-  --       lua = { 'stylua' },
-  --       -- Conform will run multiple formatters sequentially
-  --       python = { 'isort', 'black' },
-  --       -- You can customize some of the format options for the filetype (:help conform.format)
-  --       rust = { 'rustfmt', lsp_format = 'fallback' },
-  --       -- Conform will run the first available formatter
-  --       javascript = { 'prettierd', 'prettier', stop_after_first = true },
-  --     },
-  --     formatters = {
-  --       csharpier = {
-  --         command = 'dotnet-csharpier',
-  --         args = { '--write-stdout' },
-  --       },
-  --     },
-  --   },
-  --   keys = {
-  --     {
-  --       '<leader>cf',
-  --       function()
-  --         require('conform').format()
-  --       end,
-  --       { desc = '[c]ode [f]ormat' },
-  --     },
-  --   },
-  -- },
   {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
@@ -271,7 +230,6 @@ return {
   },
   { 'rcarriga/nvim-dap-ui', version = '*' },
   { 'Tastyep/structlog.nvim', version = '*' },
-  { 'folke/lazydev.nvim', version = '*' },
   { 'jay-babu/mason-nvim-dap.nvim', version = '*' },
   {
     'stevearc/oil.nvim',
@@ -291,109 +249,58 @@ return {
       },
     },
   },
-  { 'folke/zen-mode.nvim', version = '*' },
   { '3rd/image.nvim', version = '*' },
-  {
-    'SuperBo/fugit2.nvim',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'nvim-lua/plenary.nvim',
-      {
-        'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
-        dependencies = { 'stevearc/dressing.nvim' },
-      },
-    },
-
-    config = function()
-      require('fugit2').setup {
-        libgit2_path = 'libgit2.so.1.1',
-      }
-    end,
-    cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph', 'Fugit2Blame' },
-    keys = {
-
-      {
-        '<leader>go',
-        function()
-          vim.cmd 'Fugit2'
-        end,
-        { desc = '[g]it' },
-      },
-      {
-        '<leader>gB',
-        function()
-          vim.cmd 'Fugit2Blame'
-        end,
-        { desc = 'Blame' },
-      },
-      -- {
-      --   '<leader>gl',
-      --   function()
-      --     vim.cmd 'Fugit2Graph'
-      --   end,
-      --   { desc = 'Log' },
-      -- },
-    },
-  },
+  -- {
+  --   'SuperBo/fugit2.nvim',
+  --   dependencies = {
+  --     'MunifTanjim/nui.nvim',
+  --     'nvim-tree/nvim-web-devicons',
+  --     'nvim-lua/plenary.nvim',
+  --     {
+  --       'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
+  --       dependencies = { 'stevearc/dressing.nvim' },
+  --     },
+  --   },
+  --
+  --   config = function()
+  --     require('fugit2').setup {
+  --       libgit2_path = 'libgit2.so.1.1',
+  --     }
+  --   end,
+  --   cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph', 'Fugit2Blame' },
+  --   keys = {
+  --
+  --     {
+  --       '<leader>go',
+  --       function()
+  --         vim.cmd 'Fugit2'
+  --       end,
+  --       { desc = '[g]it' },
+  --     },
+  --     {
+  --       '<leader>gB',
+  --       function()
+  --         vim.cmd 'Fugit2Blame'
+  --       end,
+  --       { desc = 'Blame' },
+  --     },
+  --     -- {
+  --     --   '<leader>gl',
+  --     --   function()
+  --     --     vim.cmd 'Fugit2Graph'
+  --     --   end,
+  --     --   { desc = 'Log' },
+  --     -- },
+  --   },
+  -- },
   {
     'echasnovski/mini.nvim',
     version = '*',
     config = function()
-      require('mini.statusline').setup()
+      -- require('mini.statusline').setup()
     end,
-  },
-  {
-    'echasnovski/mini.diff',
-    version = '*',
-    config = function()
-      require('fugit2').setup {
-        libgit2_path = 'libgit2.so.1.1',
-      }
-    end,
-    keys = {
-      {
-        '<leader>gp',
-        function()
-          require('mini.diff').toggle_overlay()
-        end,
-        { desc = 'preview toggle' },
-      },
-    },
   },
   { 'nvim-telescope/telescope.nvim' },
-  {
-    'rmagatti/auto-session', -- auto save session
-    config = function()
-      require('auto-session').setup {
-        log_level = 'error',
-        auto_session_suppress_dirs = {
-          '~/',
-          '~/Downloads',
-          '~/Documents',
-        },
-        auto_session_use_git_branch = true,
-        auto_save_enabled = true,
-      }
-    end,
-    keys = {
-      {
-        '<leader>qq',
-        function()
-          vim.cmd 'SessionDelete'
-          vim.cmd 'qq'
-        end,
-        { desc = 'Save Session' },
-      },
-      {
-        '<leader>sl',
-        function()
-          require('auto-session').load()
-        end,
-        { desc = 'Load Session' },
-      },
-    },
-  },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -401,87 +308,16 @@ return {
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
   },
-  -- {
-  --   'kylechui/nvim-surround', -- surround objects
-  --   config = function()
-  --     require('nvim-surround').setup {}
-  --   end,
-  -- },
-  { 'echasnovski/mini.surround', version = '*', config = true },
   {
     'stevearc/overseer.nvim',
     config = function()
       require 'config.overseer'
     end,
   },
-  -- {
-  --   'folke/flash.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {},
-  --   keys = {
-  --     {
-  --       's',
-  --       mode = { 'n', 'x', 'o' },
-  --       function()
-  --         require('flash').jump()
-  --       end,
-  --       desc = 'Flash',
-  --     },
-  --     {
-  --       'S',
-  --       mode = { 'n', 'x', 'o' },
-  --       function()
-  --         require('flash').treesitter()
-  --       end,
-  --       desc = 'Flash Treesitter',
-  --     },
-  --     {
-  --       'r',
-  --       mode = 'o',
-  --       function()
-  --         require('flash').remote()
-  --       end,
-  --       desc = 'Remote Flash',
-  --     },
-  --     {
-  --       'R',
-  --       mode = { 'o', 'x' },
-  --       function()
-  --         require('flash').treesitter_search()
-  --       end,
-  --       desc = 'Treesitter Search',
-  --     },
-  --     {
-  --       '<c-s>',
-  --       mode = { 'c' },
-  --       function()
-  --         require('flash').toggle()
-  --       end,
-  --       desc = 'Toggle Flash Search',
-  --     },
-  --   },
-  -- },
   {
     'max397574/better-escape.nvim',
     config = function()
       require('better_escape').setup()
-    end,
-  },
-  {
-    'ramilito/kubectl.nvim',
-    config = function()
-      require('kubectl').setup()
-    end,
-    keys = {
-      { '<leader>k', '<cmd>lua require("kubectl").open()<cr>', { noremap = true, silent = true } },
-    },
-  },
-  { --  colorscheme
-    'vague2k/vague.nvim',
-    config = function()
-      require('vague').setup {
-        transparent = true,
-      }
     end,
   },
   {
@@ -596,85 +432,28 @@ return {
     },
   },
   {
-    'mikavilpas/yazi.nvim',
-    event = 'VeryLazy',
+    'christoomey/vim-tmux-navigator',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+    },
     keys = {
-      -- 👇 in this section, choose your own keymappings!
-      {
-        '<leader>y',
-        '<cmd>Yazi<cr>',
-        desc = 'Open yazi at the current file',
-      },
-      {
-        -- Open in the current working directory
-        '<leader>cw',
-        '<cmd>Yazi cwd<cr>',
-        desc = "Open the file manager in nvim's working directory",
-      },
-      {
-        -- NOTE: this requires a version of yazi that includes
-        -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-        '<c-up>',
-        '<cmd>Yazi toggle<cr>',
-        desc = 'Resume the last yazi session',
-      },
-    },
-    opts = {
-      -- if you want to open yazi instead of netrw, see below for more info
-      open_for_directories = false,
-      keymaps = {
-        show_help = '<f1>',
-      },
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
   },
   {
-    'rcarriga/nvim-notify',
-    keys = {
-      {
-        '<leader>un',
-        function()
-          require('notify').dismiss { silent = true, pending = true }
-        end,
-        desc = 'Dismiss All Notifications',
-      },
-    },
-    opts = {
-      stages = 'static',
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { zindex = 100 })
-      end,
-    },
-  },
-  -- lazy.nvim
-  {
-    'GustavEikaas/easy-dotnet.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    'OXY2DEV/bars-N-lines.nvim',
+    -- No point in lazy loading this
+    lazy = false,
     config = function()
-      require('easy-dotnet').setup()
-    end,
-  },
-  {
-    'alexghergh/nvim-tmux-navigation',
-    config = function()
-      local nvim_tmux_nav = require 'nvim-tmux-navigation'
-
-      nvim_tmux_nav.setup {
-        disable_when_zoomed = true, -- defaults to false
-      }
-
-      vim.keymap.set('n', '<C-h>', nvim_tmux_nav.NvimTmuxNavigateLeft)
-      vim.keymap.set('n', '<C-j>', nvim_tmux_nav.NvimTmuxNavigateDown)
-      vim.keymap.set('n', '<C-k>', nvim_tmux_nav.NvimTmuxNavigateUp)
-      vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
-      vim.keymap.set('n', '<C-\\>', nvim_tmux_nav.NvimTmuxNavigateLastActive)
-      vim.keymap.set('n', '<C-CR>', nvim_tmux_nav.NvimTmuxNavigateNext)
+      require 'config.bars'
     end,
   },
 }
