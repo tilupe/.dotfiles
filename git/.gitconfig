@@ -1,6 +1,10 @@
 [user]
 	name = Timothy Pescatore
-	email = timothy.pescatore@digitecgalaxus.ch
+	email = timothy@pescatore.ch
+
+[includeIf "gitdir:~/Development/*"]
+	path = "~/Development/.gitconfig"
+
 [core]
 	autocrlf = input
   pager = delta
@@ -20,11 +24,15 @@
   indentHeuristic = true
   tool = nvimdiff
   renames = copies
+  context = 10
 [difftool "nvimdif"]
   cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
 
+[commit]
+  verbose = true
+
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
   tool =  nvimdiff4
   prompt = false
 
@@ -42,3 +50,6 @@
 	staash = stash --all
 [maintenance]
 	repo = /home/dev-notomoro/Development/Dg.Sales
+
+[help]
+  autocorrect = 10

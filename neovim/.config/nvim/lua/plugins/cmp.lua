@@ -50,8 +50,8 @@ return {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
+          { name = 'easy-dotnet' },
           { name = 'path' },
-        }, {
           { name = 'buffer' },
         }),
         formatting = {

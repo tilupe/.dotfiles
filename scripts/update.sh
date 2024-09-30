@@ -23,7 +23,7 @@ fi
 
 
 if command -v flatpak &>/dev/null; then
-  flatpak update
+  flatpak update -y
 fi
 
 if command -v snap &>/dev/null; then

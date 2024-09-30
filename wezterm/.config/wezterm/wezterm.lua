@@ -23,16 +23,15 @@ local direction_keys = {
 	l = "Right",
 }
 
-
 return {
 	font_size = 15,
 	cell_width = 0.90,
 	line_height = 1.0,
 	font = wezterm.font_with_fallback({
-		{ family = "CommitMonoCustom", weight = "Light" },
-		{ family = "JetBrainsMono NFM", weight = "Thin" },
-		{ family = "InconsolataGoNerdFont", weight = "Medium" },
-		"MesloLGS NF",
+		{ family = "CommitMonoCustom" },
+		--{ family = "JetBrainsMono NFM", weight = "Thin" },
+		--{ family = "InconsolataGoNerdFont", weight = "Medium" },
+		--"MesloLGS NF",
 	}),
 	font_rules = {},
 
@@ -102,8 +101,6 @@ return {
 	--},
 	leader = { key = "a", mods = "ALT", timeout_milliseconds = 1000 },
 	keys = {
-		-- { mods = "LEADER", key = "s", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		-- { mods = "LEADER", key = "v", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ mods = "LEADER", key = "m", action = wezterm.action.TogglePaneZoomState },
 		-- rotate panes
 		{
@@ -119,15 +116,6 @@ return {
 				mode = "SwapWithActive",
 			}),
 		},
-		-- split_nav("move", "h"),
-		-- split_nav("move", "j"),
-		-- split_nav("move", "k"),
-		-- split_nav("move", "l"),
-		-- split_nav("resize", "h"),
-		-- split_nav("resize", "j"),
-		-- split_nav("resize", "k"),
-		-- split_nav("resize", "l"),
-		-- activate copy mode or vim mode
 		{
 			key = "Enter",
 			mods = "LEADER",

@@ -100,4 +100,4 @@ end, { desc = '[r]eferences' })
 vim.keymap.set('n', 'gd', function()
   require('fzf-lua').lsp_definitions { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true }
 end, { desc = '[d]efinitions' })
---vim.keymap.set('v', '<C-f>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})
+vim.keymap.set('v', '<C-s>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})

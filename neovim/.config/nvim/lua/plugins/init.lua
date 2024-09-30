@@ -92,14 +92,24 @@ return {
     { '<leader>u', ':UndotreeToggle<cr>' },
   } }, -- see undo tree
   { 'echasnovski/mini.icons', version = false, config = true },
+  { 'echasnovski/mini.statusline', version = '*', config = function ()
+    require('mini.statusline').setup()
+  end },
   {
     'neanias/everforest-nvim',
     priority = 1000,
     config = function()
-      require('everforest').setup {
+      local everforest = require 'everforest'
+      everforest.setup {
         background = 'hard',
+        italics = true,
+        inlay_hints_background = 'dimmed',
+        disable_italic_comments = false,
+        diagnostic_line_highlight = true,
+        show_eob = false,
+        spell_foreground = true,
       }
-      vim.cmd [[colorscheme everforest]]
+      everforest.load()
     end,
   },
   { 'savq/melange-nvim' },
@@ -250,56 +260,6 @@ return {
     },
   },
   { '3rd/image.nvim', version = '*' },
-  -- {
-  --   'SuperBo/fugit2.nvim',
-  --   dependencies = {
-  --     'MunifTanjim/nui.nvim',
-  --     'nvim-tree/nvim-web-devicons',
-  --     'nvim-lua/plenary.nvim',
-  --     {
-  --       'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
-  --       dependencies = { 'stevearc/dressing.nvim' },
-  --     },
-  --   },
-  --
-  --   config = function()
-  --     require('fugit2').setup {
-  --       libgit2_path = 'libgit2.so.1.1',
-  --     }
-  --   end,
-  --   cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph', 'Fugit2Blame' },
-  --   keys = {
-  --
-  --     {
-  --       '<leader>go',
-  --       function()
-  --         vim.cmd 'Fugit2'
-  --       end,
-  --       { desc = '[g]it' },
-  --     },
-  --     {
-  --       '<leader>gB',
-  --       function()
-  --         vim.cmd 'Fugit2Blame'
-  --       end,
-  --       { desc = 'Blame' },
-  --     },
-  --     -- {
-  --     --   '<leader>gl',
-  --     --   function()
-  --     --     vim.cmd 'Fugit2Graph'
-  --     --   end,
-  --     --   { desc = 'Log' },
-  --     -- },
-  --   },
-  -- },
-  {
-    'echasnovski/mini.nvim',
-    version = '*',
-    config = function()
-      -- require('mini.statusline').setup()
-    end,
-  },
   { 'nvim-telescope/telescope.nvim' },
   {
     'windwp/nvim-autopairs',
@@ -449,11 +409,32 @@ return {
     },
   },
   {
-    'OXY2DEV/bars-N-lines.nvim',
-    -- No point in lazy loading this
-    lazy = false,
+    'davidmh/cspell.nvim',
+  },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'davidmh/cspell.nvim',
+    },
     config = function()
-      require 'config.bars'
+      local null_ls = require 'null-ls'
+
+      local cspell = require 'cspell'
+      null_ls.setup {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.completion.spell,
+        cspell.diagnostics,
+        cspell.code_actions,
+      }
     end,
   },
+  {
+    'GustavEikaas/easy-dotnet.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('easy-dotnet').setup()
+    end,
+  },
+  { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
+  { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
 }
