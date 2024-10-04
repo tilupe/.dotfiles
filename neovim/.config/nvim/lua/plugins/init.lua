@@ -56,6 +56,22 @@ return {
       default_args = {
         DiffviewOpen = { '--imply-local' },
       },
+      keymaps = {
+        file_panel = {
+          {
+            'n',
+            'cc',
+            [[<Cmd>call jobstart(["git", "commit"]) | au BufWinEnter * ++once wincmd J<CR>]],
+            { desc = 'Commit staged changes' },
+          },
+          {
+            'n',
+            'ca',
+            [[<Cmd>call jobstart(["git", "commit", "--amend"]) | au BufWinEnter * ++once wincmd J<CR>]],
+            { desc = 'Amend the last commit' },
+          },
+        },
+      },
     },
     keys = {
       { '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' } },
