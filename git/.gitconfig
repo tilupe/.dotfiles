@@ -31,8 +31,11 @@
 [commit]
   verbose = true
 
+[branch]
+  sort = -committerdate
+
 [merge]
-  conflictstyle = zdiff3
+  conflictStyle = diff3
   tool =  nvimdiff4
   prompt = false
 

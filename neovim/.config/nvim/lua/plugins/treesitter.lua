@@ -35,4 +35,5 @@ return {
       }
     end,
   },
+  { 'yorickpeterse/nvim-tree-pairs', config = true },
 }

@@ -26,7 +26,7 @@ export DOTNET_ROOT=/opt/dotnet
 export BROWSER="/usr/bin/firefox"
 export GPGKEY=
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$XDG_DATA_HOME/zplug/bin/:$HOME/.local/share/cargo/bin/:
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$XDG_DATA_HOME/zplug/bin/:$HOME/.local/share/cargo/bin/:/usr/local/go/bin/:
 
 # Cargo
 if command -v cargo >/dev/null 2>&1; then
