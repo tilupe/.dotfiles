@@ -98,7 +98,7 @@ opt.fillchars = 'diff:╱'
 opt.diffopt = 'linematch:150,context:5,closeoff,algorithm:histogram'
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = 'ö'
 vim.g.have_nerd_font = true
 
 opt.list = true

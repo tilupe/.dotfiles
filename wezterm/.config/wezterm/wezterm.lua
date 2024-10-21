@@ -24,12 +24,13 @@ local direction_keys = {
 }
 
 return {
-	font_size = 15,
-	cell_width = 0.90,
-	line_height = 1.0,
+	font_size = 17,
+	cell_width = 0.95,
+	--line_height = 0.95,
 	font = wezterm.font_with_fallback({
-		{ family = "CommitMonoCustom" },
-		--{ family = "JetBrainsMono NFM", weight = "Thin" },
+		{ family = "Iosevka Term" },
+		{ family = "CommitMono" },
+		--{ family = "JetBrainsMono NFM"},
 		--{ family = "InconsolataGoNerdFont", weight = "Medium" },
 		--"MesloLGS NF",
 	}),
@@ -48,7 +49,7 @@ return {
 	warn_about_missing_glyphs = false,
 
 	window_decorations = "NONE",
-	window_background_opacity = 0.93,
+	window_background_opacity = 0.96,
 	window_padding = {
 		left = 0,
 		right = 0,

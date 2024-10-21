@@ -1,154 +1,138 @@
-export DOTFILES="$HOME/.dotfiles"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_DATA_HOME="$HOME/.local/share"
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export GOPATH="$XDG_DATA_HOME"/go
-export GOBIN="$GOPATH"/bin
-export ZPLUG_HOME="$XDG_DATA_HOME"/zplug
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
-export NVM_DIR="$XDG_DATA_HOME"/nvm
-export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
-export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export ZAUTOJUMP="$XDG_DATA_HOME/autojump/autojump.txt "
-export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/.terraformrc"
-export POETRY_HOME="$XDG_DATA_HOME/poetry"
-# TODO do I still need that? export JIRA_API_TOKEN=$(cat ~/.config/secrets/jira_token)
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-export DOTNET_ROOT=/opt/dotnet
-export BROWSER="/usr/bin/firefox"
-export GPGKEY=
+#!/usr/bin/env zsh
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/share/nvim/mason/bin/:$XDG_DATA_HOME/zplug/bin/:$HOME/.local/share/cargo/bin/:/usr/local/go/bin/:
+setopt AUTO_CD # Go to folder path without using cd.
 
-# Cargo
-if command -v cargo >/dev/null 2>&1; then
-  export CARGO_HOME="$XDG_DATA_HOME"/cargo
-  export CARGO_TARGET_DIR="$XDG_DATA_HOME/cargo_target"
+setopt AUTO_PUSHD        # Push the old directory onto the stack on cd.
+setopt PUSHD_IGNORE_DUPS # Do not store duplicates in the stack.
+setopt PUSHD_SILENT      # Do not print the directory stack after pushd or popd.
 
-  alias cargi='f() { cargo install "\$1" && echo "\$1" >> ~/.dotfiles/rust/cargo_packages; unset -f f; }; f'
+setopt CORRECT       # Spelling correction
+setopt CDABLE_VARS   # Change directory to a path stored in a variable.
+setopt EXTENDED_GLOB # Use extended globbing syntax.
+
+# +---------+
+# | HISTORY |
+# +---------+
+
+setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY          # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS       # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS   # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY            # Do not execute immediately upon history expansion.
+
+# +--------+
+# | COLORS |
+# +--------+
+
+# Override colors
+eval "$(dircolors -b $ZDOTDIR/dircolors)"
+
+# +---------+
+# | ALIASES |
+# +---------+
+
+source $DOTFILES/aliases/aliases
+
+# +--------------+
+# | WORK-CONFIG |
+# +--------------+
+
+if [[ -f $WORKRC ]]; then
+  source $WORKRC
 fi
 
-# User configuration
-source "$ZPLUG_HOME"/init.zsh
 
-zplug "woefe/wbase.zsh" #Faster startup
-zplug "jeffreytse/zsh-vi-mode"
-zplug "zsh-users/zsh-completions"
-# completion based on history
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
-# Then, source plugins and add commands to $PATH
-zplug load
+# +--------------+
+# | VIMMODE |
+# +--------------+
+bindkey -v
+export KEYTIMEOUT=1
+cursor_mode() {
+    # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
+    cursor_block='\e[2 q'
+    cursor_beam='\e[6 q'
 
-# Should be called before compinit
-zmodload zsh/complist
+    function zle-keymap-select {
+        if [[ ${KEYMAP} == vicmd ]] ||
+            [[ $1 = 'block' ]]; then
+            echo -ne $cursor_block
+        elif [[ ${KEYMAP} == main ]] ||
+            [[ ${KEYMAP} == viins ]] ||
+            [[ ${KEYMAP} = '' ]] ||
+            [[ $1 = 'beam' ]]; then
+            echo -ne $cursor_beam
+        fi
+    }
 
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste up-line-or-search down-line-or-search expand-or-complete accept-line push-line-or-edit)
+    zle-line-init() {
+        echo -ne $cursor_beam
+    }
 
-# Use hjlk in menu selection (during completion)
-# Doesn't work well with interactive mode
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-
-bindkey -M menuselect '^xg' clear-screen
-bindkey -M menuselect '^xi' vi-insert                     # Insert
-bindkey -M menuselect '^xh' accept-and-hold               # Hold
-bindkey -M menuselect '^xn' accept-and-infer-next-history # Next
-bindkey -M menuselect '^xu' undo                          # Undo
-
-_comp_options+=(globdots) # With hidden files
-
-## ENVIRONEMENT VARIALES
-export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
-export EDITOR=nvim
-
-# custom functions
-function yy() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
+    zle -N zle-keymap-select
+    zle -N zle-line-init
 }
 
-if command -v eza >/dev/null 2>&1; then
-  alias l='eza --icons --git --no-user'
-  alias ll='eza -l --icons --git -a'
-  alias lt='eza --tree --level=2 --long --icons --git'
-else
-  alias l='ls'
-  alias ll='ls -la'
-fi
+cursor_mode
 
-if command -v fdfind >/dev/null 2>&1; then
-  alias fd='fdfind'
-fi
+# Text opbjects
+autoload -Uz select-bracketed select-quoted
+zle -N select-quoted
+zle -N select-bracketed
+for km in viopp visual; do
+  bindkey -M $km -- '-' vi-up-line-or-history
+  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
+    bindkey -M $km $c select-quoted
+  done
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $km $c select-bracketed
+  done
+done
 
-if command -v bat >/dev/null 2>&1; then
-  alias cat='bat --style=plain'
-fi
+# Menuselction
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
-if command -v fzf >/dev/null 2>&1; then
-  source <(fzf --zsh)
 
-  export FZF_DEFAULT_OPTS='-i --height=50%'
-  bindkey -s '^v' "fzf --preview 'bat --color=always {}' \n"
+## Edit command line in editor; run `v` in normal mode to edit the command line in vim
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
-fi
+## Surround
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -M vicmd cs change-surround
+bindkey -M vicmd ds delete-surround
+bindkey -M vicmd ys add-surround
+bindkey -M visual S add-surround
 
-# Swap <Esc> and <Capslock> for better vim experience on foreign keyboards
-alias swapesc='/usr/bin/setxkbmap -option "caps:swapescape"'
-alias v="nvim"
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-alias oscpvpn="sudo -b openvpn --config ~/projects/offsec/universal.ovpn "
-alias cd..="cd .."
-alias cd2="cd ../.."
-alias cd3="cd ../../.."
-alias cd4="cd ../../../.."
-alias pbcopy='xsel --input --clipboard'
-alias pbpaste='xsel --output --clipboard'
-alias ip='ip -c'
-
+# +------------+ 
+# | Extensions |
+# +------------+
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 bindkey -s '^f' "$HOME/.config/tmux/tmux-sessionizer\n"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-export WORKRC="$HOME/.config/zsh/work.zsh"
-# Work specific configs
-if [[ -f $WORKRC ]]; then
-  source $WORKRC
-fi
-
-if command -v zellij >/dev/null 2>&1; then
-  export ZELLIJ_AUTO_ATTACH=0
-  alias ze="zellij"
-fi
-
 # Created by `pipx` on 2023-04-18 06:15:55
-export PATH="$PATH:/home/$USER/.local/bin"
-export PATH="$PATH:/opt/mssql-tools18/bin"
 
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
-fi
+autoload -U compinit
+compinit
 
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init zsh)"
-fi
+_comp_options+=(globdots) # With hidden files
+source $ZDOTDIR/completion.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

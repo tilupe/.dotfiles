@@ -10,6 +10,13 @@ autocmd('TextYankPost', {
   pattern = '*',
 })
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {"*.cshtml", "*.razor"},
+  callback = function()
+    vim.bo.filetype = "html.cshtml.razor"
+  end
+})
+
 -- local format_group = vim.api.nvim_create_augroup('Format', { clear = true })
 -- autocmd('BufWritePre', {
 --   callback = function()

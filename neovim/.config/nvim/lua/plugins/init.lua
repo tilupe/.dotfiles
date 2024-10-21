@@ -3,8 +3,8 @@ return {
   { 'nvim-neotest/nvim-nio' },
   {
     'seblj/roslyn.nvim',
-    config = function()
-      require('roslyn').setup {
+    ft = "cs",
+    opts = {
         config = {
           settings = {
             ['csharp|inlay_hints'] = {
@@ -38,49 +38,58 @@ return {
           },
         },
         filewatching = true,
-      }
-    end,
-    lazy = false,
+      },
     keys = {
       {
         '<leader>lt',
         function()
-          vim.cmd 'CSTarget'
+          vim.cmd 'Roslyn target'
         end,
       },
     },
   },
   {
     'sindrets/diffview.nvim',
-    opts = {
-      default_args = {
-        DiffviewOpen = { '--imply-local' },
-      },
-      keymaps = {
-        file_panel = {
-          {
-            'n',
-            'cc',
-            [[<Cmd>call jobstart(["git", "commit"]) | au BufWinEnter * ++once wincmd J<CR>]],
-            { desc = 'Commit staged changes' },
-          },
-          {
-            'n',
-            'ca',
-            [[<Cmd>call jobstart(["git", "commit", "--amend"]) | au BufWinEnter * ++once wincmd J<CR>]],
-            { desc = 'Amend the last commit' },
+    config = function()
+      require('diffview').setup {
+        default_args = {
+          DiffviewOpen = { '--imply-local' },
+        },
+        keymaps = {
+          file_panel = {
+            {
+              'n',
+              'cc',
+              function()
+                vim.ui.input({ prompt = 'Commit message: ' }, function(msg)
+                  if not msg then
+                    return
+                  end
+                  local results = vim.system({ 'git', 'commit', '-m', msg }, { text = true }):wait()
+
+                  if results.code ~= 0 then
+                    vim.notify(
+                      'Commit failed with the message: \n' .. vim.trim(results.stdout .. '\n' .. results.stderr),
+                      vim.log.levels.ERROR,
+                      { title = 'Commit' }
+                    )
+                  else
+                    vim.notify(results.stdout, vim.log.levels.INFO, { title = 'Commit' })
+                  end
+                end)
+              end,
+            },
           },
         },
-      },
-    },
-    keys = {
-      { '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' } },
-      { '<leader>gDh', '<CMD>DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>', { desc = '[D]iffview commit [h]istory' } },
-      { '<leader>gq', '<CMD>DiffviewClose<CR>', { desc = '[D]iffview Close' } },
-      { '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' } },
-      { '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' } },
-      { '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' } },
-    },
+      }
+
+      vim.keymap.set('n', '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' } )
+      vim.keymap.set('n', '<leader>gDh', '<CMD>DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>', { desc = '[D]iffview commit [h]istory' } )
+      vim.keymap.set('n', '<leader>gq', '<CMD>DiffviewClose<CR>', { desc = '[D]iffview Close' } )
+      vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' } )
+      vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' } )
+      vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' } )
+    end,
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -422,5 +431,12 @@ return {
     'zenbones-theme/zenbones.nvim',
     dependencies = 'rktjmp/lush.nvim',
     priority = 1100,
+  },
+  {
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup({
+      });
+    end
   },
 }

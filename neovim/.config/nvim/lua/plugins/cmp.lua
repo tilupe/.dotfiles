@@ -8,7 +8,8 @@ return {
   },
   { 'hrsh7th/cmp-nvim-lsp' },
   {
-    'hrsh7th/nvim-cmp',
+    'iguanacucumber/magazine.nvim',
+    name = 'nvim-cmp', -- Otherwise highlighting gets messed up
     version = false, -- last release is way too old
     event = 'InsertEnter',
     dependencies = {
@@ -48,12 +49,12 @@ return {
             fallback()
           end,
         },
-        sources = cmp.config.sources({
+        sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'easy-dotnet' },
           { name = 'path' },
           { name = 'buffer' },
-        }),
+        },
         formatting = {
           format = function(entry, item)
             if MiniIcons.get('lsp', item.kind) then
