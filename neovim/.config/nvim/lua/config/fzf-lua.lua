@@ -16,12 +16,24 @@ fzf.setup {
 
   winopts = {
     hl = { normal = 'Pmenu' },
-    split = 'belowright new',
+    --split = 'belowright new',
     border = 'none',
     -- backddrop = 10, Todo check what that is
     preview = {
+      -- default = 'bat',
       --border = 'noborder',
     },
+  },
+  grep = {
+    rg_glob = true,
+    -- first returned string is the new search query
+    -- second returned string are (optional) additional rg flags
+    -- @return string, string?
+    rg_glob_fn = function(query, opts)
+      local regex, flags = query:match '^(.-)%s%-%-(.*)$'
+      -- If no separator is detected will return the original query
+      return (regex or query), flags
+    end,
   },
   fzf_opts = {
     ['--highlight-line'] = true,
@@ -74,13 +86,13 @@ fzf.setup {
 }
 
 vim.keymap.set('n', '<leader><space>', function()
-  vim.cmd 'FzfLua files'
+  fzf.files({ winopts = { split = 'botright new'}})
 end, { desc = 'files' })
 vim.keymap.set('n', '<leader>ff', function()
   vim.cmd 'FzfLua'
 end, { desc = '[f]zfLua' })
 vim.keymap.set('n', '<leader>fs', function()
-  vim.cmd 'FzfLua live_grep_native'
+  vim.cmd 'FzfLua live_grep_glob'
 end, { desc = '[s]tring' })
 vim.keymap.set('n', '<leader>fr', function()
   vim.cmd 'FzfLua resume'
@@ -100,4 +112,6 @@ end, { desc = '[r]eferences' })
 vim.keymap.set('n', 'gd', function()
   require('fzf-lua').lsp_definitions { sync = true, ignore_current_line = true, includeDeclaration = false, jump_to_single_result = true }
 end, { desc = '[d]efinitions' })
-vim.keymap.set('v', '<C-s>', function() vim.cmd 'FzfLua grep_visual' end, { desc = 'Resume'})
+vim.keymap.set('v', '<C-s>', function()
+  vim.cmd 'FzfLua grep_visual'
+end, { desc = 'Resume' })
