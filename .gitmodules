@@ -4,3 +4,6 @@
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/plugins/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh/plugins/zsh-kubectl-completion"]
+	path = zsh/plugins/zsh-kubectl-completion
+	url = git@github.com:nnao45/zsh-kubectl-completion.git
