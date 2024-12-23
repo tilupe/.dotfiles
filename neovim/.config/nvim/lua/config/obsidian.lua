@@ -2,7 +2,7 @@ local opts = {
   workspaces = {
     {
       name = 'notes',
-      path = '~/Documents/notes',
+      path = '~/private/notes',
     },
   },
   daily_notes = {
@@ -10,11 +10,10 @@ local opts = {
     folder = 'daily-notes',
     date_format = '%Y-%m-%d',
     default_tags = { 'daily-note' },
-    template = '~/Documents/notes/resources/templates/obsidian/daily_note.md',
+    --template = '~/private/notes/resources/templates/obsidian/daily_note.md',
   },
   log_level = vim.log.levels.INFO,
   completion = {
-    nvim_cmp = true,
     min_chars = 2,
   },
   mappings = {
