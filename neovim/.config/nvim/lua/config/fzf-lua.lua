@@ -15,7 +15,6 @@ fzf.setup {
   end,
 
   winopts = {
-    hl = { normal = 'Pmenu' },
     --split = 'belowright new',
     border = 'none',
     -- backddrop = 10, Todo check what that is
