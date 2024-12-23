@@ -2,53 +2,6 @@ return {
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-neotest/nvim-nio' },
   {
-    'seblj/roslyn.nvim',
-    ft = "cs",
-    opts = {
-        config = {
-          settings = {
-            ['csharp|inlay_hints'] = {
-              csharp_enable_inlay_hints_for_implicit_object_creation = true,
-              csharp_enable_inlay_hints_for_implicit_variable_types = true,
-              csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-              csharp_enable_inlay_hints_for_types = true,
-              dotnet_enable_inlay_hints_for_indexer_parameters = true,
-              dotnet_enable_inlay_hints_for_literal_parameters = true,
-              dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-              dotnet_enable_inlay_hints_for_other_parameters = true,
-              dotnet_enable_inlay_hints_for_parameters = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-            },
-            ['csharp|code_lens'] = {
-              dotnet_enable_references_code_lens = true,
-            },
-            ['csharp|symbol_search'] = {
-              dotnet_search_reference_assemblies = true,
-            },
-            ['csharp|completion'] = {
-              dotnet_show_completion_items_from_unimported_namespaces = true,
-              dotnet_show_name_completion_suggestions = true,
-            },
-            ['csharp|background_analysis'] = {
-              dotnet_analyzer_diagnostics_scope = 'fullSolution',
-              dotnet_compiler_diagnostics_scope = 'fullSolution',
-            },
-          },
-        },
-        filewatching = true,
-      },
-    keys = {
-      {
-        '<leader>lt',
-        function()
-          vim.cmd 'Roslyn target'
-        end,
-      },
-    },
-  },
-  {
     'sindrets/diffview.nvim',
     config = function()
       require('diffview').setup {
@@ -104,14 +57,6 @@ return {
       { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'prev-hunk' } },
       { '<leader>gb', '<CMD>Gitsigns blame<CR>', { desc = 'blame' } },
     },
-  },
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require 'config.harpoon'
-    end,
   },
   { 'mbbill/undotree', lazy = true, cmd = 'UndotreeToggle', keys = {
     { '<leader>u', ':UndotreeToggle<cr>' },
@@ -251,17 +196,8 @@ return {
       },
     },
   },
-  { 'neovim/nvim-lspconfig', version = '*' },
-  { 'williamboman/mason.nvim', version = '*' },
-  {
-    'williamboman/mason-lspconfig.nvim',
-    config = function()
-      require 'config.mason-lspconfig'
-    end,
-  },
   { 'rcarriga/nvim-dap-ui', version = '*' },
   { 'Tastyep/structlog.nvim', version = '*' },
-  { 'jay-babu/mason-nvim-dap.nvim', version = '*' },
   {
     'stevearc/oil.nvim',
     version = '*',
@@ -421,9 +357,21 @@ return {
   {
     'GustavEikaas/easy-dotnet.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    ft = "cs",
     config = function()
       require('easy-dotnet').setup()
     end,
+    keys = {
+      { '<leader>xr', function ()
+        require"easy-dotnet".run_profile()
+      end, { desc = '[r]un' } },
+      { '<leader>xb', function ()
+        require"easy-dotnet".build_quickfix()
+      end, { desc = '[b]uild' } },
+      { '<leader>xs', function ()
+        require"easy-dotnet".restore()
+      end, { desc = 'Re[s]tor' } },
+    },
   },
   { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
   { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
@@ -448,4 +396,13 @@ return {
       require 'config.fzf-lua'
     end,
   },
+  {
+    'freddiehaddad/feline.nvim',
+    opts = {},
+    config = function(_, opts)
+        require('feline').setup()
+        require('feline').winbar.setup()       -- to use winbar
+        require('feline').statuscolumn.setup() -- to use statuscolumn
+    end
+},
 }
