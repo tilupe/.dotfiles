@@ -17,15 +17,6 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
   end
 })
 
--- local format_group = vim.api.nvim_create_augroup('Format', { clear = true })
--- autocmd('BufWritePre', {
---   callback = function()
---     vim.cmd 'Neoformat'
---   end,
---   group = format_group,
---   pattern = '*',
--- })
-
 local lsp_setup = vim.api.nvim_create_augroup('LspSetup', { clear = true })
 autocmd('LspAttach', {
   callback = function()

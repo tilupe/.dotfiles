@@ -12,8 +12,9 @@ keybinds {
         bind "Alt s" { SwitchToMode "Search"; }
         bind "Alt S" { SwitchToMode "EnterSearch"; }
         bind "Alt r" { SwitchToMode "Resize"; }
-        bind "Alt n" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "Alt n" { NewTab; SwitchToMode "Normal"; }
         bind "Alt v" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "Alt c" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "Alt u" { SwitchToMode "Locked"; }
         bind "Alt e" { SwitchToMode "Scroll"; }
         bind "Alt h" { MoveFocusOrTab "Left"; SwitchToMode "Normal"; }

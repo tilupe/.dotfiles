@@ -7,7 +7,7 @@ return {
   --   end,
   -- },
   { 'bullets-vim/bullets.vim' },
- -- { 'jghauser/follow-md-links.nvim' },
+  -- { 'jghauser/follow-md-links.nvim' },
   {
     'epwalsh/obsidian.nvim',
     version = '*',
@@ -25,7 +25,9 @@ return {
     lazy = false, -- Recommended
     -- ft = "markdown" -- If you decide to lazy-load anyway
     opts = {
-      hybrid_modes = { "n", "i" },
+      preview = {
+        hybrid_modes = { 'n', 'i' },
+      },
     },
 
     dependencies = {

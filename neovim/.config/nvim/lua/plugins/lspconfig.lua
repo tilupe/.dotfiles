@@ -3,19 +3,18 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        'folke/lazydev.nvim',
+        ft = 'lua', -- only load on lua files
         opts = {
           library = {
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
           },
         },
       },
-
     },
     version = '*',
     config = function()
-      local lspconfig = require "lspconfig"
+      local lspconfig = require 'lspconfig'
       lspconfig.lua_ls.setup {}
       lspconfig.nixd.setup {}
       lspconfig.gopls.setup {}
@@ -23,12 +22,11 @@ return {
       lspconfig.yamlls.setup {}
       lspconfig.superhtml.setup {}
       lspconfig.sqls.setup {}
-
-    end
+    end,
   },
   {
     'seblj/roslyn.nvim',
-    ft = "cs",
+    ft = 'cs',
     opts = {
       config = {
         settings = {

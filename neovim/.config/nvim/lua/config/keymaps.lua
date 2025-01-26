@@ -30,14 +30,6 @@ vim.keymap.set('n', '<right>', ':vertical resize +2<cr>')
 vim.keymap.set('n', '<left>', ':vertical resize -2<cr>')
 
 vim.keymap.set('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'Quit all' })
-vim.keymap.set('n', '<leader>bw', function()
-  vim.cmd 'Neoformat'
-  vim.cmd 'update!'
-end, { desc = 'Save' })
-vim.keymap.set('n', '<leader>ba', function()
-  vim.cmd 'Neoformat'
-  vim.cmd 'wa'
-end, { desc = 'Save' })
 vim.keymap.set('n', '<leader>bd', '<CMD>bdelete<CR>', { desc = 'Buffer Delete' })
 vim.keymap.set('n', '<leader>bx', '<C-W>c', { desc = 'Buffer Close' })
 

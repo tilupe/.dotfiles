@@ -36,12 +36,18 @@ return {
         },
       }
 
-      vim.keymap.set('n', '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = '[d]iffview Open' } )
-      vim.keymap.set('n', '<leader>gDh', '<CMD>DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>', { desc = '[D]iffview commit [h]istory' } )
-      vim.keymap.set('n', '<leader>gq', '<CMD>DiffviewClose<CR>', { desc = '[D]iffview Close' } )
-      vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'File [H]istory' } )
-      vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' } )
-      vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' } )
+      vim.keymap.set('n', '<leader>gd', '<CMD>DiffviewOpen<CR>', { desc = 'Diffview open' })
+      vim.keymap.set(
+        'n',
+        '<leader>gDh',
+        '<CMD>DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>',
+        { desc = '[D]iffview commit [h]istory' }
+      )
+      vim.keymap.set('n', '<leader>gm', '<CMD>DiffviewOpen origin/master...HEAD<CR>', { desc = 'Master [D]' })
+      vim.keymap.set('n', '<leader>gq', '<CMD>DiffviewClose<CR>', { desc = 'Quit [D]' })
+      vim.keymap.set('n', '<leader>gh', '<CMD>DiffviewFileHistory %<CR>', { desc = 'history' })
+      vim.keymap.set('n', '<leader>gH', '<CMD>DiffviewFileHistory<CR>', { desc = 'All File [H]istory' })
+      vim.keymap.set('n', '<leader>gR', '<CMD>DiffviewRefresh<CR>', { desc = 'All File [H]istory' })
     end,
   },
   {
@@ -50,17 +56,22 @@ return {
     config = true,
     keys = {
 
-      { '<leader>gs', '<CMD>Gitsigns stage_hunk<CR>', { desc = '[s]tage hunk' } },
-      { '<leader>gu', '<CMD>Gitsigns undo_stage_hunk<CR>', { desc = '[u]ndo-stage hunk' } },
-      { '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', { desc = '[r]eset-hunk' } },
-      { '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', { desc = 'next-hunk' } },
-      { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'prev-hunk' } },
+      { '<leader>gs', '<CMD>Gitsigns stage_hunk<CR>', { desc = 'stage hunk' } },
+      { '<leader>gu', '<CMD>Gitsigns undo_stage_hunk<CR>', { desc = 'undo-stage hunk' } },
+      { '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', { desc = 'reset-hunk' } },
+      { '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', { desc = 'down-hunk' } },
+      { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'up-hunk' } },
       { '<leader>gb', '<CMD>Gitsigns blame<CR>', { desc = 'blame' } },
     },
   },
-  { 'mbbill/undotree', lazy = true, cmd = 'UndotreeToggle', keys = {
-    { '<leader>u', ':UndotreeToggle<cr>' },
-  } }, -- see undo tree
+  {
+    'mbbill/undotree',
+    lazy = true,
+    cmd = 'UndotreeToggle',
+    keys = {
+      { '<leader>u', ':UndotreeToggle<cr>' },
+    },
+  }, -- see undo tree
   {
     'neanias/everforest-nvim',
     priority = 1000,
@@ -160,11 +171,45 @@ return {
     },
   },
   {
+    'stevearc/conform.nvim',
+    config = function()
+      require('conform').setup {
+        formatters = {
+          csharpier = { command = 'dotnet', args = { 'csharpier', '--write-stdout' } },
+        },
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          go = { 'goimports', 'gofmt' },
+          python = { 'isort', 'black' },
+          rust = { 'rustfmt', lsp_format = 'fallback' },
+          javascript = { 'prettierd', 'prettier', stop_after_first = true },
+          cs = { 'csharpier' },
+          nix = { 'nixfmt' },
+          json = { 'jq' },
+        },
+        default_format_opts = {
+          lsp_format = 'fallback',
+        },
+      }
+
+      vim.keymap.set('n', '<leader>bw', function()
+        require('conform').format()
+        vim.cmd 'update!'
+      end, { desc = 'Save' })
+      vim.keymap.set('n', '<leader>ba', function()
+        require('conform').format()
+        vim.cmd 'wa'
+      end, { desc = 'Save' })
+
+      vim.keymap.set('n', '<leader>cf', function()
+        require('conform').format()
+      end, { desc = 'Format' })
+    end,
+  },
+  {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
-    keys = {
-      { '<leader>cf', '<CMD>Neoformat<CR>', { desc = '[c]ode [f]ormat' } },
-    },
+    keys = {},
   },
   {
     'L3MON4D3/LuaSnip',
@@ -177,24 +222,21 @@ return {
   { 'nvim-tree/nvim-web-devicons', version = '*' },
   {
     'NeogitOrg/neogit',
-    opts = {
-      kind = 'auto',
-      graph_style = 'unicode',
-      disable_commit_confirmation = false,
-      integrations = {
-        diffview = true,
-      },
-    },
-    keys = {
-      {
-        '<leader>gg',
-        function()
-          local neogit = require 'neogit'
-          return neogit.open { kind = 'replace' }
-        end,
-        { desc = 'neo[g]it' },
-      },
-    },
+    config = function()
+      require('neogit').setup {
+        kind = 'auto',
+        graph_style = 'unicode',
+        disable_commit_confirmation = false,
+        integrations = {
+          diffview = true,
+        },
+      }
+
+      vim.keymap.set('n', '<leader>gg', function()
+        local neogit = require 'neogit'
+        return neogit.open { kind = 'replace' }
+      end, { desc = 'Neogit' })
+    end,
   },
   { 'rcarriga/nvim-dap-ui', version = '*' },
   { 'Tastyep/structlog.nvim', version = '*' },
@@ -357,20 +399,33 @@ return {
   {
     'GustavEikaas/easy-dotnet.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-    ft = "cs",
+    ft = 'cs',
     config = function()
-      require('easy-dotnet').setup()
+      local dotnet = require 'easy-dotnet'
+      dotnet.setup {}
     end,
     keys = {
-      { '<leader>xr', function ()
-        require"easy-dotnet".run_profile()
-      end, { desc = '[r]un' } },
-      { '<leader>xb', function ()
-        require"easy-dotnet".build_quickfix()
-      end, { desc = '[b]uild' } },
-      { '<leader>xs', function ()
-        require"easy-dotnet".restore()
-      end, { desc = 'Re[s]tor' } },
+      {
+        '<leader>xr',
+        function()
+          require('easy-dotnet').run_profile()
+        end,
+        { desc = '[r]un' },
+      },
+      {
+        '<leader>xb',
+        function()
+          require('easy-dotnet').build_quickfix()
+        end,
+        { desc = '[b]uild' },
+      },
+      {
+        '<leader>xs',
+        function()
+          require('easy-dotnet').restore()
+        end,
+        { desc = 'Re[s]tor' },
+      },
     },
   },
   { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
@@ -383,9 +438,8 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     config = function()
-      require('grug-far').setup({
-      });
-    end
+      require('grug-far').setup {}
+    end,
   },
   {
     'ibhagwan/fzf-lua',
@@ -397,12 +451,13 @@ return {
     end,
   },
   {
-    'freddiehaddad/feline.nvim',
-    opts = {},
-    config = function(_, opts)
-        require('feline').setup()
-        require('feline').winbar.setup()       -- to use winbar
-        require('feline').statuscolumn.setup() -- to use statuscolumn
-    end
-},
+    {
+      'folke/snacks.nvim',
+      opts = {
+        statuscolumn = {},
+        bigfile = {},
+        input = {},
+      },
+    },
+  },
 }

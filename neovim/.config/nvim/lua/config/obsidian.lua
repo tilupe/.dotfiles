@@ -2,7 +2,7 @@ local opts = {
   workspaces = {
     {
       name = 'notes',
-      path = '~/private/notes',
+      path = '~/private/documents/notes',
     },
   },
   daily_notes = {
