@@ -213,6 +213,9 @@ return {
   },
   {
     'L3MON4D3/LuaSnip',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+    },
     version = '*',
     config = function()
       require 'config.luasnip'
@@ -398,11 +401,13 @@ return {
   },
   {
     'GustavEikaas/easy-dotnet.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'ibhagwan/fzf-lua' },
     ft = 'cs',
     config = function()
       local dotnet = require 'easy-dotnet'
-      dotnet.setup {}
+      dotnet.setup {
+        picker = 'fzf',
+      }
     end,
     keys = {
       {
