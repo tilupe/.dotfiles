@@ -1,8 +1,0 @@
-layout {
-  pane cwd="~/Development/Dg.Sales"{
-  }
-    pane {
-      borderless true
-      plugin location="zellij:status-bar"
-    }
-}

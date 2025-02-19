@@ -65,11 +65,11 @@ local opts = {
   ui = {
     enable = false,
   },
-  templates = {
-    folder = 'resources/templates/obsidian',
-    date_format = '%Y-%m-%d-%a',
-    time_format = '%H:%M',
-  },
+  -- templates = {
+  --   folder = 'resources/templates/obsidian',
+  --   date_format = '%Y-%m-%d-%a',
+  --   time_format = '%H:%M',
+  -- },
 }
 
 require('obsidian').setup(opts)

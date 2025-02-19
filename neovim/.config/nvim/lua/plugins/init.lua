@@ -59,8 +59,8 @@ return {
       { '<leader>gs', '<CMD>Gitsigns stage_hunk<CR>', { desc = 'stage hunk' } },
       { '<leader>gu', '<CMD>Gitsigns undo_stage_hunk<CR>', { desc = 'undo-stage hunk' } },
       { '<leader>gr', '<CMD>Gitsigns reset_hunk<CR>', { desc = 'reset-hunk' } },
-      { '<leader>gj', '<CMD>Gitsigns next_hunk<CR>', { desc = 'down-hunk' } },
-      { '<leader>gk', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'up-hunk' } },
+      { ']g', '<CMD>Gitsigns next_hunk<CR>', { desc = 'down-hunk' } },
+      { '[g', '<CMD>Gitsigns prev_hunk<CR>', { desc = 'up-hunk' } },
       { '<leader>gb', '<CMD>Gitsigns blame<CR>', { desc = 'blame' } },
     },
   },
@@ -69,9 +69,70 @@ return {
     lazy = true,
     cmd = 'UndotreeToggle',
     keys = {
-      { '<leader>u', ':UndotreeToggle<cr>' },
+      { '<leader>U', ':UndotreeToggle<cr>' },
     },
   }, -- see undo tree
+  {
+    'oonamo/ef-themes.nvim',
+    config = function()
+      require('ef-themes').setup {
+        light = 'ef-spring', -- Ef-theme to select for light backgrounds
+        dark = 'ef-dream', -- Ef-theme to select for dark backgrounds
+        transparent = false,
+        styles = {
+          -- Set specific styles for specific highlight groups
+          -- Can be any valid attr-list value. See `:h nvim_set_hl`
+          comments = { italic = true },
+          keywords = { bold = true },
+          functions = {},
+          variables = {},
+
+          diagnostic = 'default', -- Can be "full"
+          pickers = 'default', -- Can be "borderless"
+        },
+
+        modules = {
+          -- Enable/Disable highlights for a module
+          -- See `h: EfThemes-modules` for the list of available modules
+          blink = true,
+          fzf = true,
+          mini = true,
+          semantic_tokens = true,
+          snacks = false,
+          treesitter = true,
+        },
+
+        --- Override any color from the ef-theme
+        ---@param colors Ef-Theme
+        ---@param name string
+        on_colors = function(colors, name) end,
+
+        --- Override specific highlights
+        ---@param highlights table
+        ---@param colors Ef-Theme
+        ---@param name string
+        ---@return table
+        on_highlights = function(highlights, colors, name)
+          -- Returns a table of highlights
+          -- return {
+          --   Normal = { fg = colors.fg_alt, bg = colors.bg_inactive }
+          --   ObscurePlugin = { fg = colors.yellow_faint }
+          -- }
+        end,
+
+        options = {
+          compile = true, -- Whether to compile a theme
+          compile_path = vim.fn.stdpath 'cache' .. '/ef-themes', -- Directory in which to place compiled themes
+        },
+      }
+
+      --vim.cmd.colorscheme 'ef-theme' -- To use the default colorscheme defined above
+      -- Or choose a specific theme
+      -- vim.cmd.colorscheme("ef-dream")
+    end,
+  },
+  { 'ellisonleao/gruvbox.nvim' },
+  { 'f4z3r/gruvbox-material.nvim' },
   {
     'neanias/everforest-nvim',
     priority = 1000,
@@ -91,36 +152,6 @@ return {
   },
   { 'savq/melange-nvim' },
   { 'norcalli/nvim-colorizer.lua' },
-  {
-    'HakonHarnes/img-clip.nvim',
-    opts = {
-      default = {
-        dir_path = '~/Pictures/', ---@type string
-      },
-    },
-    keys = {
-      {
-        '<leader>po',
-        function()
-          local oil = require 'oil'
-          local filename = oil.get_cursor_entry().name
-          local dir = oil.get_current_dir()
-          oil.close()
-
-          local img_clip = require 'img-clip'
-          img_clip.paste_image({}, dir .. filename)
-        end,
-        { desc = 'Past img' },
-      },
-      {
-        '<leader>fc',
-        function()
-          require('oil').close()
-        end,
-        { desc = '[f]iles [c]lose' },
-      },
-    },
-  },
   {
     'zbirenbaum/copilot.lua', -- Copilot but lua
     cmd = 'Copilot',
@@ -175,7 +206,7 @@ return {
     config = function()
       require('conform').setup {
         formatters = {
-          csharpier = { command = 'dotnet', args = { 'csharpier', '--write-stdout' } },
+          -- csharpier = { command = 'dotnet', args = { 'csharpier', '--write-stdout' } },
         },
         formatters_by_ft = {
           lua = { 'stylua' },
@@ -186,10 +217,15 @@ return {
           cs = { 'csharpier' },
           nix = { 'nixfmt' },
           json = { 'jq' },
+          sql = { 'sql_formatter', lsp_format = 'never' },
+          --['*'] = { 'injected' }, -- enables injected-lang formatting for all filetypes
         },
         default_format_opts = {
           lsp_format = 'fallback',
         },
+      }
+      require('conform').formatters.sql_formatter = {
+        prepend_args = { '-c', vim.fn.expand '~/.config/sql_formatter.json' },
       }
 
       vim.keymap.set('n', '<leader>bw', function()
@@ -207,11 +243,6 @@ return {
     end,
   },
   {
-    'sbdchd/neoformat',
-    cmd = 'Neoformat',
-    keys = {},
-  },
-  {
     'L3MON4D3/LuaSnip',
     dependencies = {
       'rafamadriz/friendly-snippets',
@@ -221,7 +252,12 @@ return {
       require 'config.luasnip'
     end,
   },
-  { 'mfussenegger/nvim-dap' },
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+      require('config.dap').setup()
+    end,
+  },
   { 'nvim-tree/nvim-web-devicons', version = '*' },
   {
     'NeogitOrg/neogit',
@@ -241,7 +277,7 @@ return {
       end, { desc = 'Neogit' })
     end,
   },
-  { 'rcarriga/nvim-dap-ui', version = '*' },
+  { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }, verison = '*' },
   { 'Tastyep/structlog.nvim', version = '*' },
   {
     'stevearc/oil.nvim',
@@ -261,7 +297,6 @@ return {
       },
     },
   },
-  { '3rd/image.nvim', version = '*' },
   { 'nvim-telescope/telescope.nvim' },
   {
     'windwp/nvim-autopairs',
@@ -363,23 +398,6 @@ return {
     },
   },
   {
-    'christoomey/vim-tmux-navigator',
-    cmd = {
-      'TmuxNavigateLeft',
-      'TmuxNavigateDown',
-      'TmuxNavigateUp',
-      'TmuxNavigateRight',
-      'TmuxNavigatePrevious',
-    },
-    keys = {
-      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
-      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
-      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
-      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
-      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
-    },
-  },
-  {
     'davidmh/cspell.nvim',
   },
   {
@@ -456,13 +474,12 @@ return {
     end,
   },
   {
-    {
-      'folke/snacks.nvim',
-      opts = {
-        statuscolumn = {},
-        bigfile = {},
-        input = {},
-      },
-    },
+  },
+  {
+    'ramilito/kubectl.nvim',
+    config = function()
+      require('kubectl').setup()
+      vim.keymap.set('n', '<leader>k', '<cmd>lua require("kubectl").toggle()<cr>', { noremap = true, silent = true })
+    end,
   },
 }

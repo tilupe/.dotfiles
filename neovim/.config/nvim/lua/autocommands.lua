@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 local lsp_setup = vim.api.nvim_create_augroup('LspSetup', { clear = true })
 autocmd('LspAttach', {
   callback = function()
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[N]ame' })
+    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Rename' })
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition' })
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { desc = 'Type [D]efinition' })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })

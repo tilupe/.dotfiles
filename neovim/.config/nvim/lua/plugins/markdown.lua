@@ -23,16 +23,19 @@ return {
   {
     'OXY2DEV/markview.nvim',
     lazy = false, -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
+    ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
     opts = {
       preview = {
+        icon_provider = 'mini',
+        enable_hybrid_mode = true,
         hybrid_modes = { 'n', 'i' },
+        filetypes = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
       },
     },
 
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
+      'echasnovski/mini.icons',
     },
   },
 }

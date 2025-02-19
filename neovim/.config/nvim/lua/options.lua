@@ -1,12 +1,13 @@
 local opt = vim.opt
 
+-- views can only be fully collapsed with the global statusline
+opt.laststatus = 3 -- from avante.nvim
 opt.formatoptions = 'jcroqlnt' -- tcqj
 opt.shortmess:append { W = true, I = true, c = true }
 opt.breakindent = true
 opt.clipboard = 'unnamedplus' -- Access system clipboard
 opt.cmdheight = 1
 opt.completeopt = 'menuone,noselect,longest'
-opt.conceallevel = 2
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
@@ -81,7 +82,6 @@ end
 -- fold
 opt.foldcolumn = '1' -- '0' is not bad
 opt.foldenable = true
-opt.foldlevel = 99
 
 -- view
 opt.wrap = true
@@ -95,7 +95,7 @@ opt.spelloptions = 'camel'
 
 -- Diff
 opt.fillchars = 'diff:╱'
-opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:150'--'
+opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60,indent-heuristic' --'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = 'ö'
